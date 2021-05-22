@@ -1,0 +1,92 @@
+﻿#HomeCover {
+    background: linear-gradient(to top, rgba(80, 68, 18, 0.6) 10%, transparent), url("../Resources/Images/HomeCover.jpg") center/cover no-repeat;
+    width: 100%;
+    height: 35vh;
+    border: 1px solid Black;
+    position: relative;
+    overflow: hidden;
+}
+
+    #HomeCover h1 {
+        color: white;
+        position: absolute;
+        font-size: 1.6rem;
+        bottom: 5%;
+        left: 3%;
+    }
+
+/* Our Plans */
+
+.ourPlan {
+    background: #d5ffdc;
+    text-align: center;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    width: 100%;
+}
+
+.ourPlanRecommended {
+    background: #19b84c;
+    color: white;
+}
+
+.ourPlanHighlighted {
+    background: white;
+    color: #19b84c;
+    padding: 0.5rem;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.ourPlanTitle {
+    color: #0e4f1f;
+}
+
+.ourPlanPrice {
+    color: #858585;
+}
+
+.ourPlanRecommended .ourPlanTitle {
+    color: white;
+}
+
+.ourPlanRecommended .ourPlanPrice {
+    color: #0e4f1f;
+}
+
+.ourPlanfeatures {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ourPlanfeature {
+    margin: 0.5rem 0;
+}
+
+@media (min-width: 40rem) {
+    .ourPlanList {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ourPlan {
+        display: inline-block;
+        width: 30%;
+        vertical-align: middle;
+        min-width: 13rem;
+        max-width: 25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 28rem;
+    }
+
+    .ourPlanRecommended {
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+        height: 30rem;
+        z-index: 50;
+    }
+}

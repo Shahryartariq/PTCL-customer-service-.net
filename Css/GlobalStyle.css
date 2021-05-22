@@ -1,0 +1,64 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Lato;
+}
+
+body {
+    font-family: Lato;
+}
+
+.Logo {
+    width: 40%;
+}
+
+.active {
+    text-decoration: underline;
+}
+
+.nav-item:hover {
+    text-decoration: underline;
+}
+
+.sectionHeader {
+    color: #2ddf5c;
+    text-align: center;
+    margin: 25px auto;
+}
+
+/* Margin*/
+.marginNav {
+    margin: -9px;
+}
+/* Footer*/
+
+.myFooter {
+    background: black;
+    padding: 30px;
+    margin-top: 35px;
+}
+
+.myFooterLinks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.myFooterLink {
+    margin: 0.5rem 0;
+}
+
+    .myFooterLink a {
+        color: white;
+        text-decoration: none;
+    }
+
+        .myFooterLink a:hover, .myFooterLink a:active {
+            color: #ccc;
+        }
