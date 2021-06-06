@@ -19,17 +19,19 @@
                     <div class="form-group mt-4">
                         <h4 class="text-center">Login as User</h4>
                         <label>Email: </label>
-                        <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ID="RFV1" ControlToValidate="txtEmail" SetFocusOnError="true" ErrorMessage="*" ForeColor="Red" ValidationGroup="LoginUser"></asp:RequiredFieldValidator>
+                        <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" TextMode="Email"></asp:TextBox>
                     </div>
                     <div class="form-group mt-4">
                         <label>Password: </label>
+                        <asp:RequiredFieldValidator runat="server" ID="RFV2" ControlToValidate="txtPassword" SetFocusOnError="true" ErrorMessage="*" ForeColor="Red" ValidationGroup="LoginUser"></asp:RequiredFieldValidator>
                         <asp:TextBox runat="server" ID="txtPassword" CssClass="form-control" TextMode="Password"></asp:TextBox>
                     </div>
                     <div>
                         <asp:Label runat="server" ID="lblMsg" ForeColor="Red"></asp:Label>
                     </div>
                     <div class="form-group mt-4 mb-2">
-                        <asp:Button Text="Login User" runat="server" ID="cmdLoginUser" CssClass="btn btn-primary w-100 mb-4" OnClick="cmdLoginUser_Click" />
+                        <asp:Button Text="Login User" runat="server" ID="cmdLoginUser" CssClass="btn btn-primary w-100 mb-4" OnClick="cmdLoginUser_Click" ValidationGroup="LoginUser" />
                         <asp:Button Text="SignUp User" runat="server" ID="cmdSignup" CssClass="btn btn-primary w-50" OnClick="cmdSignup_Click" />
                         <asp:Button Text="Login as Admin" runat="server" ID="cmdLoginAdmin" CssClass="btn btn-primary" Style="width: 48%;" OnClick="cmdLoginAdmin_Click" />
                     </div>

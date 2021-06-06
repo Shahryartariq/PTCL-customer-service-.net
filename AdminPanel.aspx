@@ -4,25 +4,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Contnet Start -->
-    <h1 class="text-center my-4">Admin Panel</h1>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 card">
-
-                <a class="btn btn-primary w-50 m-auto my-3" href="ManageAdmins.aspx">Manange Admin</a>
-                <a class="btn btn-primary w-50 m-auto my-3 active" href="AdminPanel.aspx">Manage Customers</a>
-                <a class="btn btn-primary w-50 m-auto my-3 " href="BillManagement.aspx">Bill Management</a>
-                <a class="btn btn-primary w-50 m-auto my-3 " href="Revenue.aspx">Revenue</a>
-                <a class="btn btn-primary w-50 m-auto my-3 " href="AdminAccount.aspx">Admin Account</a>
-                <a class="btn btn-primary w-50 m-auto my-3" href="Home.aspx">HomePage</a>
-                <a class="btn btn-primary w-50 m-auto my-3" href="AdminLogin.aspx">Logout</a>
-            </div>
-            <div class="col-lg-9 card">
-                <div class="row">
-
-                    <h3 class="text-center my-3 text-success ">PTCL CUSTOMERS</h3>
-                    <div class="mt-3">
+                  <h3 class="text-center my-3 text-success ">Our PTCL Customers</h3>
+                    <div class="card mb-4">
+                         <div class="card-body">
 
                         <asp:GridView runat="server" ID="GV" CssClass="table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting" OnRowEditing="GV_RowEditing">
                             <Columns>
@@ -41,8 +25,7 @@
                             </Columns>
                         </asp:GridView>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                   </div>
+ 
+          
 </asp:Content>

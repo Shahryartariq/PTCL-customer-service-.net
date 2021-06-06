@@ -5,65 +5,55 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <!-- Contnet Start -->
-    <h1 class="text-center my-4">Admin Panel</h1>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 card">
+    <div class="row">
 
-                <a class="btn btn-primary w-50 m-auto my-3 active" href="ManageAdmins.aspx">Manange Admin</a>
-                <a class="btn btn-primary w-50 m-auto my-3 " href="AdminPanel.aspx">Manage Customers</a>
+        <h3 class="text-center my-3 text-success ">Add Admin New</h3>
+        <div class="card mb-4">
+            <div class="card-body">
 
-                <button class="btn btn-primary w-50 m-auto mt-3">
-                    Bill Management
-                </button>
+                <div class="form-group mt-4">
+                    <label>UserName: </label>
+                    <asp:RequiredFieldValidator runat="server" ID="RFV1" ControlToValidate="txtUserName" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your UserName" ForeColor="Red" ValidationGroup="AdminSetup"></asp:RequiredFieldValidator>
+                    <asp:TextBox runat="server" ID="txtUserName" CssClass="form-control w-75"></asp:TextBox>
+                </div>
 
-                <button class="btn btn-primary w-50 m-auto mt-3">
-                    Revenue
-                </button>
-                <button class="btn btn-primary w-50 m-auto mt-3">
-                    Your Account
-                </button>
+                <div class="form-group mt-4">
+                    <label>Password: </label>
+                    <asp:CompareValidator runat="server" ID="CMV4" ControlToValidate="txtPassword" ControlToCompare="txtConfirmPassword" SetFocusOnError="true" Text="*" ErrorMessage="Password Donot Match" ForeColor="Red" ValidationGroup="AdminSetup"></asp:CompareValidator>
+                    <asp:RequiredFieldValidator runat="server" ID="RFV5" ControlToValidate="txtPassword" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your Password" ForeColor="Red" ValidationGroup="AdminSetup"></asp:RequiredFieldValidator>
 
-                <a class="btn btn-primary w-50 m-auto my-3" href="Home.aspx">Go to HomePage</a>
-                <a class="btn btn-primary w-50 m-auto my-3" href="AdminLogin.aspx">Logout</a>
-            </div>
-            <div class="col-lg-9 card">
-                <h3 class="text-center my-3 text-success ">ADMIN SETUP</h3>
-                <div class="container">
-                    <div class="row">
+                    <asp:TextBox runat="server" ID="txtPassword" CssClass="form-control w-75"></asp:TextBox>
+                </div>
 
-                        <div class="form-group mt-4">
-                            <label>UserName: </label>
-                            <asp:TextBox runat="server" ID="txtUserName" CssClass="form-control"></asp:TextBox>
-                        </div>
+                <div class="form-group mt-4">
+                    <label>Confirm Password: </label>
+                    <asp:RequiredFieldValidator runat="server" ID="RFV6" ControlToValidate="txtConfirmPassword" SetFocusOnError="true" Text="*" ErrorMessage="Please Confirm Password" ForeColor="Red" ValidationGroup="AdminSetup"></asp:RequiredFieldValidator>
 
-                        <div class="form-group mt-4">
-                            <label>Password: </label>
-                            <asp:TextBox runat="server" ID="txtPassword" CssClass="form-control"></asp:TextBox>
-                        </div>
+                    <asp:TextBox runat="server" ID="txtConfirmPassword" CssClass="form-control w-75"></asp:TextBox>
+                </div>
 
-                        <div class="form-group mt-4">
-                            <label>Confirm Password: </label>
-                            <asp:TextBox runat="server" ID="txtConfirmPassword" CssClass="form-control"></asp:TextBox>
-                        </div>
+                <div class="form-group mt-4">
+                    <label>Status (Only 1 and 0):  </label>
+                    <asp:DropDownList runat="server" ID="ddlStatus" CssClass="form-control w-75">
+                        <asp:ListItem Text="True" Value="1" />
+                        <asp:ListItem Text="False" Value="0" />
+                    </asp:DropDownList>
+                </div>
 
-                        <div class="form-group mt-4">
-                            <label>Status:  </label>
-                            <asp:TextBox runat="server" ID="txtStatus" CssClass="form-control"></asp:TextBox>
-                        </div>
+                <!-- Validation Summary  -->
+                <div class="mt-2">
+                    <asp:ValidationSummary runat="server" ID="ValidationSummary1" ForeColor="Red" ValidationGroup="AdminSetup" />
+                </div>
 
-                        <div class="form-group mb-2">
-                            <asp:Button Text="Submit" runat="server" ID="cmdCreate" CssClass="btn btn-primary mt-4" OnClick="cmdCreate_Click" />
-                            <a class="btn btn-primary mt-4" href="ManageAdmins.aspx">Cancel</a>
+                <div class="form-group mb-2">
+                    <asp:Button Text="Submit" runat="server" ID="cmdCreate" CssClass="btn btn-primary mt-4" OnClick="cmdCreate_Click" ValidationGroup="AdminSetup" />
+                    <a class="btn btn-primary mt-4" href="ManageAdmins.aspx">Cancel</a>
 
-                            <div>
-                                <asp:Label runat="server" ID="lblMsg" ForeColor="Red"></asp:Label>
-                            </div>
-                        </div>
+                    <div>
+                        <asp:Label runat="server" ID="lblMsg" ForeColor="Red"></asp:Label>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </asp:Content>

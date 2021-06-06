@@ -11,6 +11,8 @@ namespace PtclCustomerService
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            HyperLink activeHyp = Master.FindControl("HypManangeAdmin") as HyperLink;
+            activeHyp.CssClass += " active";
             FillAdmin();
         }
 

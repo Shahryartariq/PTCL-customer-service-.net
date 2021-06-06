@@ -12,6 +12,9 @@ namespace PtclCustomerService
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            HyperLink activeHyp = Master.FindControl("HypEditAccount") as HyperLink;
+            activeHyp.CssClass += " active";
+
             using (PTCLEntities db = new PTCLEntities())
             {
                 if (IsPostBack == true) return;
@@ -26,6 +29,7 @@ namespace PtclCustomerService
                     txtCnic.Text = s.Cnic;
                     txtPassword.Text = s.Password;
                     txtConfirmPassword.Text = s.Password;
+                    txtStatus.Text = s.Status.ToString();
                 }
             }
         }
@@ -46,20 +50,6 @@ namespace PtclCustomerService
                     u.Password = txtPassword.Text;
                     db.SaveChanges();
                     lblMsg.Text = "User Updated Successfully";
-                }
-            }
-        }
-
-        protected void cmdOkay_Click(object sender, EventArgs e)
-        {
-            using (PTCLEntities db = new PTCLEntities())
-            {
-                if (Session["UserID"] != null)
-                {
-                    int UserID = (int)Session["UserID"];
-                    tblPtclUser u = db.tblPtclUsers.FirstOrDefault(v => v.UserID == UserID);
-                    //u.FirstName = TxtTheName.Text;
-                    db.SaveChanges();
                 }
             }
         }

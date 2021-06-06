@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace PtclCustomerService
 {
-    public partial class Revenue : System.Web.UI.Page
+    public partial class UserComplaintDetails : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

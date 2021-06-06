@@ -11,6 +11,12 @@ namespace PtclCustomerService
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.Cookies["PCS"] != null)
+            {
+                Session["AdminID"] = Request.Cookies["PCS"]["AdminID"];
+                Session["UserName"] = Request.Cookies["PCS"]["UserName"];
+                Session.Timeout = 720;
+            }
         }
 
         protected void cmdLoginAdmin_Click(object sender, EventArgs e)
@@ -23,6 +29,11 @@ namespace PtclCustomerService
                     Session["AdminID"] = query[0].AdminID;
                     Session["UserName"] = query[0].UserName;
                     Session.Timeout = 720;
+
+                    Response.Cookies["PCS"]["AdminID"] = query[0].AdminID.ToString();
+                    Response.Cookies["PCS"]["UserName"] = query[0].UserName.ToString();
+                    Response.Cookies["PCS"].Expires = DateTime.Now.AddDays(1);
+                    ;
 
                     Response.Redirect("Home.aspx");
                 }

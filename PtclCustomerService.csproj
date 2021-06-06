@@ -49,7 +49,17 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Konscious.Security.Cryptography.Argon2, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Konscious.Security.Cryptography.Argon2.1.2.1\lib\net46\Konscious.Security.Cryptography.Argon2.dll</HintPath>
+    </Reference>
+    <Reference Include="Konscious.Security.Cryptography.Blake2, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Konscious.Security.Cryptography.Blake2.1.0.9\lib\net46\Konscious.Security.Cryptography.Blake2.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -76,31 +86,59 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminAccount.aspx" />
+    <Content Include="AdminComplaint.aspx" />
+    <Content Include="AdminComplaintDetails.aspx" />
+    <Content Include="AdminDashboard.aspx" />
     <Content Include="AdminLogin.aspx" />
     <Content Include="AdminPanel.aspx" />
     <Content Include="AdminSetup.aspx" />
+    <Content Include="assets\demo\chart-area-demo.js" />
+    <Content Include="assets\demo\chart-bar-demo.js" />
+    <Content Include="assets\demo\chart-pie-demo.js" />
+    <Content Include="assets\demo\datatables-demo.js" />
+    <Content Include="assets\img\error-404-monochrome.svg" />
     <Content Include="BillManagement.aspx" />
     <Content Include="Css\bootstrap.min.css" />
     <Content Include="Css\GlobalStyle.css" />
     <Content Include="Css\Home.css" />
+    <Content Include="Css\styles.css" />
+    <Content Include="CustomerSupport.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
+    <Content Include="Js\datatables-simple-demo.js" />
     <Content Include="Js\JQuery.js" />
+    <Content Include="Js\scripts.js" />
     <Content Include="Logout.aspx" />
     <Content Include="ManageAdmins.aspx" />
     <Content Include="Models\PtclModel1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PtclModel1.Context.cs</LastGenOutput>
       <DependentUpon>PtclModel1.edmx</DependentUpon>
+      <LastGenOutput>PtclModel1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\PtclModel1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PtclModel1.edmx</DependentUpon>
       <LastGenOutput>PtclModel1.cs</LastGenOutput>
     </Content>
-    <Content Include="Resources\Images\HomeCover.jpg" />
-    <Content Include="Resources\Images\PCS_Logo.png" />
-    <Content Include="Revenue.aspx" />
+    <Content Include="PackageDetails.aspx" />
+    <Content Include="PrintBill.aspx" />
+    <Content Include="assets\img\HomeCover.jpg" />
+    <Content Include="assets\img\PCS_Logo.png" />
+    <Content Include="temp.aspx" />
+    <Content Include="Temp\401.html" />
+    <Content Include="Temp\404.html" />
+    <Content Include="Temp\500.html" />
+    <Content Include="Temp\charts.html" />
+    <Content Include="Temp\index.html" />
+    <Content Include="Temp\layout-sidenav-light.html" />
+    <Content Include="Temp\layout-static.html" />
+    <Content Include="Temp\login.html" />
+    <Content Include="Temp\password.html" />
+    <Content Include="Temp\register.html" />
+    <Content Include="Temp\tables.html" />
+    <Content Include="UserComplaint.aspx" />
+    <Content Include="UserComplaintDetails.aspx" />
+    <Content Include="UserDashboard.aspx" />
     <Content Include="UserLogin.aspx" />
     <Content Include="UserPanel.aspx" />
     <Content Include="UserSetup.aspx" />
@@ -114,6 +152,27 @@
     </Compile>
     <Compile Include="AdminAccount.aspx.designer.cs">
       <DependentUpon>AdminAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminComplaint.aspx.cs">
+      <DependentUpon>AdminComplaint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminComplaint.aspx.designer.cs">
+      <DependentUpon>AdminComplaint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminComplaintDetails.aspx.cs">
+      <DependentUpon>AdminComplaintDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminComplaintDetails.aspx.designer.cs">
+      <DependentUpon>AdminComplaintDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard.aspx.cs">
+      <DependentUpon>AdminDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard.aspx.designer.cs">
+      <DependentUpon>AdminDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminLogin.aspx.cs">
       <DependentUpon>AdminLogin.aspx</DependentUpon>
@@ -150,6 +209,13 @@
     <Compile Include="BillManagement.aspx.designer.cs">
       <DependentUpon>BillManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CustomerSupport.aspx.cs">
+      <DependentUpon>CustomerSupport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerSupport.aspx.designer.cs">
+      <DependentUpon>CustomerSupport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -181,10 +247,28 @@
     <Compile Include="ManageAdmins.aspx.designer.cs">
       <DependentUpon>ManageAdmins.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminApprovedComplaint_Result.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminPendingComplaint_Result.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetComplaints_Result.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetComplaintType_Result.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetPtclAdmins_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetPtclUsers_Result.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyApprovedComplaint_Result.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyPendingComplaint_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PtclAdminLogin_Result.cs">
@@ -211,19 +295,64 @@
     <Compile Include="Models\tblAdmin.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblComplaint.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblComplaintType.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblPtclUser.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PTCLEntities.cs" />
-    <Compile Include="Revenue.aspx.cs">
-      <DependentUpon>Revenue.aspx</DependentUpon>
+    <Compile Include="Models\uniqueEmail_Result.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PackageDetails.aspx.cs">
+      <DependentUpon>PackageDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Revenue.aspx.designer.cs">
-      <DependentUpon>Revenue.aspx</DependentUpon>
+    <Compile Include="PackageDetails.aspx.designer.cs">
+      <DependentUpon>PackageDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PrintBill.aspx.cs">
+      <DependentUpon>PrintBill.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PrintBill.aspx.designer.cs">
+      <DependentUpon>PrintBill.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PTCLEntities.cs" />
     <Compile Include="Sherry1Entities.cs" />
+    <Compile Include="tblAadmin.cs" />
+    <Compile Include="temp.aspx.cs">
+      <DependentUpon>temp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="temp.aspx.designer.cs">
+      <DependentUpon>temp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserComplaint.aspx.cs">
+      <DependentUpon>UserComplaint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserComplaint.aspx.designer.cs">
+      <DependentUpon>UserComplaint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserComplaintDetails.aspx.cs">
+      <DependentUpon>UserComplaintDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserComplaintDetails.aspx.designer.cs">
+      <DependentUpon>UserComplaintDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserDashboard.aspx.cs">
+      <DependentUpon>UserDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserDashboard.aspx.designer.cs">
+      <DependentUpon>UserDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserLogin.aspx.cs">
       <DependentUpon>UserLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -261,6 +390,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MainMaster.Master" />
+    <Content Include="AdminPanelMasterPage.Master" />
     <EntityDeploy Include="Models\PtclModel1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PtclModel1.Designer.cs</LastGenOutput>
@@ -268,8 +399,6 @@
     <Content Include="Models\PtclModel1.edmx.diagram">
       <DependentUpon>PtclModel1.edmx</DependentUpon>
     </Content>
-    <Content Include="MainMaster.Master" />
-    <Content Include="AdminPanelMasterPage.Master" />
     <None Include="packages.config" />
     <Content Include="UserPanelMasterPage.Master" />
     <None Include="Web.Debug.config">
