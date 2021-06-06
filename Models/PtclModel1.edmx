@@ -14,6 +14,25 @@
           <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblComplaint">
+          <Key>
+            <PropertyRef Name="ComplaintID" />
+          </Key>
+          <Property Name="ComplaintID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComplaintTypeID" Type="int" Nullable="false" />
+          <Property Name="ComplaintImage" Type="nvarchar" MaxLength="200" />
+          <Property Name="ComplaintTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="ComplaintDescription" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ComplaintStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblComplaintType">
+          <Key>
+            <PropertyRef Name="ComplaintTypeID" />
+          </Key>
+          <Property Name="ComplaintTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComplaintTypeName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tblPtclUser">
           <Key>
             <PropertyRef Name="UserID" />
@@ -27,14 +46,51 @@
           <Property Name="Cnic" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <Association Name="FK_tblComplaint_tblComplaintType">
+          <End Role="tblComplaintType" Type="Self.tblComplaintType" Multiplicity="1" />
+          <End Role="tblComplaint" Type="Self.tblComplaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblComplaintType">
+              <PropertyRef Name="ComplaintTypeID" />
+            </Principal>
+            <Dependent Role="tblComplaint">
+              <PropertyRef Name="ComplaintTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblComplaint_tblPtclUser">
+          <End Role="tblPtclUser" Type="Self.tblPtclUser" Multiplicity="0..1" />
+          <End Role="tblComplaint" Type="Self.tblComplaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPtclUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblComplaint">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AdminApprovedComplaint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="AdminPendingComplaint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DeleteComplaint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ComplaintID" Type="int" Mode="In" />
+        </Function>
         <Function Name="DeletePtclAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AdminID" Type="int" Mode="In" />
         </Function>
         <Function Name="DeletePtlcUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetComplaintType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetPtclAdmins" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetPtclUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="MyApprovedComplaint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MyPendingComplaint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
         <Function Name="PtclAdminLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
@@ -43,14 +99,58 @@
           <Parameter Name="Email" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="uniqueEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="PTCLModelStoreContainer">
           <EntitySet Name="tblAdmin" EntityType="Self.tblAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblComplaint" EntityType="Self.tblComplaint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblComplaintType" EntityType="Self.tblComplaintType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPtclUser" EntityType="Self.tblPtclUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblComplaint_tblComplaintType" Association="Self.FK_tblComplaint_tblComplaintType">
+            <End Role="tblComplaintType" EntitySet="tblComplaintType" />
+            <End Role="tblComplaint" EntitySet="tblComplaint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblComplaint_tblPtclUser" Association="Self.FK_tblComplaint_tblPtclUser">
+            <End Role="tblPtclUser" EntitySet="tblPtclUser" />
+            <End Role="tblComplaint" EntitySet="tblComplaint" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PTCLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAdmin">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblComplaint">
+          <Key>
+            <PropertyRef Name="ComplaintID" />
+          </Key>
+          <Property Name="ComplaintID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComplaintTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ComplaintImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ComplaintTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ComplaintDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ComplaintStatus" Type="Boolean" />
+          <NavigationProperty Name="tblComplaintType" Relationship="Self.FK_tblComplaint_tblComplaintType" FromRole="tblComplaint" ToRole="tblComplaintType" />
+          <NavigationProperty Name="tblPtclUser" Relationship="Self.FK_tblComplaint_tblPtclUser" FromRole="tblComplaint" ToRole="tblPtclUser" />
+        </EntityType>
+        <EntityType Name="tblComplaintType">
+          <Key>
+            <PropertyRef Name="ComplaintTypeID" />
+          </Key>
+          <Property Name="ComplaintTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComplaintTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblComplaints" Relationship="Self.FK_tblComplaint_tblComplaintType" FromRole="tblComplaintType" ToRole="tblComplaint" />
+        </EntityType>
         <EntityType Name="tblPtclUser">
           <Key>
             <PropertyRef Name="UserID" />
@@ -63,47 +163,83 @@
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="Cnic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblComplaints" Relationship="Self.FK_tblComplaint_tblPtclUser" FromRole="tblPtclUser" ToRole="tblComplaint" />
         </EntityType>
+        <Association Name="FK_tblComplaint_tblComplaintType">
+          <End Role="tblComplaintType" Type="Self.tblComplaintType" Multiplicity="1" />
+          <End Role="tblComplaint" Type="Self.tblComplaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblComplaintType">
+              <PropertyRef Name="ComplaintTypeID" />
+            </Principal>
+            <Dependent Role="tblComplaint">
+              <PropertyRef Name="ComplaintTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblComplaint_tblPtclUser">
+          <End Role="tblPtclUser" Type="Self.tblPtclUser" Multiplicity="0..1" />
+          <End Role="tblComplaint" Type="Self.tblComplaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPtclUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblComplaint">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="PTCLEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAdmins" EntityType="Self.tblAdmin" />
+          <EntitySet Name="tblComplaints" EntityType="Self.tblComplaint" />
+          <EntitySet Name="tblComplaintTypes" EntityType="Self.tblComplaintType" />
           <EntitySet Name="tblPtclUsers" EntityType="Self.tblPtclUser" />
-          <FunctionImport Name="PtclUserLogin" ReturnType="Collection(PTCLModel.PtclUserLogin_Result)">
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
+          <AssociationSet Name="FK_tblComplaint_tblComplaintType" Association="Self.FK_tblComplaint_tblComplaintType">
+            <End Role="tblComplaintType" EntitySet="tblComplaintTypes" />
+            <End Role="tblComplaint" EntitySet="tblComplaints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblComplaint_tblPtclUser" Association="Self.FK_tblComplaint_tblPtclUser">
+            <End Role="tblPtclUser" EntitySet="tblPtclUsers" />
+            <End Role="tblComplaint" EntitySet="tblComplaints" />
+          </AssociationSet>
+          <FunctionImport Name="DeletePtclAdmin">
+          <Parameter Name="AdminID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="tblAdmins" EntityType="PTCLModel.tblAdmin" />
+          <FunctionImport Name="DeletePtlcUser">
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetComplaintType" ReturnType="Collection(PTCLModel.GetComplaintType_Result)" />
+          <FunctionImport Name="GetPtclAdmins" ReturnType="Collection(PTCLModel.GetPtclAdmins_Result)" />
+          <FunctionImport Name="GetPtclUsers" ReturnType="Collection(PTCLModel.GetPtclUsers_Result)" />
           <FunctionImport Name="PtclAdminLogin" ReturnType="Collection(PTCLModel.PtclAdminLogin_Result)">
             <Parameter Name="UserName" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="GetPtclUsers" ReturnType="Collection(PTCLModel.GetPtclUsers_Result)" />
-          <FunctionImport Name="DeletePtlcUser">
+          <FunctionImport Name="PtclUserLogin" ReturnType="Collection(PTCLModel.PtclUserLogin_Result)">
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uniqueEmail" ReturnType="Collection(PTCLModel.uniqueEmail_Result)">
+          <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="MyPendingComplaint" ReturnType="Collection(PTCLModel.MyPendingComplaint_Result)">
           <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetPtclAdmins" ReturnType="Collection(PTCLModel.GetPtclAdmins_Result)" />
-          <FunctionImport Name="DeletePtclAdmin">
-            <Parameter Name="AdminID" Mode="In" Type="Int32" />
+          <FunctionImport Name="GetComplaints" ReturnType="Collection(PTCLModel.GetComplaints_Result)" />
+          <FunctionImport Name="DeleteComplaint">
+          <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="MyApprovedComplaint" ReturnType="Collection(PTCLModel.MyApprovedComplaint_Result)">
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AdminPendingComplaint" ReturnType="Collection(PTCLModel.AdminPendingComplaint_Result)" />
+          <FunctionImport Name="AdminApprovedComplaint" ReturnType="Collection(PTCLModel.AdminApprovedComplaint_Result)" />
         </EntityContainer>
-        <ComplexType Name="PtclUserLogin_Result">
-          <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Phone" Nullable="false" MaxLength="100" />
-          <Property Type="Boolean" Name="Status" Nullable="false" />
-          <Property Type="String" Name="Cnic" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
+        <ComplexType Name="GetComplaintType_Result">
+          <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
+          <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="tblAdmin">
-          <Key>
-            <PropertyRef Name="AdminID" />
-          </Key>
-          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <ComplexType Name="PtclAdminLogin_Result">
+        <ComplexType Name="GetPtclAdmins_Result">
           <Property Type="Int32" Name="AdminID" Nullable="false" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
@@ -119,11 +255,68 @@
           <Property Type="String" Name="Cnic" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="GetPtclAdmins_Result">
+        <ComplexType Name="PtclAdminLogin_Result">
           <Property Type="Int32" Name="AdminID" Nullable="false" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Status" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="PtclUserLogin_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="Status" Nullable="false" />
+          <Property Type="String" Name="Cnic" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="uniqueEmail_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="Status" Nullable="false" />
+          <Property Type="String" Name="Cnic" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="MyPendingComplaint_Result">
+          <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+          <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+          </ComplexType>
+        <ComplexType Name="GetComplaints_Result">
+          <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+          <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
+          <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ComplaintDescription" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="MyApprovedComplaint_Result">
+          <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+          <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="AdminPendingComplaint_Result">
+          <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+          <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="AdminApprovedComplaint_Result">
+          <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+          <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -131,6 +324,37 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PTCLModelStoreContainer" CdmEntityContainer="PTCLEntities">
+          <EntitySetMapping Name="tblAdmins">
+            <EntityTypeMapping TypeName="PTCLModel.tblAdmin">
+              <MappingFragment StoreEntitySet="tblAdmin">
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblComplaints">
+            <EntityTypeMapping TypeName="PTCLModel.tblComplaint">
+              <MappingFragment StoreEntitySet="tblComplaint">
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintTypeID" ColumnName="ComplaintTypeID" />
+                <ScalarProperty Name="ComplaintImage" ColumnName="ComplaintImage" />
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="ComplaintDescription" ColumnName="ComplaintDescription" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblComplaintTypes">
+            <EntityTypeMapping TypeName="PTCLModel.tblComplaintType">
+              <MappingFragment StoreEntitySet="tblComplaintType">
+                <ScalarProperty Name="ComplaintTypeID" ColumnName="ComplaintTypeID" />
+                <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblPtclUsers">
             <EntityTypeMapping TypeName="PTCLModel.tblPtclUser">
               <MappingFragment StoreEntitySet="tblPtclUser">
@@ -145,33 +369,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="PtclUserLogin" FunctionName="PTCLModel.Store.PtclUserLogin">
+          <FunctionImportMapping FunctionImportName="DeletePtclAdmin" FunctionName="PTCLModel.Store.DeletePtclAdmin" />
+          <FunctionImportMapping FunctionImportName="DeletePtlcUser" FunctionName="PTCLModel.Store.DeletePtlcUser" />
+          <FunctionImportMapping FunctionImportName="GetComplaintType" FunctionName="PTCLModel.Store.GetComplaintType">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="PTCLModel.PtclUserLogin_Result">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Cnic" ColumnName="Cnic" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
+              <ComplexTypeMapping TypeName="PTCLModel.GetComplaintType_Result">
+                <ScalarProperty Name="ComplaintTypeID" ColumnName="ComplaintTypeID" />
+                <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="tblAdmins">
-            <EntityTypeMapping TypeName="PTCLModel.tblAdmin">
-              <MappingFragment StoreEntitySet="tblAdmin">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="PtclAdminLogin" FunctionName="PTCLModel.Store.PtclAdminLogin">
+          <FunctionImportMapping FunctionImportName="GetPtclAdmins" FunctionName="PTCLModel.Store.GetPtclAdmins">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="PTCLModel.PtclAdminLogin_Result">
+              <ComplexTypeMapping TypeName="PTCLModel.GetPtclAdmins_Result">
                 <ScalarProperty Name="AdminID" ColumnName="AdminID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -193,10 +403,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="DeletePtlcUser" FunctionName="PTCLModel.Store.DeletePtlcUser" />
-          <FunctionImportMapping FunctionImportName="GetPtclAdmins" FunctionName="PTCLModel.Store.GetPtclAdmins">
+          <FunctionImportMapping FunctionImportName="PtclAdminLogin" FunctionName="PTCLModel.Store.PtclAdminLogin">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="PTCLModel.GetPtclAdmins_Result">
+              <ComplexTypeMapping TypeName="PTCLModel.PtclAdminLogin_Result">
                 <ScalarProperty Name="AdminID" ColumnName="AdminID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -204,7 +413,92 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="DeletePtclAdmin" FunctionName="PTCLModel.Store.DeletePtclAdmin" />
+          <FunctionImportMapping FunctionImportName="PtclUserLogin" FunctionName="PTCLModel.Store.PtclUserLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.PtclUserLogin_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Cnic" ColumnName="Cnic" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uniqueEmail" FunctionName="PTCLModel.Store.uniqueEmail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.uniqueEmail_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Cnic" ColumnName="Cnic" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MyPendingComplaint" FunctionName="PTCLModel.Store.MyPendingComplaint">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.MyPendingComplaint_Result">
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetComplaints" FunctionName="PTCLModel.Store.GetComplaints">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.GetComplaints_Result">
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintTypeID" ColumnName="ComplaintTypeID" />
+                <ScalarProperty Name="ComplaintImage" ColumnName="ComplaintImage" />
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="ComplaintDescription" ColumnName="ComplaintDescription" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteComplaint" FunctionName="PTCLModel.Store.DeleteComplaint" />
+          <FunctionImportMapping FunctionImportName="MyApprovedComplaint" FunctionName="PTCLModel.Store.MyApprovedComplaint">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.MyApprovedComplaint_Result">
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AdminPendingComplaint" FunctionName="PTCLModel.Store.AdminPendingComplaint">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.AdminPendingComplaint_Result">
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AdminApprovedComplaint" FunctionName="PTCLModel.Store.AdminApprovedComplaint">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.AdminApprovedComplaint_Result">
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

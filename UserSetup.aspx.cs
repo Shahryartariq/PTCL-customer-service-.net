@@ -23,10 +23,21 @@ namespace PtclCustomerService
                     txtLastName.Text = s.LastName;
                     txtEmail.Text = s.EmailAddress;
                     txtPhone.Text = s.Phone;
-                    txtStatus.Text = s.Status.ToString();
+                    //txtStatus.Text = s.Status.ToString();
                     txtCnic.Text = s.Cnic;
                     txtPassword.Text = s.Password;
                     txtConfirmPassword.Text = s.Password;
+                    lblCustomer.Text = "Manage " + s.FirstName;
+
+                    //Response.Write(s.Status);
+                    if (Convert.ToInt32(s.Status) == 1)
+                    {
+                        ddlStatus.SelectedValue = "1";
+                    }
+                    else
+                    {
+                        ddlStatus.SelectedValue = "0";
+                    }
                 }
             }
         }
@@ -43,7 +54,10 @@ namespace PtclCustomerService
                     s.LastName = txtLastName.Text;
                     s.EmailAddress = txtEmail.Text;
                     s.Phone = txtPhone.Text;
-                    s.Status = bool.Parse(txtStatus.Text);
+                    //s.Status = bool.Parse(txtStatus.Text);
+                    s.Status = bool.Parse(ddlStatus.SelectedItem.Text);
+                    //s.Status = ddlStatus.SelectedValue.ToString();
+
                     s.Cnic = txtCnic.Text;
                     s.Password = txtPassword.Text;
                     s.Password = txtConfirmPassword.Text;
@@ -52,5 +66,18 @@ namespace PtclCustomerService
                 }
             }
         }
+
+        /* protected void CVStatus_ServerValidate(object source, ServerValidateEventArgs args)
+         {
+             var temp = args.Value;
+             if (temp == "True" || temp == "true" || temp == "False" || temp == "false")
+             {
+                 args.IsValid = true;
+             }
+             else
+             {
+                 args.IsValid = false;
+             }
+         }*/
     }
 }

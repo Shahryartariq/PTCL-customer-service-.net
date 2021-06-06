@@ -22,7 +22,17 @@ namespace PtclCustomerService
                     txtUserName.Text = s.UserName;
                     txtPassword.Text = s.Password;
                     txtConfirmPassword.Text = s.Password;
-                    txtStatus.Text = s.Status;
+                    //txtStatus.Text = s.Status;
+                    //Response.Write(s.Status);
+
+                    if (Convert.ToInt32(s.Status) == 1)
+                    {
+                        ddlStatus.SelectedValue = "1";
+                    }
+                    else
+                    {
+                        ddlStatus.SelectedValue = "0";
+                    }
                 }
             }
         }
@@ -36,7 +46,8 @@ namespace PtclCustomerService
                     tblAdmin s = new tblAdmin();
                     s.UserName = txtUserName.Text;
                     s.Password = txtPassword.Text;
-                    s.Status = txtStatus.Text;
+                    //s.Status = txtStatus.Text;
+                    s.Status = ddlStatus.SelectedValue.ToString();
                     db.tblAdmins.Add(s);
                     db.SaveChanges();
                     lblMsg.Text = "Admin Inserted Successfully";
@@ -47,11 +58,26 @@ namespace PtclCustomerService
                     tblAdmin s = db.tblAdmins.FirstOrDefault(v => v.AdminID == AdminID);
                     s.UserName = txtUserName.Text;
                     s.Password = txtPassword.Text;
-                    s.Status = txtStatus.Text;
+                    //s.Status = txtStatus.Text;
+                    s.Status = ddlStatus.SelectedValue.ToString();
+
                     db.SaveChanges();
                     lblMsg.Text = "Admin Updated Successfully";
                 }
             }
         }
+
+        /*protected void CVStatus_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            var temp = args.Value;
+            if (temp == "1" || temp == "0")
+            {
+                args.IsValid = true;
+            }
+            else
+            {
+                args.IsValid = false;
+            }
+        }*/
     }
 }

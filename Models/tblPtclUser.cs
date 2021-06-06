@@ -14,6 +14,12 @@ namespace PtclCustomerService.Models
     
     public partial class tblPtclUser
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblPtclUser()
+        {
+            this.tblComplaints = new HashSet<tblComplaint>();
+        }
+    
         public int UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -22,5 +28,8 @@ namespace PtclCustomerService.Models
         public bool Status { get; set; }
         public string Cnic { get; set; }
         public string Password { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblComplaint> tblComplaints { get; set; }
     }
 }

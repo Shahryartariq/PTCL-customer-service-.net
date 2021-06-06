@@ -38,6 +38,7 @@
                         <li class="ourPlanfeature">Unlimited Data Limit</li>
                         <li class="ourPlanfeature">1000 Free Mints</li>
                         <li class="ourPlanfeature">Advance Support</li>
+                        <li class="ourPlanfeature">Smart TV</li>
                     </ul>
                     <div>
                         <button class="btn btn-success btn-lg text-dark">CHOOSE PLAN</button>
@@ -52,6 +53,7 @@
                         <li class="ourPlanfeature">Unlimited Data Limit</li>
                         <li class="ourPlanfeature">Unlimited Free Mints</li>
                         <li class="ourPlanfeature">Premium Support</li>
+                        <li class="ourPlanfeature">Fiber Smart TV</li>
                     </ul>
                     <div>
                         <button class="btn btn-success">CHOOSE PLAN</button>

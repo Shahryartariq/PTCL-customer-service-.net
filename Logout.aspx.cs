@@ -12,6 +12,7 @@ namespace PtclCustomerService
         protected void Page_Load(object sender, EventArgs e)
         {
             Session.Abandon();
+            Response.Cookies["PCS"].Expires = DateTime.Now.AddMinutes(-1);
             Response.Redirect("UserLogin.aspx");
         }
     }

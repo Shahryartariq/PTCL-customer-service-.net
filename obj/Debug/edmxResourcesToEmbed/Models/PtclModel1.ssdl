@@ -9,6 +9,25 @@
     <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Status" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
+  <EntityType Name="tblComplaint">
+    <Key>
+      <PropertyRef Name="ComplaintID" />
+    </Key>
+    <Property Name="ComplaintID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ComplaintTypeID" Type="int" Nullable="false" />
+    <Property Name="ComplaintImage" Type="nvarchar" MaxLength="200" />
+    <Property Name="ComplaintTitle" Type="nvarchar" MaxLength="200" />
+    <Property Name="ComplaintDescription" Type="nvarchar" MaxLength="1000" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="ComplaintStatus" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblComplaintType">
+    <Key>
+      <PropertyRef Name="ComplaintTypeID" />
+    </Key>
+    <Property Name="ComplaintTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ComplaintTypeName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="tblPtclUser">
     <Key>
       <PropertyRef Name="UserID" />
@@ -22,14 +41,51 @@
     <Property Name="Cnic" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
+  <Association Name="FK_tblComplaint_tblComplaintType">
+    <End Role="tblComplaintType" Type="Self.tblComplaintType" Multiplicity="1" />
+    <End Role="tblComplaint" Type="Self.tblComplaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblComplaintType">
+        <PropertyRef Name="ComplaintTypeID" />
+      </Principal>
+      <Dependent Role="tblComplaint">
+        <PropertyRef Name="ComplaintTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblComplaint_tblPtclUser">
+    <End Role="tblPtclUser" Type="Self.tblPtclUser" Multiplicity="0..1" />
+    <End Role="tblComplaint" Type="Self.tblComplaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPtclUser">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tblComplaint">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AdminApprovedComplaint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="AdminPendingComplaint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="DeleteComplaint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ComplaintID" Type="int" Mode="In" />
+  </Function>
   <Function Name="DeletePtclAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="AdminID" Type="int" Mode="In" />
   </Function>
   <Function Name="DeletePtlcUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetComplaintType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GetPtclAdmins" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GetPtclUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="MyApprovedComplaint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MyPendingComplaint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
   <Function Name="PtclAdminLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserName" Type="varchar" Mode="In" />
     <Parameter Name="Password" Type="varchar" Mode="In" />
@@ -38,8 +94,21 @@
     <Parameter Name="Email" Type="varchar" Mode="In" />
     <Parameter Name="Password" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="uniqueEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+  </Function>
   <EntityContainer Name="PTCLModelStoreContainer">
     <EntitySet Name="tblAdmin" EntityType="Self.tblAdmin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblComplaint" EntityType="Self.tblComplaint" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblComplaintType" EntityType="Self.tblComplaintType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPtclUser" EntityType="Self.tblPtclUser" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblComplaint_tblComplaintType" Association="Self.FK_tblComplaint_tblComplaintType">
+      <End Role="tblComplaintType" EntitySet="tblComplaintType" />
+      <End Role="tblComplaint" EntitySet="tblComplaint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblComplaint_tblPtclUser" Association="Self.FK_tblComplaint_tblPtclUser">
+      <End Role="tblPtclUser" EntitySet="tblPtclUser" />
+      <End Role="tblComplaint" EntitySet="tblComplaint" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -10,7 +10,7 @@
 
 namespace PtclCustomerService
 {
-    public partial class Revenue
+    public partial class PackageDetails
     {
     }
 }
