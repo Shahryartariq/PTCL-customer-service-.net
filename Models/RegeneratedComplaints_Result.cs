@@ -11,12 +11,15 @@ namespace PtclCustomerService.Models
 {
     using System;
     
-    public partial class MyPendingComplaint_Result
+    public partial class RegeneratedComplaints_Result
     {
-        public string ComplaintTitle { get; set; }
         public int ComplaintID { get; set; }
-        public Nullable<bool> ComplaintStatus { get; set; }
+        public int ComplaintTypeID { get; set; }
+        public string ComplaintImage { get; set; }
+        public string ComplaintTitle { get; set; }
+        public string ComplaintDescription { get; set; }
         public Nullable<int> UserID { get; set; }
-        public string ComplaintTypeName { get; set; }
+        public Nullable<bool> ComplaintStatus { get; set; }
+        public Nullable<int> RegeneratedID { get; set; }
     }
 }

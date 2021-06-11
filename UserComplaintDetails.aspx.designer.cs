@@ -24,75 +24,57 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.TextBox txtComplaintID;
 
         /// <summary>
-        /// txtLastName control.
+        /// txtComplaintTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLastName;
+        protected global::System.Web.UI.WebControls.TextBox txtComplaintTitle;
 
         /// <summary>
-        /// txtPhone control.
+        /// txtComplaintUserID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPhone;
+        protected global::System.Web.UI.WebControls.TextBox txtComplaintUserID;
 
         /// <summary>
-        /// txtCnic control.
+        /// ddlComplaintStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCnic;
+        protected global::System.Web.UI.WebControls.DropDownList ddlComplaintStatus;
 
         /// <summary>
-        /// txtEmail control.
+        /// txtComplaintRegenerated control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        protected global::System.Web.UI.WebControls.TextBox txtComplaintRegenerated;
 
         /// <summary>
-        /// txtPassword control.
+        /// HypRegeneratedComplaint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        protected global::System.Web.UI.WebControls.HyperLink HypRegeneratedComplaint;
 
         /// <summary>
-        /// txtConfirmPassword control.
+        /// txtComplaintDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
-
-        /// <summary>
-        /// ddlStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
-
-        /// <summary>
-        /// cmdSubmit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button cmdSubmit;
+        protected global::System.Web.UI.WebControls.TextBox txtComplaintDescription;
     }
 }

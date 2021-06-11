@@ -22,6 +22,12 @@ namespace PtclCustomerService
                     txtUserName.Text = s.UserName;
                     txtPassword.Text = s.Password;
                     txtConfirmPassword.Text = s.Password;
+                    txtFullName.Text = s.FullName;
+                    txtEmailAddress.Text = s.EmailAddress;
+                    txtAddress.Text = s.Location;
+                    txtPhone.Text = s.AdminPhone.ToString();
+                    txtDummyImage.Text = s.AdminDP;
+
                     //txtStatus.Text = s.Status;
                     //Response.Write(s.Status);
 
@@ -46,8 +52,25 @@ namespace PtclCustomerService
                     tblAdmin s = new tblAdmin();
                     s.UserName = txtUserName.Text;
                     s.Password = txtPassword.Text;
+                    s.FullName = txtFullName.Text;
+                    s.EmailAddress = txtEmailAddress.Text;
+                    s.Location = txtAddress.Text;
+                    s.AdminPhone = txtPhone.Text;
+
+                    //DP Start
+
+                    if (FileUpload.HasFile)
+                    {
+                        FileUpload.SaveAs(Server.MapPath("UploadFiles/AdminProfile/" + FileUpload.FileName));
+                        s.AdminDP = FileUpload.FileName;
+                    }
+                    else
+                    {
+                        s.AdminDP = "No File Uploaded";
+                    }
+
                     //s.Status = txtStatus.Text;
-                    s.Status = ddlStatus.SelectedValue.ToString();
+                    s.Status = bool.Parse(ddlStatus.SelectedValue);
                     db.tblAdmins.Add(s);
                     db.SaveChanges();
                     lblMsg.Text = "Admin Inserted Successfully";
@@ -58,26 +81,20 @@ namespace PtclCustomerService
                     tblAdmin s = db.tblAdmins.FirstOrDefault(v => v.AdminID == AdminID);
                     s.UserName = txtUserName.Text;
                     s.Password = txtPassword.Text;
+                    s.FullName = txtFullName.Text;
+                    s.EmailAddress = txtEmailAddress.Text;
+                    s.Location = txtAddress.Text;
+                    s.AdminPhone = txtPhone.Text;
+
+                    s.AdminDP = txtDummyImage.Text;
+
                     //s.Status = txtStatus.Text;
-                    s.Status = ddlStatus.SelectedValue.ToString();
+                    s.Status = bool.Parse(ddlStatus.SelectedValue);
 
                     db.SaveChanges();
                     lblMsg.Text = "Admin Updated Successfully";
                 }
             }
         }
-
-        /*protected void CVStatus_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            var temp = args.Value;
-            if (temp == "1" || temp == "0")
-            {
-                args.IsValid = true;
-            }
-            else
-            {
-                args.IsValid = false;
-            }
-        }*/
     }
 }
