@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="20fdabe2bc4a4171aec8e09a310f16b8" Name="Diagram1" ZoomLevel="81">
-        <EntityTypeShape EntityType="PTCLModel.tblAdmin" Width="1.5" PointX="4.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTCLModel.tblComplaint" Width="1.5" PointX="3.25" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTCLModel.tblComplaintType" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTCLModel.tblPtclUser" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+      <Diagram DiagramId="9ab7ecc4f0c64e5682ec1a40fbba3664" Name="Diagram1">
+        <EntityTypeShape EntityType="PTCLModel.tblAdmin" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTCLModel.tblComplaint" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTCLModel.tblComplaintType" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTCLModel.tblPtclUser" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <AssociationConnector Association="PTCLModel.FK_tblComplaint_tblComplaintType" ManuallyRouted="false" />
         <AssociationConnector Association="PTCLModel.FK_tblComplaint_tblPtclUser" ManuallyRouted="false" />
       </Diagram>

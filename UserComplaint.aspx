@@ -56,6 +56,13 @@
                         <asp:BoundField DataField="ComplaintTitle" HeaderText="Complaint Title" />
                         <asp:BoundField DataField="ComplaintStatus" HeaderText="Status" />
                         <asp:BoundField DataField="ComplaintTypeName" HeaderText="Complaint Type" />
+                         <asp:HyperLinkField
+                            Text="Detail"
+                            HeaderText="More Info"
+                            DataNavigateUrlFields="ComplaintID"
+                            DataNavigateUrlFormatString="UserComplaintDetails.aspx?ComplaintID={0}"
+                            target="_blank"
+                            />
                         <asp:TemplateField HeaderText="Action">
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="lnkDelete" Text="Delete" CommandName="delete" CommandArgument='<%# Bind("ComplaintID") %>' OnClientClick="return confirm('Are you sure you want to delete this Complaint?');"><i class="mx-3 text-center fas fa-trash fa-1x"></i></asp:LinkButton>
@@ -73,6 +80,21 @@
                         <asp:BoundField DataField="ComplaintTitle" HeaderText="Complaint Title" />
                         <asp:BoundField DataField="ComplaintStatus" HeaderText="Status" />
                         <asp:BoundField DataField="ComplaintTypeName" HeaderText="Complaint Type" />
+                         <asp:HyperLinkField
+                            Text="Detail"
+                            HeaderText="More Info"
+                            DataNavigateUrlFields="ComplaintID"
+                            DataNavigateUrlFormatString="UserComplaintDetails.aspx?ComplaintID={0}"
+                            target="_blank"
+                            />
+
+
+                        <asp:TemplateField HeaderText="Regenerate">
+                            <ItemTemplate>
+                                <asp:LinkButton runat="server" ID="lnkRegenerate" Text="Regenerate" CommandName="Regenerate" CommandArgument='<%# Bind("ComplaintID") %>' OnClientClick="return confirm('Are you sure you want to Regenerate this Complaint?');"><i class="mx-3 text-center fas fa-exclamation-triangle fa-1x"></i></asp:LinkButton>
+
+                            </ItemTemplate>
+                        </asp:TemplateField> 
                         <asp:TemplateField HeaderText="Action">
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="lnkDelete" Text="Delete" CommandName="delete" CommandArgument='<%# Bind("ComplaintID") %>' OnClientClick="return confirm('Are you sure you want to delete this Complaint?');"><i class="mx-3 text-center fas fa-trash fa-1x"></i></asp:LinkButton>

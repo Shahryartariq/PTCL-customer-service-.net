@@ -21,6 +21,7 @@ namespace PtclCustomerService.Models
         public string ComplaintDescription { get; set; }
         public Nullable<int> UserID { get; set; }
         public Nullable<bool> ComplaintStatus { get; set; }
+        public Nullable<int> RegeneratedID { get; set; }
     
         public virtual tblComplaintType tblComplaintType { get; set; }
         public virtual tblPtclUser tblPtclUser { get; set; }

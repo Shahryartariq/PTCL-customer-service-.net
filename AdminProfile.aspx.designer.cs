@@ -11,70 +11,52 @@ namespace PtclCustomerService
 {
 
 
-    public partial class UserComplaintDetails
+    public partial class AdminProfile
     {
 
         /// <summary>
-        /// txtComplaintID control.
+        /// AdminPic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComplaintID;
+        protected global::System.Web.UI.WebControls.Image AdminPic;
 
         /// <summary>
-        /// txtComplaintTitle control.
+        /// PanelUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComplaintTitle;
+        protected global::System.Web.UI.WebControls.Panel PanelUserName;
 
         /// <summary>
-        /// txtComplaintUserID control.
+        /// PanelFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComplaintUserID;
+        protected global::System.Web.UI.WebControls.Panel PanelFullName;
 
         /// <summary>
-        /// ddlComplaintStatus control.
+        /// PanelEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlComplaintStatus;
+        protected global::System.Web.UI.WebControls.Panel PanelEmail;
 
         /// <summary>
-        /// txtComplaintRegenerated control.
+        /// PanelPhone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComplaintRegenerated;
-
-        /// <summary>
-        /// HypRegeneratedComplaint control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HypRegeneratedComplaint;
-
-        /// <summary>
-        /// txtComplaintDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComplaintDescription;
+        protected global::System.Web.UI.WebControls.Panel PanelPhone;
     }
 }

@@ -17,6 +17,11 @@ namespace PtclCustomerService.Models
         public int AdminID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string Status { get; set; }
+        public bool Status { get; set; }
+        public string FullName { get; set; }
+        public string EmailAddress { get; set; }
+        public string Location { get; set; }
+        public string AdminDP { get; set; }
+        public string AdminPhone { get; set; }
     }
 }

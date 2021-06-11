@@ -11,17 +11,18 @@ namespace PtclCustomerService
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            HyperLink activeHyp = Master.FindControl("HypAdminAccount") as HyperLink;
+            HyperLink activeHyp = Master.FindControl("HypConplaints") as HyperLink;
             activeHyp.CssClass += " active";
             PendingGridView();
             ApprovedGridView();
+            RegeneratedGridView();
         }
 
         protected void PendingGridView()
         {
             using (PTCLEntities db = new PTCLEntities())
             {
-                var PendingComplaintsData = db.AdminPendingComplaint().ToList();
+                var PendingComplaintsData = db.GetComplaints().ToList();
                 GV1.DataSource = PendingComplaintsData;
                 GV1.DataBind();
             }
@@ -37,26 +38,53 @@ namespace PtclCustomerService
             }
         }
 
+        protected void RegeneratedGridView()
+        {
+            using (PTCLEntities db = new PTCLEntities())
+            {
+                var MyRegeneratedComplaintData = db.RegeneratedComplaints().ToList();
+                GV3.DataSource = MyRegeneratedComplaintData;
+                GV3.DataBind();
+            }
+        }
+
         protected void cmdCancelMenu_Click(object sender, EventArgs e)
         {
             PanelPendingComplaint.CssClass = " d-none";
             PanelApprovedComplaint.CssClass = " d-none";
+            PanelRegeneratedComplaint.CssClass = " d-none";
         }
 
         protected void PendingComplaint_Click(object sender, EventArgs e)
         {
             PanelPendingComplaint.CssClass = " active";
             PanelApprovedComplaint.CssClass = " d-none";
+            PanelRegeneratedComplaint.CssClass = " d-none";
             PendingComplaint.CssClass += " active";
             ApprovedComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
+            RegeneratedComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
         }
 
         protected void ApprovedComplaint_Click(object sender, EventArgs e)
         {
-            PanelPendingComplaint.CssClass = " d-none";
             PanelApprovedComplaint.CssClass = " active";
+            PanelPendingComplaint.CssClass = " d-none";
+            PanelRegeneratedComplaint.CssClass = " d-none";
+
             ApprovedComplaint.CssClass += " active";
             PendingComplaint.CssClass = PendingComplaint.CssClass.Replace("active", "");
+            RegeneratedComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
+        }
+
+        protected void RegeneratedComplaint_Click(object sender, EventArgs e)
+        {
+            PanelRegeneratedComplaint.CssClass = " active";
+            PanelPendingComplaint.CssClass = " d-none";
+            PanelApprovedComplaint.CssClass = " d-none";
+
+            RegeneratedComplaint.CssClass += " active";
+            PendingComplaint.CssClass = PendingComplaint.CssClass.Replace("active", "");
+            ApprovedComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
         }
 
         protected void GV_RowDeleting(object sender, GridViewDeleteEventArgs e)

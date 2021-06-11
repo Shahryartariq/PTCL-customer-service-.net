@@ -33,6 +33,15 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.Button ApprovedComplaint;
 
         /// <summary>
+        /// RegeneratedComplaint control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button RegeneratedComplaint;
+
+        /// <summary>
         /// PanelPendingComplaint control.
         /// </summary>
         /// <remarks>
@@ -67,5 +76,23 @@ namespace PtclCustomerService
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GV2;
+
+        /// <summary>
+        /// PanelRegeneratedComplaint control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelRegeneratedComplaint;
+
+        /// <summary>
+        /// GV3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GV3;
     }
 }

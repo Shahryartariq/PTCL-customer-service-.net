@@ -33,6 +33,15 @@ namespace PtclCustomerService
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// HypAdminProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HypAdminProfile;
+
+        /// <summary>
         /// HypManangeAdmin control.
         /// </summary>
         /// <remarks>
@@ -51,13 +60,22 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.HyperLink HypAdminPanel;
 
         /// <summary>
-        /// HypAdminAccount control.
+        /// HypConplaints control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HypAdminAccount;
+        protected global::System.Web.UI.WebControls.HyperLink HypConplaints;
+
+        /// <summary>
+        /// HypAdminReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HypAdminReport;
 
         /// <summary>
         /// lblName control.

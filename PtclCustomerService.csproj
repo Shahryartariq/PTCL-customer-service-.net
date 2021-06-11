@@ -86,18 +86,22 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminAccount.aspx" />
-    <Content Include="AdminComplaint.aspx" />
-    <Content Include="AdminComplaintDetails.aspx" />
+    <Content Include="Complaints\Admin\AdminComplaint.aspx" />
+    <Content Include="Complaints\Admin\AdminComplaintDetails.aspx" />
     <Content Include="AdminDashboard.aspx" />
     <Content Include="AdminLogin.aspx" />
     <Content Include="AdminPanel.aspx" />
+    <Content Include="AdminProfile.aspx" />
+    <Content Include="AdminReport.aspx" />
     <Content Include="AdminSetup.aspx" />
     <Content Include="assets\demo\chart-area-demo.js" />
     <Content Include="assets\demo\chart-bar-demo.js" />
     <Content Include="assets\demo\chart-pie-demo.js" />
     <Content Include="assets\demo\datatables-demo.js" />
+    <Content Include="assets\img\avatar.png" />
     <Content Include="assets\img\error-404-monochrome.svg" />
     <Content Include="BillManagement.aspx" />
+    <Content Include="Complaints\Admin\AdminComplaintHistory.aspx" />
     <Content Include="Css\bootstrap.min.css" />
     <Content Include="Css\GlobalStyle.css" />
     <Content Include="Css\Home.css" />
@@ -124,6 +128,7 @@
     <Content Include="PrintBill.aspx" />
     <Content Include="assets\img\HomeCover.jpg" />
     <Content Include="assets\img\PCS_Logo.png" />
+    <Content Include="RegisterUserComplaint.aspx" />
     <Content Include="temp.aspx" />
     <Content Include="Temp\401.html" />
     <Content Include="Temp\404.html" />
@@ -153,18 +158,18 @@
     <Compile Include="AdminAccount.aspx.designer.cs">
       <DependentUpon>AdminAccount.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdminComplaint.aspx.cs">
+    <Compile Include="Complaints\Admin\AdminComplaint.aspx.cs">
       <DependentUpon>AdminComplaint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdminComplaint.aspx.designer.cs">
+    <Compile Include="Complaints\Admin\AdminComplaint.aspx.designer.cs">
       <DependentUpon>AdminComplaint.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdminComplaintDetails.aspx.cs">
+    <Compile Include="Complaints\Admin\AdminComplaintDetails.aspx.cs">
       <DependentUpon>AdminComplaintDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdminComplaintDetails.aspx.designer.cs">
+    <Compile Include="Complaints\Admin\AdminComplaintDetails.aspx.designer.cs">
       <DependentUpon>AdminComplaintDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard.aspx.cs">
@@ -195,6 +200,20 @@
     <Compile Include="AdminPanelMasterPage.Master.designer.cs">
       <DependentUpon>AdminPanelMasterPage.Master</DependentUpon>
     </Compile>
+    <Compile Include="AdminProfile.aspx.cs">
+      <DependentUpon>AdminProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminProfile.aspx.designer.cs">
+      <DependentUpon>AdminProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminReport.aspx.cs">
+      <DependentUpon>AdminReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminReport.aspx.designer.cs">
+      <DependentUpon>AdminReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminSetup.aspx.cs">
       <DependentUpon>AdminSetup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -208,6 +227,13 @@
     </Compile>
     <Compile Include="BillManagement.aspx.designer.cs">
       <DependentUpon>BillManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Complaints\Admin\AdminComplaintHistory.aspx.cs">
+      <DependentUpon>AdminComplaintHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Complaints\Admin\AdminComplaintHistory.aspx.designer.cs">
+      <DependentUpon>AdminComplaintHistory.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomerSupport.aspx.cs">
       <DependentUpon>CustomerSupport.aspx</DependentUpon>
@@ -250,9 +276,6 @@
     <Compile Include="Models\AdminApprovedComplaint_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AdminPendingComplaint_Result.cs">
-      <DependentUpon>PtclModel1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\GetComplaints_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
@@ -266,9 +289,6 @@
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MyApprovedComplaint_Result.cs">
-      <DependentUpon>PtclModel1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MyPendingComplaint_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PtclAdminLogin_Result.cs">
@@ -290,6 +310,9 @@
       <DependentUpon>PtclModel1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\PtclUserLogin_Result.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RegeneratedComplaints_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblAdmin.cs">
@@ -323,6 +346,13 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PTCLEntities.cs" />
+    <Compile Include="RegisterUserComplaint.aspx.cs">
+      <DependentUpon>RegisterUserComplaint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegisterUserComplaint.aspx.designer.cs">
+      <DependentUpon>RegisterUserComplaint.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Sherry1Entities.cs" />
     <Compile Include="tblAadmin.cs" />
     <Compile Include="temp.aspx.cs">
@@ -410,6 +440,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Complaints\User\" />
+    <Folder Include="UploadFiles\AdminProfile\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

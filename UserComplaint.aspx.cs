@@ -33,8 +33,8 @@ namespace PtclCustomerService
             using (PTCLEntities db = new PTCLEntities())
             {
                 var UserID = Convert.ToInt32(Session["UserID"]);
-
-                var PendingComplaintsData = db.MyPendingComplaint(UserID).ToList();
+                //change bad ma
+                var PendingComplaintsData = db.GetComplaints().ToList();
                 //var PendingComplaintsData = db.GetComplaints().ToList();
                 GV1.DataSource = PendingComplaintsData;
                 GV1.DataBind();
@@ -117,6 +117,10 @@ namespace PtclCustomerService
 
         protected void GV_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            if (e.CommandName == "Regenerate")
+            {
+                Response.Redirect("RegisterUserComplaint.aspx?ComplaintID=" + e.CommandArgument);
+            }
             if (e.CommandName == "delete")
             {
                 int ComplaintID = Convert.ToInt32(e.CommandArgument);
