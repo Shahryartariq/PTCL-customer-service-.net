@@ -15,18 +15,24 @@
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6 card mt-2">
                     <h4 class="text-center text-success mt-2">User Registeration for PCS</h4>
+
+                 <div class="row">
+                  <div class="col-lg-6 mt-2">
                     <div class="form-group mt-2">
                         <!-- First Name Name -->
                         <label>First Name: </label>
                         <asp:RequiredFieldValidator runat="server" ID="RFV1" ControlToValidate="txtFirstName" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your First Name" ForeColor="Red" ValidationGroup="UserSignUp"></asp:RequiredFieldValidator>
                         <asp:TextBox runat="server" ID="txtFirstName" CssClass="form-control"></asp:TextBox>
                     </div>
+                      </div>
 
                     <!-- Last Name -->
-                    <div class="form-group mt-3">
+                 <div class="col-lg-6 mt-2">
+                    <div class="form-group mt-2">
                         <label>Last Name (Optional) </label>
                         <asp:TextBox runat="server" ID="txtLastName" CssClass="form-control"></asp:TextBox>
                     </div>
+                  </div></div>
 
                     <div class="row mt-1">
                         <!-- Phone -->
@@ -53,7 +59,7 @@
                     </div>
 
                     <!-- Email -->
-                    <div class="form-group mt-3">
+                    <div class="form-group mt-2">
                         <label>Email: </label>
                         <asp:RequiredFieldValidator runat="server" ID="RFV4" ControlToValidate="txtEmail" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your Email" ForeColor="Red" ValidationGroup="UserSignUp"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator runat="server" ID="REV3" ControlToValidate="txtEmail" SetFocusOnError="true" Text="*" ErrorMessage="Invalid Email" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ValidationGroup="UserSignUp"></asp:RegularExpressionValidator>
@@ -89,19 +95,29 @@
                         <asp:TextBox runat="server" ID="txtLocation" CssClass="form-control"></asp:TextBox>
                     </div>
 
+
+                    <div class="form-group mt-2">
+                                                <!-- Location -->
+                <label>Upload Your Profile Picture </label>
+                <br />
+                <asp:FileUpload ID="FileUpload" runat="server" /><br />
+                <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+            </div>
+
                     <!-- Validation Summary  -->
                     <div class="mt-2">
                         <asp:ValidationSummary runat="server" ID="ValidationSummary1" ForeColor="Red" ValidationGroup="UserSignUp" />
                     </div>
 
                     <!-- Buttons -->
+                    <div>
+                            <asp:Label runat="server" ID="lblMsg" ForeColor="Red"></asp:Label>
+                        </div>
                     <div class="form-group mt-4 mb-2">
                         <asp:Button Text="Register" runat="server" ID="cmdRegister" CssClass="btn btn-primary w-100 mb-4" CausesValidation="true" ValidationGroup="UserSignUp" OnClick="cmdRegister_Click" />
                         <asp:Button Text="Login as User" runat="server" ID="cmdLoginUser" CssClass="btn btn-primary w-50" OnClick="cmdLoginUser_Click" />
                         <asp:Button Text="Login as Admin" runat="server" ID="cmdLoginAdmin" CssClass="btn btn-primary" Style="width: 48%;" OnClick="cmdLoginAdmin_Click" />
-                        <div>
-                            <asp:Label runat="server" ID="lblMsg" ForeColor="Red"></asp:Label>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

@@ -14,6 +14,16 @@ namespace PtclCustomerService
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*if (IsCallback == false)
+            {
+                txtFirstName.Text = "";
+                txtLastName.Text = "";
+                txtPhone.Text = "";
+                txtCnic.Text = "";
+                txtEmail.Text = "";
+                txtPassword.Text = "";
+                txtLocation.Text = "";
+            }*/
         }
 
         //Hashing Start
@@ -51,15 +61,26 @@ namespace PtclCustomerService
                 u.EmailAddress = txtEmail.Text;
                 u.Cnic = txtCnic.Text;
                 u.Phone = txtPhone.Text;
+                u.CustomerLocation = txtLocation.Text;
 
-                //u.Password = txtPassword.Text;
+                if (FileUpload.HasFile)
+                {
+                    FileUpload.SaveAs(Server.MapPath("UploadFiles/CustomerProfile/" + FileUpload.FileName));
+                    u.CustomerDP = FileUpload.FileName;
+                }
+                else
+                {
+                    u.CustomerDP = "No File Uploaded";
+                }
+
+                u.Password = txtPassword.Text;
 
                 //hashing password start
-                var password = txtPassword.Text;
-                var salt = CreateSalt();
-                var hash = HashPassword(password, salt);
+                //var password = txtPassword.Text;
+                //var salt = CreateSalt();
+                //var hash = HashPassword(password, salt);
                 //Response.Write(Convert.ToBase64String(hash));
-                u.Password = (Convert.ToBase64String(hash));
+                //u.Password = (Convert.ToBase64String(hash));
 
                 //hashing password end
 

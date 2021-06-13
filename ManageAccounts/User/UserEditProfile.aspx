@@ -3,13 +3,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
    </style>
-        <script src="../../Js/scripts.js"></script>
+    <script src="../../Js/scripts.js"></script>
 
     <!-- Page level ki Java/cs -->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="container">
+    <div class="container w-75">
 
         <div class="row overflow-hidden">
 
@@ -79,6 +79,21 @@
                 </div>
             </div>
 
+            <div class="form-group mt-4">
+                <!-- Location -->
+                <label>Location: </label>
+                <asp:RequiredFieldValidator runat="server" ID="RFV7" ControlToValidate="txtLocation" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your Current Location" ForeColor="Red" ValidationGroup="UserUpdate"></asp:RequiredFieldValidator>
+                <asp:TextBox runat="server" ID="txtLocation" CssClass="form-control"></asp:TextBox>
+            </div>
+
+            <div class="form-group mt-4">
+                <!-- profile -->
+                <label>Update Your Profile Picture </label>
+                <br />
+                <asp:FileUpload ID="FileUpload" runat="server" /><br />
+                <asp:Label ID="lblUpload" runat="server" Text=""></asp:Label>
+            </div>
+
             <div class="form-group my-4 ">
                 <label>Status: </label>
                 <asp:TextBox runat="server" ReadOnly="true" ID="txtStatus" CssClass="form-control" />
@@ -88,7 +103,7 @@
                 <asp:ValidationSummary runat="server" ID="ValidationSummary1" ForeColor="Red" ValidationGroup="UserUpdate" />
             </div>
 
-            <div class="form-group mb-2">
+            <div class="form-group mb-4">
                 <asp:Button Text="Update" runat="server" ID="cmdUpdate" CssClass="btn btn-primary" OnClick="cmdUpdate_Click" ValidationGroup="UserUpdate" />
                 <a class="btn btn-primary" href="UserProfile.aspx">Cancel</a>
 

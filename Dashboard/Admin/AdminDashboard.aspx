@@ -15,19 +15,19 @@
         <div class="row">
             <div class="col-xl-3 col-md-6 ">
                 <div class="card bg-primary text-white mb-4 ">
-                    <div class="card-body text-center text-capitalize fw-bold">Total Customers
+                    <div class="card-body text-center text-capitalize fw-bold">
+                        Total Customers
                           <div>
-                        <asp:Label runat="server" ID="lblTotalCustomers" CssClass="h2">
-                            
-                        </asp:Label></div>
+                              <asp:Label runat="server" ID="lblTotalCustomers" CssClass="h2">
+                              </asp:Label>
+                          </div>
                     </div>
-                        <div class="card-footer d-flex align-items-center justify-content-between">
+                    <div class="card-footer d-flex align-items-center justify-content-between">
                         <a class="small text-white stretched-link" href="../../ManageCustomers/Admin/AdminManageCustomers.aspx">View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right">asdasd</i></div>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
             </div>
-           
         </div>
     </div>
 </asp:Content>

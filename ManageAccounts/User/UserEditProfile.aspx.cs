@@ -15,6 +15,9 @@ namespace PtclCustomerService
             HyperLink activeHyp = Master.FindControl("HypProfile") as HyperLink;
             activeHyp.CssClass += " active";
 
+            txtPassword.Attributes["type"] = "password";
+            txtConfirmPassword.Attributes["type"] = "password";
+
             using (PTCLEntities db = new PTCLEntities())
             {
                 if (IsPostBack == true) return;
@@ -30,6 +33,8 @@ namespace PtclCustomerService
                     txtPassword.Text = s.Password;
                     txtConfirmPassword.Text = s.Password;
                     txtStatus.Text = s.Status.ToString();
+                    txtLocation.Text = s.CustomerLocation;
+                    lblUpload.Text = s.CustomerDP;
                 }
             }
         }
@@ -48,7 +53,20 @@ namespace PtclCustomerService
                     u.Phone = txtPhone.Text;
                     u.Cnic = txtCnic.Text;
                     u.Password = txtPassword.Text;
+                    u.CustomerLocation = txtLocation.Text;
+
+                    if (FileUpload.HasFile)
+                    {
+                        FileUpload.SaveAs(Server.MapPath("../../UploadFiles/CustomerProfile/" + FileUpload.FileName));
+                        u.CustomerDP = FileUpload.FileName;
+                    }
+                    else
+                    {
+                        u.CustomerDP = "";
+                    }
+
                     db.SaveChanges();
+
                     lblMsg.Text = "User Updated Successfully";
                 }
             }
