@@ -24,13 +24,31 @@ namespace PtclCustomerService.ManageAccounts.User
         protected global::System.Web.UI.WebControls.Image userPic;
 
         /// <summary>
-        /// PanelUserName control.
+        /// PanelFirstName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelUserName;
+        protected global::System.Web.UI.WebControls.Panel PanelFirstName;
+
+        /// <summary>
+        /// PanelCustomerType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelCustomerType;
+
+        /// <summary>
+        /// PanelLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelLocation;
 
         /// <summary>
         /// PanelFullName control.
@@ -58,5 +76,23 @@ namespace PtclCustomerService.ManageAccounts.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelPhone;
+
+        /// <summary>
+        /// PanelCnic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelCnic;
+
+        /// <summary>
+        /// PanelStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelStatus;
     }
 }
