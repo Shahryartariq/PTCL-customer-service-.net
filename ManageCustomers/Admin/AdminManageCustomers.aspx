@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPanelMasterPage.Master" AutoEventWireup="true" CodeBehind="AdminManageCustomers.aspx.cs" Inherits="PtclCustomerService.AdminPanel" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+        <script src="../../Js/scripts.js"></script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 

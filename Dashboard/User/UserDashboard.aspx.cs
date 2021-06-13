@@ -16,7 +16,6 @@ namespace PtclCustomerService
             activeHyp.CssClass += " active";
             using (PTCLEntities db = new PTCLEntities())
             {
-                if (IsPostBack == true) return;
                 if (Session["UserID"] != null)
                 {
                     int UserID = (int)Session["UserID"];

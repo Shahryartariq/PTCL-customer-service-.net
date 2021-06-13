@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserPanelMasterPage.Master" AutoEventWireup="true" CodeBehind="UserComplaint.aspx.cs" Inherits="PtclCustomerService.UserComplaint" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+            <script src="../../Js/scripts.js"></script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">

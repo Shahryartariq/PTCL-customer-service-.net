@@ -35,8 +35,7 @@
             padding: 1rem;
         }
     </style>
-        <script src="../../Js/scripts.js"></script>
-
+    <script src="../../Js/scripts.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
@@ -93,7 +92,7 @@
                                     <h6 class="mb-0">Phone</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                <asp:Panel runat="server" ID="PanelPhone" Text="" CssClass="col-sm-9 text-secondary"></asp:Panel>
+                                    <asp:Panel runat="server" ID="PanelPhone" Text="" CssClass="col-sm-9 text-secondary"></asp:Panel>
                                 </div>
                             </div>
                             <hr>
