@@ -89,24 +89,21 @@
     <Content Include="Complaints\Admin\AdminComplaint.aspx" />
     <Content Include="Complaints\Admin\AdminComplaintDetails.aspx" />
     <Content Include="AdminLogin.aspx" />
-    <Content Include="AdminManageCustomers.aspx" />
+    <Content Include="ManageCustomers\Admin\AdminManageCustomers.aspx" />
     <Content Include="Dashboard\Admin\AdminDashboard.aspx" />
     <Content Include="Erros\404NotFound.aspx" />
     <Content Include="ManageAccounts\Admin\AdminProfile.aspx" />
-    <Content Include="AdminReport.aspx" />
     <Content Include="ManageAccounts\Admin\AdminSetup.aspx" />
     <Content Include="assets\demo\chart-area-demo.js" />
     <Content Include="assets\demo\chart-bar-demo.js" />
     <Content Include="assets\demo\chart-pie-demo.js" />
     <Content Include="assets\demo\datatables-demo.js" />
     <Content Include="assets\img\avatar.png" />
-    <Content Include="BillManagement.aspx" />
     <Content Include="Complaints\Admin\AdminComplaintHistory.aspx" />
     <Content Include="Css\bootstrap.min.css" />
     <Content Include="Css\GlobalStyle.css" />
     <Content Include="Css\Home.css" />
     <Content Include="Css\styles.css" />
-    <Content Include="CustomerSupport.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
     <Content Include="Js\datatables-simple-demo.js" />
@@ -125,11 +122,8 @@
       <DependentUpon>PtclModel1.edmx</DependentUpon>
       <LastGenOutput>PtclModel1.cs</LastGenOutput>
     </Content>
-    <Content Include="PackageDetails.aspx" />
-    <Content Include="PrintBill.aspx" />
     <Content Include="assets\img\HomeCover.jpg" />
     <Content Include="assets\img\PCS_Logo.png" />
-    <Content Include="RegisterUserComplaint.aspx" />
     <Content Include="temp.aspx" />
     <Content Include="Temp\401.html" />
     <Content Include="Temp\404.html" />
@@ -142,12 +136,12 @@
     <Content Include="Temp\password.html" />
     <Content Include="Temp\register.html" />
     <Content Include="Temp\tables.html" />
-    <Content Include="UserComplaint.aspx" />
-    <Content Include="UserComplaintDetails.aspx" />
+    <Content Include="Complaints\User\UserComplaint.aspx" />
+    <Content Include="Complaints\User\UserComplaintDetails.aspx" />
     <Content Include="Dashboard\User\UserDashboard.aspx" />
     <Content Include="UserLogin.aspx" />
     <Content Include="ManageAccounts\User\UserEditProfile.aspx" />
-    <Content Include="UserSetup.aspx" />
+    <Content Include="ManageCustomers\Admin\CustomerSetup.aspx" />
     <Content Include="UserSignup.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -173,11 +167,11 @@
     <Compile Include="AdminLogin.aspx.designer.cs">
       <DependentUpon>AdminLogin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdminManageCustomers.aspx.cs">
+    <Compile Include="ManageCustomers\Admin\AdminManageCustomers.aspx.cs">
       <DependentUpon>AdminManageCustomers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdminManageCustomers.aspx.designer.cs">
+    <Compile Include="ManageCustomers\Admin\AdminManageCustomers.aspx.designer.cs">
       <DependentUpon>AdminManageCustomers.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminPanelMasterPage.Master.cs">
@@ -208,13 +202,6 @@
     <Compile Include="ManageAccounts\Admin\AdminProfile.aspx.designer.cs">
       <DependentUpon>AdminProfile.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdminReport.aspx.cs">
-      <DependentUpon>AdminReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdminReport.aspx.designer.cs">
-      <DependentUpon>AdminReport.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ManageAccounts\Admin\AdminSetup.aspx.cs">
       <DependentUpon>AdminSetup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -222,26 +209,12 @@
     <Compile Include="ManageAccounts\Admin\AdminSetup.aspx.designer.cs">
       <DependentUpon>AdminSetup.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BillManagement.aspx.cs">
-      <DependentUpon>BillManagement.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="BillManagement.aspx.designer.cs">
-      <DependentUpon>BillManagement.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Complaints\Admin\AdminComplaintHistory.aspx.cs">
       <DependentUpon>AdminComplaintHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Complaints\Admin\AdminComplaintHistory.aspx.designer.cs">
       <DependentUpon>AdminComplaintHistory.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerSupport.aspx.cs">
-      <DependentUpon>CustomerSupport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CustomerSupport.aspx.designer.cs">
-      <DependentUpon>CustomerSupport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -356,29 +329,8 @@
     <Compile Include="Models\UserPendingComplaints_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
-    <Compile Include="PackageDetails.aspx.cs">
-      <DependentUpon>PackageDetails.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PackageDetails.aspx.designer.cs">
-      <DependentUpon>PackageDetails.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PrintBill.aspx.cs">
-      <DependentUpon>PrintBill.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PrintBill.aspx.designer.cs">
-      <DependentUpon>PrintBill.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PTCLEntities.cs" />
-    <Compile Include="RegisterUserComplaint.aspx.cs">
-      <DependentUpon>RegisterUserComplaint.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RegisterUserComplaint.aspx.designer.cs">
-      <DependentUpon>RegisterUserComplaint.aspx</DependentUpon>
-    </Compile>
     <Compile Include="temp.aspx.cs">
       <DependentUpon>temp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -386,18 +338,18 @@
     <Compile Include="temp.aspx.designer.cs">
       <DependentUpon>temp.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UserComplaint.aspx.cs">
+    <Compile Include="Complaints\User\UserComplaint.aspx.cs">
       <DependentUpon>UserComplaint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserComplaint.aspx.designer.cs">
+    <Compile Include="Complaints\User\UserComplaint.aspx.designer.cs">
       <DependentUpon>UserComplaint.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UserComplaintDetails.aspx.cs">
+    <Compile Include="Complaints\User\UserComplaintDetails.aspx.cs">
       <DependentUpon>UserComplaintDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserComplaintDetails.aspx.designer.cs">
+    <Compile Include="Complaints\User\UserComplaintDetails.aspx.designer.cs">
       <DependentUpon>UserComplaintDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Dashboard\User\UserDashboard.aspx.cs">
@@ -428,12 +380,12 @@
     <Compile Include="UserPanelMasterPage.Master.designer.cs">
       <DependentUpon>UserPanelMasterPage.Master</DependentUpon>
     </Compile>
-    <Compile Include="UserSetup.aspx.cs">
-      <DependentUpon>UserSetup.aspx</DependentUpon>
+    <Compile Include="ManageCustomers\Admin\CustomerSetup.aspx.cs">
+      <DependentUpon>CustomerSetup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserSetup.aspx.designer.cs">
-      <DependentUpon>UserSetup.aspx</DependentUpon>
+    <Compile Include="ManageCustomers\Admin\CustomerSetup.aspx.designer.cs">
+      <DependentUpon>CustomerSetup.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserSignup.aspx.cs">
       <DependentUpon>UserSignup.aspx</DependentUpon>
@@ -464,7 +416,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Complaints\User\" />
+    <Folder Include="ManageCustomers\User\" />
     <Folder Include="UploadFiles\AdminProfile\" />
   </ItemGroup>
   <ItemGroup>

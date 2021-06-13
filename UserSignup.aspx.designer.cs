@@ -186,6 +186,24 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
 
         /// <summary>
+        /// RFV7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFV7;
+
+        /// <summary>
+        /// txtLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLocation;
+
+        /// <summary>
         /// ValidationSummary1 control.
         /// </summary>
         /// <remarks>

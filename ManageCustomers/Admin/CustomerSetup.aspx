@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPanelMasterPage.Master" AutoEventWireup="true" CodeBehind="UserSetup.aspx.cs" Inherits="PtclCustomerService.UserSetup" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPanelMasterPage.Master" AutoEventWireup="true" CodeBehind="CustomerSetup.aspx.cs" Inherits="PtclCustomerService.UserSetup" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -87,7 +87,7 @@
 
             <div class="form-group mb-2">
                 <asp:Button Text="Submit" runat="server" ID="cmdSubmit" CssClass="btn btn-primary mt-4" OnClick="cmdSubmit_Click" ValidationGroup="UserSetup" />
-                <a class="btn btn-primary mt-4" href="AdminPanel.aspx">Cancel</a>
+                <a class="btn btn-primary mt-4" href="AdminManageCustomers.aspx">Cancel</a>
 
                 <div>
                     <asp:Label runat="server" ID="lblMsg" ForeColor="Red"></asp:Label>

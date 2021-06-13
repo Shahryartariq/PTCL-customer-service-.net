@@ -47,6 +47,8 @@
     <Property Name="Status" Type="bit" Nullable="false" />
     <Property Name="Cnic" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CustomerDP" Type="nvarchar" MaxLength="100" />
+    <Property Name="CustomerLocation" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <Association Name="FK_tblComplaint_tblComplaintType">
     <End Role="tblComplaintType" Type="Self.tblComplaintType" Multiplicity="1" />

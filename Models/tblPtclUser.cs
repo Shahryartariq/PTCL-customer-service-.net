@@ -28,6 +28,8 @@ namespace PtclCustomerService.Models
         public bool Status { get; set; }
         public string Cnic { get; set; }
         public string Password { get; set; }
+        public string CustomerDP { get; set; }
+        public string CustomerLocation { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblComplaint> tblComplaints { get; set; }

@@ -52,6 +52,8 @@
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="Cnic" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerDP" Type="nvarchar" MaxLength="100" />
+          <Property Name="CustomerLocation" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_tblComplaint_tblComplaintType">
           <End Role="tblComplaintType" Type="Self.tblComplaintType" Multiplicity="1" />
@@ -183,6 +185,8 @@
           <Property Name="Cnic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tblComplaints" Relationship="Self.FK_tblComplaint_tblPtclUser" FromRole="tblPtclUser" ToRole="tblComplaint" />
+          <Property Name="CustomerDP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_tblComplaint_tblComplaintType">
           <End Role="tblComplaintType" Type="Self.tblComplaintType" Multiplicity="1" />
@@ -256,7 +260,7 @@
           <Parameter Name="userID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetMyComplaints" ReturnType="Collection(PTCLModel.GetMyComplaints_Result)">
-            <Parameter Name="userID" Mode="In" Type="Int32" />
+          <Parameter Name="userID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="AdminApprovedComplaint_Result">
@@ -474,6 +478,8 @@
           <EntitySetMapping Name="tblPtclUsers">
             <EntityTypeMapping TypeName="PTCLModel.tblPtclUser">
               <MappingFragment StoreEntitySet="tblPtclUser">
+                <ScalarProperty Name="CustomerLocation" ColumnName="CustomerLocation" />
+                <ScalarProperty Name="CustomerDP" ColumnName="CustomerDP" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

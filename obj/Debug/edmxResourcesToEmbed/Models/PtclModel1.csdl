@@ -51,6 +51,8 @@
     <Property Name="Cnic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="tblComplaints" Relationship="Self.FK_tblComplaint_tblPtclUser" FromRole="tblPtclUser" ToRole="tblComplaint" />
+    <Property Name="CustomerDP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_tblComplaint_tblComplaintType">
     <End Role="tblComplaintType" Type="Self.tblComplaintType" Multiplicity="1" />

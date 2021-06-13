@@ -13,6 +13,17 @@ namespace PtclCustomerService.Dashboard.Admin
         {
             HyperLink activeHyp = Master.FindControl("HypDashBoard") as HyperLink;
             activeHyp.CssClass += " active";
+
+            using (PTCLEntities db = new PTCLEntities())
+            {
+                if (Session["AdminID"] != null)
+                {
+                    var totalCount = db.GetPtclUsers().ToList();
+
+                    int count = totalCount.Count;
+                    lblTotalCustomers.Text = count.ToString();
+                }
+            }
         }
     }
 }

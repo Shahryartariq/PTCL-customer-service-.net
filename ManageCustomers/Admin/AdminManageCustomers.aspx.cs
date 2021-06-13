@@ -30,7 +30,7 @@ namespace PtclCustomerService
         {
             if (e.CommandName == "edit")
             {
-                Response.Redirect("UserSetup.aspx?UserID=" + e.CommandArgument);
+                Response.Redirect("CustomerSetup.aspx?UserID=" + e.CommandArgument);
             }
             else if (e.CommandName == "delete")
             {

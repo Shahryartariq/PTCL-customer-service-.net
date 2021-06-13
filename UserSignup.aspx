@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="Css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
+<body class="bg-primary">
     <form id="form1" runat="server">
         <div class="container">
             <div class="row">
@@ -80,6 +80,13 @@
                                 <asp:TextBox runat="server" ID="txtConfirmPassword" CssClass="form-control" TextMode="Password"></asp:TextBox>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <!-- Location -->
+                        <label>Location: </label>
+                        <asp:RequiredFieldValidator runat="server" ID="RFV7" ControlToValidate="txtLocation" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your Current Location" ForeColor="Red" ValidationGroup="UserSignUp"></asp:RequiredFieldValidator>
+                        <asp:TextBox runat="server" ID="txtLocation" CssClass="form-control"></asp:TextBox>
                     </div>
 
                     <!-- Validation Summary  -->
