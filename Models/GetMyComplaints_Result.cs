@@ -10,9 +10,8 @@
 namespace PtclCustomerService.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tblComplaint
+    public partial class GetMyComplaints_Result
     {
         public int ComplaintID { get; set; }
         public int ComplaintTypeID { get; set; }
@@ -23,8 +22,5 @@ namespace PtclCustomerService.Models
         public Nullable<bool> ComplaintStatus { get; set; }
         public Nullable<int> RegeneratedID { get; set; }
         public Nullable<System.DateTime> ComplaintCreationDate { get; set; }
-    
-        public virtual tblComplaintType tblComplaintType { get; set; }
-        public virtual tblPtclUser tblPtclUser { get; set; }
     }
 }

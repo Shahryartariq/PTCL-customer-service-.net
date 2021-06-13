@@ -6,6 +6,8 @@
           overflow: hidden;
       }
    </style>
+        <script src="../../Js/scripts.js"></script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- Contnet Start -->

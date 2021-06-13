@@ -22,7 +22,7 @@ namespace PtclCustomerService
         {
             using (PTCLEntities db = new PTCLEntities())
             {
-                var PendingComplaintsData = db.GetComplaints().ToList();
+                var PendingComplaintsData = db.ActiveC().ToList();
                 GV1.DataSource = PendingComplaintsData;
                 GV1.DataBind();
             }

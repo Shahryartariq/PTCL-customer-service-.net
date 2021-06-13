@@ -78,14 +78,14 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li>
-                            <asp:HyperLink ID="HypAdminProfile" Text="Admin Profile" runat="server" CssClass="dropdown-item" NavigateUrl="AdminProfile.aspx"></asp:HyperLink>
-
+                            <asp:HyperLink ID="HypAdminProfile" Text="Admin Profile" runat="server" CssClass="dropdown-item" NavigateUrl="~/ManageAccounts/Admin/AdminProfile.aspx"></asp:HyperLink>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
-                        <li><a class="dropdown-item" href="Logout.aspx">Logout</a></li>
+                        <li>
+                            <asp:HyperLink ID="HypLogout" Text="Logout" runat="server" CssClass="dropdown-item" NavigateUrl="~/Logout.aspx"></asp:HyperLink>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -95,29 +95,28 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
+
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="AdminDashboard.aspx">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
+                            <asp:HyperLink ID="HypDashBoard" runat="server" CssClass="nav-link" NavigateUrl="~/Dashboard/Admin/AdminDashboard.aspx">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                 Dashboard
+                            </asp:HyperLink>
 
                             <%-- Custom --%>
                             <div class="sb-sidenav-menu-heading">Pages</div>
-                            <asp:HyperLink ID="HypManangeAdmin" runat="server" CssClass="nav-link" NavigateUrl="ManageAdmins.aspx">
+                            <asp:HyperLink ID="HypManangeAdmin" runat="server" CssClass="nav-link" NavigateUrl="~/ManageAccounts/Admin/ManageAdmins.aspx">
                             <div class="sb-nav-link-icon"><i class="fas fa-user-cog"></i></div>
                                 Manange Admin
                             </asp:HyperLink>
-                            <asp:HyperLink ID="HypAdminPanel" runat="server" CssClass="nav-link" NavigateUrl="AdminPanel.aspx">
+                            <asp:HyperLink ID="HypAdminPanel" runat="server" CssClass="nav-link" NavigateUrl="AdminManageCustomers.aspx">
                             <div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>
                                 Manage Customers
                             </asp:HyperLink>
 
-                             <asp:HyperLink ID="HypConplaints" runat="server" CssClass="nav-link" NavigateUrl="~/Complaints/Admin/AdminComplaint.aspx">
+                            <asp:HyperLink ID="HypConplaints" runat="server" CssClass="nav-link" NavigateUrl="~/Complaints/Admin/AdminComplaint.aspx">
                             <div class="sb-nav-link-icon"><i class="fas fa-exclamation-circle"></i></div>
                                 Complaints
                             </asp:HyperLink>
-
-                          
 
                             <asp:HyperLink ID="HypAdminReport" runat="server" CssClass="nav-link" NavigateUrl="AdminReport.aspx">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
@@ -132,7 +131,7 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link"  href="login.html">Login</a>
+                                            <a class="nav-link" href="login.html">Login</a>
                                             <a class="nav-link" href="register.html">Register</a>
                                             <a class="nav-link" href="password.html">Forgot Password</a>
                                         </nav>

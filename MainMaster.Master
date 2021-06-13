@@ -48,10 +48,10 @@
                                 <asp:HyperLink ID="HypLogin" runat="server" Text="Login" CssClass="nav-link" NavigateUrl="UserLogin.aspx"></asp:HyperLink>
                             </li>
                             <li class="nav-item h4">
-                                <asp:HyperLink ID="HypUserPanel" runat="server" Text="" CssClass="nav-link" NavigateUrl="~/UserDashboard.aspx"></asp:HyperLink>
+                                <asp:HyperLink ID="HypUserPanel" runat="server" Text="" CssClass="nav-link" NavigateUrl="~/Dashboard/User/UserDashboard.aspx"></asp:HyperLink>
                             </li>
                             <li class="nav-item h4">
-                                <asp:HyperLink ID="HypAdminPanel" runat="server" Text="" CssClass="nav-link" NavigateUrl="~/AdminDashboard.aspx"></asp:HyperLink>
+                                <asp:HyperLink ID="HypAdminPanel" runat="server" Text="" CssClass="nav-link" NavigateUrl="~/Dashboard/Admin/AdminDashboard.aspx"></asp:HyperLink>
                             </li>
 
                             <li class="nav-item h4">

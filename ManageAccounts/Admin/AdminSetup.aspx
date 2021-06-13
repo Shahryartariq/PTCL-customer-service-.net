@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPanelMasterPage.Master" AutoEventWireup="true" CodeBehind="AdminSetup.aspx.cs" Inherits="PtclCustomerService.AdminSetup" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+        <script src="../../Js/scripts.js"></script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h3 class="text-center my-3 text-success ">Add Admin New</h3>
@@ -45,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group mt-4">
@@ -53,24 +55,24 @@
                         <asp:RequiredFieldValidator runat="server" ID="RFV4" ControlToValidate="txtAddress" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your Address   " ForeColor="Red" ValidationGroup="AdminSetup"></asp:RequiredFieldValidator>
                         <asp:TextBox runat="server" ID="txtAddress" CssClass="form-control w-100"></asp:TextBox>
                     </div>
-                </div> 
+                </div>
                 <div class="col-lg-6">
                     <div class="form-group mt-4">
-                        <label>Phome: </label>
-                       
-                                <asp:RequiredFieldValidator runat="server" ID="RFVPhone" ControlToValidate="txtPhone" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your Phone Number" ForeColor="Red" ValidationGroup="AdminSetup"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator runat="server" ID="REVP" ControlToValidate="txtPhone" SetFocusOnError="true" Text="*" ErrorMessage="Invalid Phone Number" ForeColor="Red" ValidationExpression="^[0-9]{11,12}$" ValidationGroup="AdminSetup"></asp:RegularExpressionValidator>
+                        <label>Phone: </label>
 
-                                <asp:TextBox runat="server" ID="txtPhone" CssClass="form-control" TextMode="Phone"></asp:TextBox>
-                            </div>
+                        <asp:RequiredFieldValidator runat="server" ID="RFVPhone" ControlToValidate="txtPhone" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your Phone Number" ForeColor="Red" ValidationGroup="AdminSetup"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator runat="server" ID="REVP" ControlToValidate="txtPhone" SetFocusOnError="true" Text="*" ErrorMessage="Invalid Phone Number" ForeColor="Red" ValidationExpression="^[0-9]{11,12}$" ValidationGroup="AdminSetup"></asp:RegularExpressionValidator>
+
+                        <asp:TextBox runat="server" ID="txtPhone" CssClass="form-control" TextMode="Phone"></asp:TextBox>
                     </div>
                 </div>
+            </div>
 
             <div class="form-group mt-4">
                 <label>Status:  </label>
                 <asp:DropDownList runat="server" ID="ddlStatus" CssClass="form-control w-50">
-                    <asp:ListItem Text="True" Value="1" />
-                    <asp:ListItem Text="False" Value="0" />
+                    <asp:ListItem Text="True" Value="true" />
+                    <asp:ListItem Text="False" Value="false" />
                 </asp:DropDownList>
             </div>
 

@@ -11,7 +11,6 @@ namespace PtclCustomerService
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblComplaintID.Text = Request.QueryString["ComplaintID"];
         }
     }
 }

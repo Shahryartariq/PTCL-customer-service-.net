@@ -5,13 +5,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace PtclCustomerService
+namespace PtclCustomerService.ManageAccounts.User
 {
-    public partial class UserDashboard : System.Web.UI.Page
+    public partial class UserProfile : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            HyperLink activeHyp = Master.FindControl("HypProfile") as HyperLink;
+            activeHyp.CssClass += " active";
         }
     }
 }
