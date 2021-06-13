@@ -132,5 +132,33 @@ namespace PtclCustomerService.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uniqueEmail_Result>("uniqueEmail", emailParameter);
         }
+    
+        public virtual ObjectResult<temp_Result> temp()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<temp_Result>("temp");
+        }
+    
+        public virtual ObjectResult<ActiveC_Result> ActiveC()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ActiveC_Result>("ActiveC");
+        }
+    
+        public virtual ObjectResult<UserPendingComplaints_Result> UserPendingComplaints(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("userID", userID) :
+                new ObjectParameter("userID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UserPendingComplaints_Result>("UserPendingComplaints", userIDParameter);
+        }
+    
+        public virtual ObjectResult<GetMyComplaints_Result> GetMyComplaints(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("userID", userID) :
+                new ObjectParameter("userID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMyComplaints_Result>("GetMyComplaints", userIDParameter);
+        }
     }
 }

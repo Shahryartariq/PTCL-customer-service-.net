@@ -12,7 +12,7 @@ namespace PtclCustomerService
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            HyperLink activeHyp = Master.FindControl("HypEditAccount") as HyperLink;
+            HyperLink activeHyp = Master.FindControl("HypProfile") as HyperLink;
             activeHyp.CssClass += " active";
 
             using (PTCLEntities db = new PTCLEntities())

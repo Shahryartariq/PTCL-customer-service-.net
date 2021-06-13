@@ -31,13 +31,13 @@ namespace PtclCustomerService
                     //txtStatus.Text = s.Status;
                     //Response.Write(s.Status);
 
-                    if (Convert.ToInt32(s.Status) == 1)
+                    if (s.Status == true)
                     {
-                        ddlStatus.SelectedValue = "1";
+                        ddlStatus.SelectedValue = "true";
                     }
                     else
                     {
-                        ddlStatus.SelectedValue = "0";
+                        ddlStatus.SelectedValue = "false";
                     }
                 }
             }
@@ -70,7 +70,8 @@ namespace PtclCustomerService
                     }
 
                     //s.Status = txtStatus.Text;
-                    s.Status = bool.Parse(ddlStatus.SelectedValue);
+                    s.Status = bool.Parse(ddlStatus.SelectedValue.ToString());
+                    // s.Status = Boolean.TryParse(ddlStatus.SelectedValue.ToString);
                     db.tblAdmins.Add(s);
                     db.SaveChanges();
                     lblMsg.Text = "Admin Inserted Successfully";
@@ -90,6 +91,8 @@ namespace PtclCustomerService
 
                     //s.Status = txtStatus.Text;
                     s.Status = bool.Parse(ddlStatus.SelectedValue);
+                    //s.Status = bool.Parse(ddlStatus.SelectedValue.ToString());
+                    //s.Status = Convert.ToBoolean(ddlStatus.SelectedValue);
 
                     db.SaveChanges();
                     lblMsg.Text = "Admin Updated Successfully";

@@ -42,6 +42,24 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.HyperLink HypAdminProfile;
 
         /// <summary>
+        /// HypLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HypLogout;
+
+        /// <summary>
+        /// HypDashBoard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HypDashBoard;
+
+        /// <summary>
         /// HypManangeAdmin control.
         /// </summary>
         /// <remarks>

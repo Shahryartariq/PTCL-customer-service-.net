@@ -78,12 +78,15 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li>
+                            <asp:HyperLink ID="HypUserProfile" Text="User Profile" runat="server" CssClass="dropdown-item" NavigateUrl="~/ManageAccounts/User/UserProfile.aspx"></asp:HyperLink>
+                        <li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
-                        <li><a class="dropdown-item" href="Logout.aspx">Logout</a></li>
+                        <li>
+                            <asp:HyperLink ID="HypLogout" Text="Logout" runat="server" CssClass="dropdown-item" NavigateUrl="~/Logout.aspx"></asp:HyperLink>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -94,23 +97,19 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="UserDashboard.aspx">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
-
-                            <%-- Custom --%>
-                            <div class="sb-sidenav-menu-heading">Pages</div>
-                            <asp:HyperLink ID="HypEditAccount" runat="server" CssClass="nav-link" NavigateUrl="UserPanel.aspx">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
-                                My Profile
+                            <asp:HyperLink ID="HypDashBoard" runat="server" CssClass="nav-link" NavigateUrl="~/Dashboard/User/UserDashboard.aspx">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                 Dashboard
                             </asp:HyperLink>
 
+                            <div class="sb-sidenav-menu-heading">Pages</div>
+                            <%-- Package Details --%>
                             <asp:HyperLink ID="HypPackage" runat="server" CssClass="nav-link" NavigateUrl="PackageDetails.aspx">
                             <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
                                 Package Details
                             </asp:HyperLink>
 
+                            <%--Complaint --%>
                             <asp:HyperLink ID="HypComplaint" runat="server" CssClass="nav-link" NavigateUrl="UserComplaint.aspx">
                             <div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>
                                 Complaint
@@ -142,15 +141,12 @@
                                     </div>
                                 </nav>
                             </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="te">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
+                            <%-- Profile --%>
+                            <div class="sb-sidenav-menu-heading">Your Account</div>
+                            <asp:HyperLink ID="HypProfile" runat="server" CssClass="nav-link" NavigateUrl="~/ManageAccounts/User/UserProfile.aspx">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
+                                My Profile
+                            </asp:HyperLink>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

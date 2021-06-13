@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPanelMasterPage.Master" AutoEventWireup="true" CodeBehind="AdminProfile.aspx.cs" Inherits="PtclCustomerService.AdminProfile" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserPanelMasterPage.Master" AutoEventWireup="true" CodeBehind="UserProfile.aspx.cs" Inherits="PtclCustomerService.ManageAccounts.User.UserProfile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -35,6 +35,8 @@
             padding: 1rem;
         }
     </style>
+        <script src="../../Js/scripts.js"></script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
@@ -42,15 +44,15 @@
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="AdminDashboard.aspx">Home</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Admin</a></li>
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Users</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Profile</li>
             </ol>
         </nav>
     </div>
     <!-- /Breadcrumb -->
 
-    <h3 class="text-center my-3 text-success ">Admin Profile</h3>
+    <h3 class="text-center my-3 text-success ">User Profile</h3>
     <div class="container">
         <div class="main-body">
 
@@ -59,11 +61,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <asp:Image runat="server" alt="Admin Profile Picture" CssClass="rounded-circle" Width="150" ID="AdminPic" />
+                                <asp:Image runat="server" alt="User Profile Picture" CssClass="rounded-circle" Width="150" ID="userPic" />
                                 <div class="mt-3">
                                     <asp:Panel runat="server" ID="PanelUserName"></asp:Panel>
-                                    <p class="text-secondary mb-1">Admin at PTCL Customer Care</p>
-                                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                    <p class="text-secondary mb-1">User at PTCL Customer Care</p>
+                                    <p class="text-muted font-size-sm">Sargodha, Punjab, Pakistan</p>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +93,7 @@
                                     <h6 class="mb-0">Phone</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                <asp:Panel runat="server" ID="PanelPhone" Text="" CssClass="col-sm-9 text-secondary"></asp:Panel>
+                                    <asp:Panel runat="server" ID="PanelPhone" Text="" CssClass="col-sm-9 text-secondary"></asp:Panel>
                                 </div>
                             </div>
                             <hr>
@@ -106,7 +108,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <a class="btn btn-primary " target="__blank" href="AdminSetup.aspx?AdminID=16">Edit Profile</a>
+                                    <a class="btn btn-primary " target="__blank" href="UserEditProfile.aspx">Edit Profile</a>
                                 </div>
                             </div>
                         </div>

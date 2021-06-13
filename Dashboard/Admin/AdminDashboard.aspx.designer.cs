@@ -8,9 +8,9 @@
 //------------------------------------------------------------------------------
 
 
-namespace PtclCustomerService
+namespace PtclCustomerService.Dashboard.Admin
 {
-    public partial class AdminAccount
+    public partial class AdminDashboard
     {
     }
 }

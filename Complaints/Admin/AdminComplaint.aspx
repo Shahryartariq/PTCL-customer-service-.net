@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPanelMasterPage.Master" AutoEventWireup="true" CodeBehind="AdminComplaint.aspx.cs" Inherits="PtclCustomerService.AdminComplaint" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+        <script src="../../Js/scripts.js"></script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
@@ -14,8 +16,8 @@
                     <div class="my-3">
                         <div class="text-center">
 
-                            <asp:Button ID="PendingComplaint" runat="server" Text="Pending Complaint" CssClass="btn btn-primary" OnClick="PendingComplaint_Click"></asp:Button>
-                            <asp:Button ID="ApprovedComplaint" runat="server" Text="Approved Complaint" CssClass="btn btn-primary" OnClick="ApprovedComplaint_Click"></asp:Button>
+                            <asp:Button ID="PendingComplaint" runat="server" Text="Active Complaint" CssClass="btn btn-primary" OnClick="PendingComplaint_Click"></asp:Button>
+                            <asp:Button ID="ApprovedComplaint" runat="server" Text="Closed Complaint" CssClass="btn btn-primary" OnClick="ApprovedComplaint_Click"></asp:Button>
                             <asp:Button ID="RegeneratedComplaint" runat="server" Text="Regenerated Complaint" CssClass="btn btn-primary" OnClick="RegeneratedComplaint_Click"></asp:Button>
                         </div>
 
@@ -23,7 +25,10 @@
                         <asp:Panel ID="PanelPendingComplaint" runat="server" CssClass="d-none">
                             <asp:GridView runat="server" ID="GV1" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
                                 <Columns>
-                                    <asp:BoundField DataField="ComplaintID" HeaderText="ComplaintID" />
+                                    <asp:BoundField DataField="ComplaintID" HeaderText="Complaint ID" />
+                                    <asp:BoundField DataField="FirstName" HeaderText="Complainant Name" />
+                                    <asp:BoundField DataField="ComplaintTypeName" HeaderText="Complaint Type" />
+                                    <asp:BoundField DataField="ComplaintCreationDate" HeaderText="Creation Date & Time" />
 
                                     <asp:HyperLinkField
                                         Text="Detail"
@@ -40,7 +45,7 @@
                             <asp:GridView runat="server" ID="GV2" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
                                 <Columns>
                                     <asp:BoundField DataField="ComplaintID" HeaderText="ComplaintID" />
-                                  
+
                                     <asp:HyperLinkField
                                         Text="Detail"
                                         HeaderText="More Info"

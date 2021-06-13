@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPanelMasterPage.Master" AutoEventWireup="true" CodeBehind="AdminComplaintHistory.aspx.cs" Inherits="PtclCustomerService.Complaints.Admin.AdminComplaintHistory" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+        <script src="../../Js/scripts.js"></script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
