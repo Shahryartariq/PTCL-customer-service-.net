@@ -32,7 +32,7 @@ namespace PtclCustomerService
 
                     Response.Cookies["PCS"]["AdminID"] = query[0].AdminID.ToString();
                     Response.Cookies["PCS"]["UserName"] = query[0].UserName.ToString();
-                    Response.Cookies["PCS"].Expires = DateTime.Now.AddDays(1);
+                    Response.Cookies["PCS"].Expires = DateTime.Now.AddDays(3);
                     ;
 
                     Response.Redirect("Home.aspx");

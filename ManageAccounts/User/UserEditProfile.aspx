@@ -89,8 +89,13 @@
             <div class="form-group mt-4">
                 <!-- profile -->
                 <label>Update Your Profile Picture </label>
+                <asp:RegularExpressionValidator ID="RegExValFileUploadFileType" runat="server"
+                    ControlToValidate="FileUpload"
+                    ErrorMessage="Only .jpg,.png,.jpeg Files are allowed"
+                    ValidationExpression="(.*?)\.(jpg|jpeg|png|JPG|JPEG|PNG)$"
+                    SetFocusOnError="true" Text="*" ForeColor="Red" ValidationGroup="UserUpdate" />
                 <br />
-                <asp:FileUpload ID="FileUpload" runat="server" /><br />
+                <asp:FileUpload ID="FileUpload" runat="server" accept=".png,.jpg,.jpeg" /><br />
                 <asp:Label ID="lblUpload" runat="server" Text=""></asp:Label>
             </div>
 

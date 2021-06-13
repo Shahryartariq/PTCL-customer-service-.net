@@ -22,7 +22,8 @@
                     <Columns>
                         <asp:BoundField DataField="AdminID" HeaderText="Admin ID" />
                         <asp:BoundField DataField="UserName" HeaderText="User Name" />
-                        <asp:BoundField DataField="Password" HeaderText="Password" />
+                        <asp:BoundField DataField="EmailAddress" HeaderText="Email" />
+                        <asp:BoundField DataField="Location" HeaderText="Location" />
                         <asp:BoundField DataField="Status" HeaderText="Status" />
                         <asp:TemplateField HeaderText="Action">
                             <ItemTemplate>

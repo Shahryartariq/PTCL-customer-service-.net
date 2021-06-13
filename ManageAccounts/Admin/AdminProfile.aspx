@@ -43,8 +43,8 @@
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="AdminDashboard.aspx">Home</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Admin</a></li>
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Admin</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Profile</li>
             </ol>
         </nav>
@@ -60,11 +60,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <asp:Image runat="server" alt="Admin Profile Picture" CssClass="rounded-circle" Width="150" ID="AdminPic" />
+                                <asp:Image runat="server" alt="Admin Profile Picture" CssClass="rounded-circle" Width="150" ID="AdminPic" Height="160" />
                                 <div class="mt-3">
                                     <asp:Panel runat="server" ID="PanelUserName"></asp:Panel>
-                                    <p class="text-secondary mb-1">Admin at PTCL Customer Care</p>
-                                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                    <asp:Panel runat="server" CssClass="ext-secondary mb-1" ID="PanelCustomerType">Administrator at PTCL Customer Care</asp:Panel>
+                                    <asp:Panel runat="server" CssClass="text-muted font-size-sm" ID="PanelLocation"></asp:Panel>
                                 </div>
                             </div>
                         </div>
@@ -95,19 +95,21 @@
                                     <asp:Panel runat="server" ID="PanelPhone" Text="" CssClass="col-sm-9 text-secondary"></asp:Panel>
                                 </div>
                             </div>
-                            <hr>
+                            <hr />
+
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Address</h6>
+                                    <h6 class="mb-0">Admin Status</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    Bay Area, San Francisco, CA
+                                    <asp:Panel runat="server" ID="PanelStatus" Text="" CssClass="col-sm-9 text-secondary"></asp:Panel>
                                 </div>
                             </div>
                             <hr>
+
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <a class="btn btn-primary " target="__blank" href="AdminSetup.aspx?AdminID=1">Edit Profile</a>
+                                    <asp:HyperLink ID="HypProfile" runat="server" CssClass="btn btn-primary" Target="__blank" NavigateUrl="~/ManageAccounts/Admin/AdminSetup.aspx">Edit Profile</asp:HyperLink>
                                 </div>
                             </div>
                         </div>

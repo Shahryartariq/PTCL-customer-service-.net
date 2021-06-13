@@ -123,13 +123,13 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RFV4;
 
         /// <summary>
-        /// txtAddress control.
+        /// txtLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAddress;
+        protected global::System.Web.UI.WebControls.TextBox txtLocation;
 
         /// <summary>
         /// RFVPhone control.
@@ -177,22 +177,13 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.FileUpload FileUpload;
 
         /// <summary>
-        /// Label1 control.
+        /// lblUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-
-        /// <summary>
-        /// txtDummyImage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDummyImage;
+        protected global::System.Web.UI.WebControls.Label lblUpload;
 
         /// <summary>
         /// ValidationSummary1 control.
@@ -211,6 +202,15 @@ namespace PtclCustomerService
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button cmdCreate;
+
+        /// <summary>
+        /// HypCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HypCancel;
 
         /// <summary>
         /// lblMsg control.
