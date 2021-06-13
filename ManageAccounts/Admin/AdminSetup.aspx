@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPanelMasterPage.Master" AutoEventWireup="true" CodeBehind="AdminSetup.aspx.cs" Inherits="PtclCustomerService.AdminSetup" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-        <script src="../../Js/scripts.js"></script>
-
+    <script src="../../Js/scripts.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h3 class="text-center my-3 text-success ">Add Admin New</h3>
@@ -52,8 +51,8 @@
                 <div class="col-lg-6">
                     <div class="form-group mt-4">
                         <label>Location: </label>
-                        <asp:RequiredFieldValidator runat="server" ID="RFV4" ControlToValidate="txtAddress" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your Address   " ForeColor="Red" ValidationGroup="AdminSetup"></asp:RequiredFieldValidator>
-                        <asp:TextBox runat="server" ID="txtAddress" CssClass="form-control w-100"></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ID="RFV4" ControlToValidate="txtLocation" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your Address   " ForeColor="Red" ValidationGroup="AdminSetup"></asp:RequiredFieldValidator>
+                        <asp:TextBox runat="server" ID="txtLocation" CssClass="form-control w-100"></asp:TextBox>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -80,12 +79,7 @@
                 <label>Upload Your Profile Picture </label>
                 <br />
                 <asp:FileUpload ID="FileUpload" runat="server" /><br />
-                <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
-            </div>
-
-            <div class="form-group mt-4">
-                <label>Location: </label>
-                <asp:TextBox runat="server" ID="txtDummyImage" CssClass="form-control w-100"></asp:TextBox>
+                <asp:Label ID="lblUpload" runat="server" Text=""></asp:Label>
             </div>
 
             <!-- Validation Summary  -->
@@ -95,7 +89,7 @@
 
             <div class="form-group mb-2">
                 <asp:Button Text="Submit" runat="server" ID="cmdCreate" CssClass="btn btn-primary mt-4" OnClick="cmdCreate_Click" ValidationGroup="AdminSetup" />
-                <a class="btn btn-primary mt-4" href="ManageAdmins.aspx">Cancel</a>
+                <asp:HyperLink ID="HypCancel" runat="server" CssClass="btn btn-primary mt-4" NavigateUrl="~/ManageAccounts/Admin/ManageAdmins.aspx">Cancel</asp:HyperLink>
 
                 <div>
                     <asp:Label runat="server" ID="lblMsg" ForeColor="Red"></asp:Label>

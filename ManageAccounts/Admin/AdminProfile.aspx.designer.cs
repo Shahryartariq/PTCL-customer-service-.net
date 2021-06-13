@@ -33,6 +33,24 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.Panel PanelUserName;
 
         /// <summary>
+        /// PanelCustomerType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelCustomerType;
+
+        /// <summary>
+        /// PanelLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelLocation;
+
+        /// <summary>
         /// PanelFullName control.
         /// </summary>
         /// <remarks>
@@ -58,5 +76,23 @@ namespace PtclCustomerService
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelPhone;
+
+        /// <summary>
+        /// PanelStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelStatus;
+
+        /// <summary>
+        /// HypProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HypProfile;
     }
 }

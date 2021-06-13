@@ -18,10 +18,13 @@ namespace PtclCustomerService.Dashboard.Admin
             {
                 if (Session["AdminID"] != null)
                 {
-                    var totalCount = db.GetPtclUsers().ToList();
+                    var totalCustomerCount = db.GetPtclUsers().ToList();
+                    int counCustomer = totalCustomerCount.Count;
+                    lblTotalCustomers.Text = counCustomer.ToString();
 
-                    int count = totalCount.Count;
-                    lblTotalCustomers.Text = count.ToString();
+                    var totalAdminCount = db.GetPtclAdmins().ToList();
+                    int counAdmins = totalAdminCount.Count;
+                    LblTotalAdmins.Text = counAdmins.ToString();
                 }
             }
         }

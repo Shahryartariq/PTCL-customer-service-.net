@@ -96,7 +96,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
 
-                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <div class="sb-sidenav-menu-heading">Overview</div>
                             <asp:HyperLink ID="HypDashBoard" runat="server" CssClass="nav-link" NavigateUrl="~/Dashboard/Admin/AdminDashboard.aspx">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                  Dashboard

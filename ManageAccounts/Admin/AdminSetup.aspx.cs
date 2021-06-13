@@ -12,6 +12,9 @@ namespace PtclCustomerService
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            txtPassword.Attributes["type"] = "password";
+            txtConfirmPassword.Attributes["type"] = "password";
+
             using (PTCLEntities db = new PTCLEntities())
             {
                 if (IsPostBack == true) return;
@@ -24,9 +27,9 @@ namespace PtclCustomerService
                     txtConfirmPassword.Text = s.Password;
                     txtFullName.Text = s.FullName;
                     txtEmailAddress.Text = s.EmailAddress;
-                    txtAddress.Text = s.Location;
                     txtPhone.Text = s.AdminPhone.ToString();
-                    txtDummyImage.Text = s.AdminDP;
+                    txtLocation.Text = s.Location;
+                    lblUpload.Text = s.AdminDP;
 
                     //txtStatus.Text = s.Status;
                     //Response.Write(s.Status);
@@ -40,6 +43,10 @@ namespace PtclCustomerService
                         ddlStatus.SelectedValue = "false";
                     }
                 }
+                if ((Request.QueryString["profile"] == "me"))
+                {
+                    HypCancel.NavigateUrl = "~/ManageAccounts/Admin/AdminProfile.aspx";
+                };
             }
         }
 
@@ -54,19 +61,17 @@ namespace PtclCustomerService
                     s.Password = txtPassword.Text;
                     s.FullName = txtFullName.Text;
                     s.EmailAddress = txtEmailAddress.Text;
-                    s.Location = txtAddress.Text;
+                    s.Location = txtLocation.Text;
                     s.AdminPhone = txtPhone.Text;
-
-                    //DP Start
 
                     if (FileUpload.HasFile)
                     {
-                        FileUpload.SaveAs(Server.MapPath("UploadFiles/AdminProfile/" + FileUpload.FileName));
+                        FileUpload.SaveAs(Server.MapPath("../../UploadFiles/AdminProfile/" + FileUpload.FileName));
                         s.AdminDP = FileUpload.FileName;
                     }
                     else
                     {
-                        s.AdminDP = "No File Uploaded";
+                        s.AdminDP = "";
                     }
 
                     //s.Status = txtStatus.Text;
@@ -84,10 +89,18 @@ namespace PtclCustomerService
                     s.Password = txtPassword.Text;
                     s.FullName = txtFullName.Text;
                     s.EmailAddress = txtEmailAddress.Text;
-                    s.Location = txtAddress.Text;
+                    s.Location = txtLocation.Text;
                     s.AdminPhone = txtPhone.Text;
 
-                    s.AdminDP = txtDummyImage.Text;
+                    if (FileUpload.HasFile)
+                    {
+                        FileUpload.SaveAs(Server.MapPath("../../UploadFiles/AdminProfile/" + FileUpload.FileName));
+                        s.AdminDP = FileUpload.FileName;
+                    }
+                    else
+                    {
+                        s.AdminDP = "";
+                    }
 
                     //s.Status = txtStatus.Text;
                     s.Status = bool.Parse(ddlStatus.SelectedValue);

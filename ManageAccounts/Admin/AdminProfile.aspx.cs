@@ -17,15 +17,19 @@ namespace PtclCustomerService
 
             using (PTCLEntities db = new PTCLEntities())
             {
-                if (IsPostBack == true) return;
                 if (Session["AdminID"] != null)
                 {
                     int AdminID = (int)Session["AdminID"];
+                    HypProfile.NavigateUrl = "~/ManageAccounts/Admin/AdminSetup.aspx?profile=me&AdminID=" + AdminID;
                     tblAdmin s = db.tblAdmins.FirstOrDefault(v => v.AdminID == AdminID);
 
                     Label lblUserName = new Label();
                     lblUserName.Text = s.UserName;
                     PanelUserName.Controls.Add(lblUserName);
+
+                    Label lbllocation = new Label();
+                    lbllocation.Text = s.Location;
+                    PanelLocation.Controls.Add(lbllocation);
 
                     Label lblFullName = new Label();
                     lblFullName.Text = s.FullName;
@@ -37,14 +41,26 @@ namespace PtclCustomerService
 
                     Label lblPhone = new Label();
                     lblPhone.Text = s.AdminPhone;
+                    PanelPhone.Controls.Add(lblPhone);
 
-                    if (s.AdminDP != "")
+                    Label lblStatus = new Label();
+                    if (s.Status.ToString() == "True")
                     {
-                        AdminPic.ImageUrl = "UploadFiles/AdminProfile/" + s.AdminDP;
+                        lblStatus.Text = "Active";
                     }
                     else
                     {
-                        AdminPic.ImageUrl = "assets/img/avatar.png";
+                        lblStatus.Text = "Inactive";
+                    }
+                    PanelStatus.Controls.Add(lblStatus);
+
+                    if (s.AdminDP != "" && s.AdminDP != null)
+                    {
+                        AdminPic.ImageUrl = "../../UploadFiles/AdminProfile/" + s.AdminDP;
+                    }
+                    else
+                    {
+                        AdminPic.ImageUrl = "../../assets/img/avatar.png";
                     }
                 }
             }
