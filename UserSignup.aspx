@@ -107,7 +107,7 @@
                         </asp:RegularExpressionValidator>
                         <br />
 
-                        <asp:FileUpload ID="FileUpload" runat="server" accept=".png,.jpg,.jpeg" /><br />
+                        <asp:FileUpload CssClass="my-2 btn" ID="FileUpload" runat="server" accept=".png,.jpg,.jpeg" /><br />
                         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                     </div>
 

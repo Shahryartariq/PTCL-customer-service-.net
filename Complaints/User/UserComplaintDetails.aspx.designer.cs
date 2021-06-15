@@ -69,6 +69,15 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.HyperLink HypRegeneratedComplaint;
 
         /// <summary>
+        /// txtDateTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateTime;
+
+        /// <summary>
         /// txtComplaintDescription control.
         /// </summary>
         /// <remarks>
@@ -76,5 +85,23 @@ namespace PtclCustomerService
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtComplaintDescription;
+
+        /// <summary>
+        /// HypDownloadUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HypDownloadUpload;
+
+        /// <summary>
+        /// HypCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HypCancel;
     }
 }

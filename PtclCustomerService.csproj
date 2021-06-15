@@ -418,6 +418,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="ManageCustomers\User\" />
     <Folder Include="UploadFiles\AdminProfile\" />
+    <Folder Include="UploadFiles\ComplaintData\" />
     <Folder Include="UploadFiles\CustomerProfile\" />
   </ItemGroup>
   <ItemGroup>

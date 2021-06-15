@@ -20,6 +20,7 @@ namespace PtclCustomerService
                 if (Session["AdminID"] != null)
                 {
                     int AdminID = (int)Session["AdminID"];
+
                     HypProfile.NavigateUrl = "~/ManageAccounts/Admin/AdminSetup.aspx?profile=me&AdminID=" + AdminID;
                     tblAdmin s = db.tblAdmins.FirstOrDefault(v => v.AdminID == AdminID);
 

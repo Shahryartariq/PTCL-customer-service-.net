@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPanelMasterPage.Master" AutoEventWireup="true" CodeBehind="AdminComplaint.aspx.cs" Inherits="PtclCustomerService.AdminComplaint" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-        <script src="../../Js/scripts.js"></script>
-
+    <script src="../../Js/scripts.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
@@ -23,12 +22,20 @@
 
                         <%--Pending --%>
                         <asp:Panel ID="PanelPendingComplaint" runat="server" CssClass="d-none">
-                            <asp:GridView runat="server" ID="GV1" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
+                            <asp:GridView runat="server" ID="GVPendingComplaint" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
                                 <Columns>
                                     <asp:BoundField DataField="ComplaintID" HeaderText="Complaint ID" />
                                     <asp:BoundField DataField="FirstName" HeaderText="Complainant Name" />
                                     <asp:BoundField DataField="ComplaintTypeName" HeaderText="Complaint Type" />
                                     <asp:BoundField DataField="ComplaintCreationDate" HeaderText="Creation Date & Time" />
+                                    <asp:BoundField DataField="RegeneratedID" HeaderText="RegeneratedID" />
+                                    <asp:TemplateField HeaderText="RegeneratedID">
+
+                                        <ItemTemplate>
+                                            <%# (String.IsNullOrEmpty(Eval("RegeneratedID").ToString()) ? String.Empty : Eval("RegeneratedID")) %>
+                                        </ItemTemplate>
+
+                                    </asp:TemplateField>
 
                                     <asp:HyperLinkField
                                         Text="Detail"
@@ -42,7 +49,7 @@
                         <%--Approved --%>
 
                         <asp:Panel ID="PanelApprovedComplaint" runat="server" CssClass="d-none">
-                            <asp:GridView runat="server" ID="GV2" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
+                            <asp:GridView runat="server" ID="GVApprovedComplaint" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
                                 <Columns>
                                     <asp:BoundField DataField="ComplaintID" HeaderText="ComplaintID" />
 
@@ -63,7 +70,7 @@
 
                         <%--Regenerated Complaints --%>
                         <asp:Panel ID="PanelRegeneratedComplaint" runat="server" CssClass="d-none">
-                            <asp:GridView runat="server" ID="GV3" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
+                            <asp:GridView runat="server" ID="GVRegeneratedComplaint" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
                                 <Columns>
                                     <asp:BoundField DataField="ComplaintID" HeaderText="ComplaintID" />
                                     <asp:BoundField DataField="RegeneratedID" HeaderText="RegeneratedID" />

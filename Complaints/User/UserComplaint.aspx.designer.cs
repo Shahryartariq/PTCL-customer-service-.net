@@ -51,6 +51,24 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.Panel PanelRegisterComplaint;
 
         /// <summary>
+        /// RegisterComplaintSection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel RegisterComplaintSection;
+
+        /// <summary>
+        /// RFV0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFV0;
+
+        /// <summary>
         /// ddlComplaint control.
         /// </summary>
         /// <remarks>
@@ -96,31 +114,31 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.TextBox txtComplaintDescription;
 
         /// <summary>
-        /// FileUploadControl control.
+        /// RegExValFileUploadFileType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUploadControl;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegExValFileUploadFileType;
 
         /// <summary>
-        /// UploadButton control.
+        /// FileUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UploadButton;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload;
 
         /// <summary>
-        /// StatusLabel control.
+        /// lblUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label StatusLabel;
+        protected global::System.Web.UI.WebControls.Label lblUpload;
 
         /// <summary>
         /// cmdSubmit control.
@@ -150,6 +168,15 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.Label lblMsg;
 
         /// <summary>
+        /// PanelOverLimit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelOverLimit;
+
+        /// <summary>
         /// PanelPendingComplaint control.
         /// </summary>
         /// <remarks>
@@ -159,13 +186,13 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.Panel PanelPendingComplaint;
 
         /// <summary>
-        /// GV1 control.
+        /// GVPendingComplaint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GV1;
+        protected global::System.Web.UI.WebControls.GridView GVPendingComplaint;
 
         /// <summary>
         /// PanelApprovedComplaint control.

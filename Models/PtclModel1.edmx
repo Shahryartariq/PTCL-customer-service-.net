@@ -408,6 +408,7 @@
           <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
           <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
         </ComplexType>
         <ComplexType Name="UserPendingComplaints_Result">
           <Property Type="Int32" Name="ComplaintID" Nullable="false" />
@@ -646,6 +647,7 @@
                 <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+                <ScalarProperty Name="RegeneratedID" ColumnName="RegeneratedID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

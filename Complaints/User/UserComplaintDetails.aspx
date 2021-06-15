@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserPanelMasterPage.Master" AutoEventWireup="true" CodeBehind="UserComplaintDetails.aspx.cs" Inherits="PtclCustomerService.UserComplaintDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-            <script src="../../Js/scripts.js"></script>
+    <script src="../../Js/scripts.js"></script>
 
     <style>
         body {
@@ -79,46 +79,52 @@
                     <div class="form-card">
                         <div class="row justify-content-between text-left mb-2">
                             <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">ComplaintID</label>
-                                <asp:TextBox  ReadOnly="true" runat="server" ID="txtComplaintID" CssClass="form-control"></asp:TextBox>
+                                <label class="form-control-label ">ComplaintID</label>
+                                <asp:TextBox ReadOnly="true" runat="server" ID="txtComplaintID" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Complaint Title</label>
-                                <asp:TextBox  ReadOnly="true" runat="server" ID="txtComplaintTitle" CssClass="form-control"></asp:TextBox>
+                                <label class="form-control-label ">Complaint Title</label>
+                                <asp:TextBox ReadOnly="true" runat="server" ID="txtComplaintTitle" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
-                       
-                        <div class="row justify-content-between text-left mb-2">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Complaint User ID</label>
-                                <asp:TextBox  ReadOnly="true" runat="server" ID="txtComplaintUserID" CssClass="form-control"></asp:TextBox>
-                            </div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Complaint Status</label>
 
-                                <asp:DropDownList runat="server" ID="ddlComplaintStatus" CssClass="form-control"  ReadOnly="true">
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label">Complainant ID</label>
+                                <asp:TextBox ReadOnly="true" runat="server" ID="txtComplaintUserID" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex " style="margin-top: 2px">
+
+                                <label class="form-control-label mb-1">Complaint Status</label>
+
+                                <asp:DropDownList runat="server" ID="ddlComplaintStatus" CssClass="form-control" Enabled="False">
                                     <asp:ListItem Text="True" Value="1" />
                                     <asp:ListItem Text="False" Value="0" />
                                 </asp:DropDownList>
                             </div>
                         </div>
                         <div class="row justify-content-between text-left mb-2">
-                            <div class="form-group col-12 flex-column d-flex">
-                                <label class="form-control-label px-3">Complaint Regenerated</label>
-                                <asp:TextBox runat="server" ID="txtComplaintRegenerated" CssClass="form-control"  ReadOnly="true"></asp:TextBox>
+                            <div class="form-group col-sm-6 flex-column d-flex mt-1">
+                                <label class="form-control-label">Complaint Regenerated</label>
+                                <asp:TextBox runat="server" ID="txtComplaintRegenerated" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                 <asp:HyperLink ID="HypRegeneratedComplaint" runat="server" Text="" CssClass="nav-link"></asp:HyperLink>
-
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex mt-1">
+                                <label class="form-control-label">Creation Date</label>
+                                <asp:TextBox runat="server" ID="txtDateTime" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                             </div>
                         </div>
-                         <div class="row justify-content-between text-left">
+                        <div class="row justify-content-between text-left">
                             <div class="form-group col-12 flex-column d-flex">
-                                <label class="form-control-label px-3">Complaint Description</label>
-                                <asp:TextBox  ReadOnly="true" runat="server" ID="txtComplaintDescription" CssClass="form-control" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                <label class="form-control-label">Complaint Description</label>
+                                <asp:TextBox ReadOnly="true" runat="server" ID="txtComplaintDescription" CssClass="form-control" TextMode="MultiLine" Rows="3"></asp:TextBox>
                             </div>
                         </div>
-                        <div class="row justify-content-end text-center py-2">
+                        <asp:HyperLink ID="HypDownloadUpload" runat="server" CssClass="mt-2 btn btn-outline-danger" Target="_blank">Download Attachment</asp:HyperLink>
+
+                        <div class="row justify-content-end text-center py-3">
                             <div class="form-group col-sm-6">
-                                <button type="submit" class="btn-block btn-primary">Request a demo</button>
+                                <asp:HyperLink ID="HypCancel" runat="server" CssClass="btn btn-primary float-end" NavigateUrl="~/Complaints/User/UserComplaint.aspx?active=1">Cancel</asp:HyperLink>
                             </div>
                         </div>
                     </div>

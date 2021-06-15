@@ -24,6 +24,7 @@ namespace PtclCustomerService
                     txtComplaintTitle.Text = s.ComplaintTitle;
                     txtComplaintDescription.Text = s.ComplaintDescription;
                     txtComplaintUserID.Text = s.UserID.ToString();
+                    txtDateTime.Text = s.ComplaintCreationDate.ToString();
 
                     if (s.RegeneratedID.ToString() != "")
                     {
@@ -44,6 +45,8 @@ namespace PtclCustomerService
                     {
                         ddlComplaintStatus.SelectedValue = "0";
                     }
+
+                    HypDownloadUpload.NavigateUrl = "../../UploadFiles/ComplaintData/" + s.ComplaintImage;
                 }
             }
         }

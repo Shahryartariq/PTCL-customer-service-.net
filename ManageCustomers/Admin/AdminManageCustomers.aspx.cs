@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace PtclCustomerService
 {
@@ -23,6 +26,8 @@ namespace PtclCustomerService
                 var Users = db.GetPtclUsers().ToList();
                 GV.DataSource = Users;
                 GV.DataBind();
+                //GV.UseAccessibleHeader = true;
+                GV.HeaderRow.TableSection = TableRowSection.TableHeader;
             }
         }
 
