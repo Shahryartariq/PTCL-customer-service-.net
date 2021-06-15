@@ -23,6 +23,8 @@ namespace PtclCustomerService
                 var Admins = db.GetPtclAdmins().ToList();
                 GVAdmin.DataSource = Admins;
                 GVAdmin.DataBind();
+                GVAdmin.UseAccessibleHeader = true;
+                GVAdmin.HeaderRow.TableSection = TableRowSection.TableHeader;
             }
         }
 

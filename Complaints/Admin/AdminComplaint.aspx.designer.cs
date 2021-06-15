@@ -51,13 +51,13 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.Panel PanelPendingComplaint;
 
         /// <summary>
-        /// GV1 control.
+        /// GVPendingComplaint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GV1;
+        protected global::System.Web.UI.WebControls.GridView GVPendingComplaint;
 
         /// <summary>
         /// PanelApprovedComplaint control.
@@ -69,13 +69,13 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.Panel PanelApprovedComplaint;
 
         /// <summary>
-        /// GV2 control.
+        /// GVApprovedComplaint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GV2;
+        protected global::System.Web.UI.WebControls.GridView GVApprovedComplaint;
 
         /// <summary>
         /// PanelRegeneratedComplaint control.
@@ -87,12 +87,12 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.Panel PanelRegeneratedComplaint;
 
         /// <summary>
-        /// GV3 control.
+        /// GVRegeneratedComplaint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GV3;
+        protected global::System.Web.UI.WebControls.GridView GVRegeneratedComplaint;
     }
 }

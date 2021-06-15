@@ -23,8 +23,8 @@ namespace PtclCustomerService
             using (PTCLEntities db = new PTCLEntities())
             {
                 var PendingComplaintsData = db.ActiveC().ToList();
-                GV1.DataSource = PendingComplaintsData;
-                GV1.DataBind();
+                GVPendingComplaint.DataSource = PendingComplaintsData;
+                GVPendingComplaint.DataBind();
             }
         }
 
@@ -33,8 +33,8 @@ namespace PtclCustomerService
             using (PTCLEntities db = new PTCLEntities())
             {
                 var MyApprovedComplaintData = db.AdminApprovedComplaint().ToList();
-                GV2.DataSource = MyApprovedComplaintData;
-                GV2.DataBind();
+                GVApprovedComplaint.DataSource = MyApprovedComplaintData;
+                GVApprovedComplaint.DataBind();
             }
         }
 
@@ -43,8 +43,8 @@ namespace PtclCustomerService
             using (PTCLEntities db = new PTCLEntities())
             {
                 var MyRegeneratedComplaintData = db.RegeneratedComplaints().ToList();
-                GV3.DataSource = MyRegeneratedComplaintData;
-                GV3.DataBind();
+                GVRegeneratedComplaint.DataSource = MyRegeneratedComplaintData;
+                GVRegeneratedComplaint.DataBind();
             }
         }
 

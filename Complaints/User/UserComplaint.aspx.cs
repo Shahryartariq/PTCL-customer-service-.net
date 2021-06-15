@@ -16,10 +16,22 @@ namespace PtclCustomerService
             activeHyp.CssClass += " active";
             PendingGridView();
             ApprovedGridView();
-
+            if (Request.QueryString["register"] == "1")
+            {
+                PanelRegisterComplaint.CssClass = " ";
+            }
+            if (Request.QueryString["Active"] == "1")
+            {
+                PanelPendingComplaint.CssClass = " ";
+            }
+            if (Request.QueryString["closed"] == "1")
+            {
+                PanelApprovedComplaint.CssClass = " ";
+            }
             using (PTCLEntities db = new PTCLEntities())
             {
                 if (IsPostBack == true) return;
+                ddlComplaint.SelectedValue = "7";
                 var ComplaintTypes = db.GetComplaintType().ToList();
                 ddlComplaint.DataSource = ComplaintTypes;
                 ddlComplaint.DataTextField = "ComplaintTypeName";
@@ -35,8 +47,17 @@ namespace PtclCustomerService
                 var UserID = Convert.ToInt32(Session["UserID"]);
                 //change bad ma
                 var PendingComplaintsData = db.UserPendingComplaints(UserID).ToList();
-                GV1.DataSource = PendingComplaintsData;
-                GV1.DataBind();
+                GVPendingComplaint.DataSource = PendingComplaintsData;
+                GVPendingComplaint.DataBind();
+
+                var totalCount = db.GetMyComplaints(UserID).ToList();
+                int count = totalCount.Count;
+                if (count > 10)
+                {
+                    Response.Write("Limit Exceed");
+                    RegisterComplaintSection.CssClass = " d-none";
+                    PanelOverLimit.CssClass = " ";
+                }
             }
         }
 
@@ -61,6 +82,7 @@ namespace PtclCustomerService
 
         protected void RegisterComplaint_Click(object sender, EventArgs e)
         {
+            Response.Redirect("~/Complaints/User/UserComplaint.aspx?register=1");
             PanelRegisterComplaint.CssClass = " ";
             PanelPendingComplaint.CssClass = " d-none";
             PanelApprovedComplaint.CssClass = " d-none";
@@ -72,6 +94,7 @@ namespace PtclCustomerService
 
         protected void PendingComplaint_Click(object sender, EventArgs e)
         {
+            Response.Redirect("~/Complaints/User/UserComplaint.aspx?active=1");
             PanelPendingComplaint.CssClass = " ";
             PanelRegisterComplaint.CssClass = " d-none";
             PanelApprovedComplaint.CssClass = " d-none";
@@ -83,6 +106,7 @@ namespace PtclCustomerService
 
         protected void ApprovedComplaint_Click(object sender, EventArgs e)
         {
+            Response.Redirect("~/Complaints/User/UserComplaint.aspx?closed=1");
             PanelPendingComplaint.CssClass = " d-none";
             PanelRegisterComplaint.CssClass = " d-none";
             PanelApprovedComplaint.CssClass = " ";
@@ -104,9 +128,24 @@ namespace PtclCustomerService
                 var UserID = Session["UserID"];
                 s.UserID = Convert.ToInt32(UserID);
 
+                s.ComplaintCreationDate = DateTime.Now;
+
+                if (FileUpload.HasFile)
+                {
+                    FileUpload.SaveAs(Server.MapPath("../../UploadFiles/ComplaintData/" + FileUpload.FileName));
+                    s.ComplaintImage = FileUpload.FileName;
+                }
+                else
+                {
+                    s.ComplaintImage = "";
+                }
+                txtComplaintDescription.Text = "";
+                txtComplaintTitle.Text = "";
                 db.tblComplaints.Add(s);
                 db.SaveChanges();
                 lblMsg.Text = "Complaint Submitted Successfully";
+                ddlComplaint.SelectedValue = "7";
+
             }
         }
 

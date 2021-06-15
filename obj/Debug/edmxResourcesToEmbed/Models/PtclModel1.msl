@@ -210,6 +210,7 @@
           <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+          <ScalarProperty Name="RegeneratedID" ColumnName="RegeneratedID" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
