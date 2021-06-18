@@ -15,6 +15,15 @@ namespace PtclCustomerService
     {
 
         /// <summary>
+        /// lblTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTitle;
+
+        /// <summary>
         /// RegisterComplaint control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,24 @@ namespace PtclCustomerService
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlComplaint;
+
+        /// <summary>
+        /// RegeneratedArea control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel RegeneratedArea;
+
+        /// <summary>
+        /// txtParentID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtParentID;
 
         /// <summary>
         /// RFV1 control.
@@ -204,12 +231,12 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.Panel PanelApprovedComplaint;
 
         /// <summary>
-        /// GV2 control.
+        /// GVApprovedComplaint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GV2;
+        protected global::System.Web.UI.WebControls.GridView GVApprovedComplaint;
     }
 }

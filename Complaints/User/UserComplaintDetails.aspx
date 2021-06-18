@@ -107,7 +107,7 @@
                             <div class="form-group col-sm-6 flex-column d-flex mt-1">
                                 <label class="form-control-label">Complaint Regenerated</label>
                                 <asp:TextBox runat="server" ID="txtComplaintRegenerated" CssClass="form-control" ReadOnly="true"></asp:TextBox>
-                                <asp:HyperLink ID="HypRegeneratedComplaint" runat="server" Text="" CssClass="nav-link"></asp:HyperLink>
+                                <asp:HyperLink ID="HypRegeneratedComplaint" Target="_blank" runat="server" Text="" CssClass="badge bg-danger p-2"></asp:HyperLink>
                             </div>
                             <div class="form-group col-sm-6 flex-column d-flex mt-1">
                                 <label class="form-control-label">Creation Date</label>
@@ -122,9 +122,35 @@
                         </div>
                         <asp:HyperLink ID="HypDownloadUpload" runat="server" CssClass="mt-2 btn btn-outline-danger" Target="_blank">Download Attachment</asp:HyperLink>
 
-                        <div class="row justify-content-end text-center py-3">
+                        <div class="row justify-content-end text-center pb-3 p">
                             <div class="form-group col-sm-6">
-                                <asp:HyperLink ID="HypCancel" runat="server" CssClass="btn btn-primary float-end" NavigateUrl="~/Complaints/User/UserComplaint.aspx?active=1">Cancel</asp:HyperLink>
+
+                                <asp:HyperLink ID="HypCancel" runat="server" CssClass="mt-1 p-2 btn btn-primary float-end" NavigateUrl="~/Complaints/User/UserComplaint.aspx?active=1">Cancel</asp:HyperLink>
+                                <asp:Panel runat="server" ID="PanelRegenerate">
+                                    <!-- Button trigger modal -->
+                                    <button class="mx-3 btn btn-primary float-end " type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        Regenerate
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">Regenerate Complaint</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are You sure you want to Regenerate this complaint?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                    <asp:Button ID="btnRegenerate" runat="server" Text="Yes" CssClass="btn btn-primary" OnClick="btnRegenerate_Click" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </asp:Panel>
                             </div>
                         </div>
                     </div>

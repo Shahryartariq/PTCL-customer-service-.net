@@ -18,6 +18,7 @@ namespace PtclCustomerService.ManageAccounts.User
             using (PTCLEntities db = new PTCLEntities())
             {
                 if (IsPostBack == true) return;
+                //User Session
                 if (Session["UserID"] != null)
                 {
                     int UserID = (int)Session["UserID"];

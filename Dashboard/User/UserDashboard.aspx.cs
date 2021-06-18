@@ -18,7 +18,8 @@ namespace PtclCustomerService
             {
                 if (Session["UserID"] != null)
                 {
-                    int UserID = (int)Session["UserID"];
+                    //int UserID = (int)Session["UserID"];
+                    int UserID = (int)Convert.ToUInt32(Session["UserID"]);
                     var totalCount = db.GetMyComplaints(UserID).ToList();
 
                     int count = totalCount.Count;

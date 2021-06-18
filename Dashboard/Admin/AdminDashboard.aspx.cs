@@ -25,6 +25,10 @@ namespace PtclCustomerService.Dashboard.Admin
                     var totalAdminCount = db.GetPtclAdmins().ToList();
                     int counAdmins = totalAdminCount.Count;
                     LblTotalAdmins.Text = counAdmins.ToString();
+
+                    var totalComplaints = db.GetComplaints().ToList();
+                    int mytotalComplaints = totalComplaints.Count;
+                    lblTotalComplaints.Text = mytotalComplaints.ToString();
                 }
             }
         }

@@ -15,7 +15,7 @@ namespace PtclCustomerService
 
             if (Session["AdminID"] == null)
             {
-                Response.Redirect("AdminLogin.aspx");
+                Response.Redirect("~/AdminLogin.aspx");
             }
 
             using (PTCLEntities db = new PTCLEntities())

@@ -38,6 +38,14 @@ namespace PtclCustomerService
                     {
                         ddlStatus.SelectedValue = "0";
                     }
+                    if (Request.QueryString["back"] == "1")
+                    {
+                        HypGoBack.NavigateUrl = "~/ManageAccounts/Admin/AdminCustomersProfile.aspx?UserID=" + UserID + "&ComplaintID=" + Request.QueryString["ComplaintID"];
+                    }
+                    else
+                    {
+                        HypGoBack.NavigateUrl = "~/ManageCustomers/Admin/AdminManageCustomers.aspx";
+                    }
                 }
             }
         }
@@ -66,18 +74,5 @@ namespace PtclCustomerService
                 }
             }
         }
-
-        /* protected void CVStatus_ServerValidate(object source, ServerValidateEventArgs args)
-         {
-             var temp = args.Value;
-             if (temp == "True" || temp == "true" || temp == "False" || temp == "false")
-             {
-                 args.IsValid = true;
-             }
-             else
-             {
-                 args.IsValid = false;
-             }
-         }*/
     }
 }

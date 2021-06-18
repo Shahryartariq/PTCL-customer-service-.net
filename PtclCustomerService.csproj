@@ -89,6 +89,7 @@
     <Content Include="Complaints\Admin\AdminComplaint.aspx" />
     <Content Include="Complaints\Admin\AdminComplaintDetails.aspx" />
     <Content Include="AdminLogin.aspx" />
+    <Content Include="ManageAccounts\Admin\AdminCustomersProfile.aspx" />
     <Content Include="ManageCustomers\Admin\AdminManageCustomers.aspx" />
     <Content Include="Dashboard\Admin\AdminDashboard.aspx" />
     <Content Include="Erros\404NotFound.aspx" />
@@ -99,7 +100,6 @@
     <Content Include="assets\demo\chart-pie-demo.js" />
     <Content Include="assets\demo\datatables-demo.js" />
     <Content Include="assets\img\avatar.png" />
-    <Content Include="Complaints\Admin\AdminComplaintHistory.aspx" />
     <Content Include="Css\bootstrap.min.css" />
     <Content Include="Css\GlobalStyle.css" />
     <Content Include="Css\Home.css" />
@@ -167,6 +167,13 @@
     <Compile Include="AdminLogin.aspx.designer.cs">
       <DependentUpon>AdminLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManageAccounts\Admin\AdminCustomersProfile.aspx.cs">
+      <DependentUpon>AdminCustomersProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageAccounts\Admin\AdminCustomersProfile.aspx.designer.cs">
+      <DependentUpon>AdminCustomersProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManageCustomers\Admin\AdminManageCustomers.aspx.cs">
       <DependentUpon>AdminManageCustomers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -208,13 +215,6 @@
     </Compile>
     <Compile Include="ManageAccounts\Admin\AdminSetup.aspx.designer.cs">
       <DependentUpon>AdminSetup.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Complaints\Admin\AdminComplaintHistory.aspx.cs">
-      <DependentUpon>AdminComplaintHistory.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Complaints\Admin\AdminComplaintHistory.aspx.designer.cs">
-      <DependentUpon>AdminComplaintHistory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -260,10 +260,19 @@
     <Compile Include="Models\AdminApprovedComplaint_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ComplaintDetailsByCID_Result.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetComplaintbyCID_Result.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetComplaints_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetComplaintType_Result.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCustomerActiveComplaint_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetMyComplaints_Result.cs">

@@ -18,5 +18,9 @@ namespace PtclCustomerService.Models
         public Nullable<bool> ComplaintStatus { get; set; }
         public Nullable<int> UserID { get; set; }
         public string ComplaintTypeName { get; set; }
+        public Nullable<int> RegeneratedID { get; set; }
+        public Nullable<System.DateTime> ComplaintCreationDate { get; set; }
+        public string ComplaintImage { get; set; }
+        public string FirstName { get; set; }
     }
 }

@@ -87,7 +87,7 @@
 
             <div class="form-group mb-2">
                 <asp:Button Text="Submit" runat="server" ID="cmdSubmit" CssClass="btn btn-primary mt-4" OnClick="cmdSubmit_Click" ValidationGroup="UserSetup" />
-                <a class="btn btn-primary mt-4" href="AdminManageCustomers.aspx">Cancel</a>
+                <asp:HyperLink runat="server" ID="HypGoBack" CssClass="btn btn-primary mt-4"> Cancel</asp:HyperLink>
 
                 <div>
                     <asp:Label runat="server" ID="lblMsg" ForeColor="Red"></asp:Label>

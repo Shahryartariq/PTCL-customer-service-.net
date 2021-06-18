@@ -14,7 +14,7 @@ namespace PtclCustomerService
         {
             if (Session["UserID"] == null)
             {
-                Response.Redirect("UserLogin.aspx");
+                Response.Redirect("~/UserLogin.aspx");
             }
             using (PTCLEntities db = new PTCLEntities())
             {

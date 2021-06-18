@@ -2,13 +2,20 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../../Js/scripts.js"></script>
+
+    <style>
+        .myActiveState{
+            border-bottom: 3px solid black;
+        }
+    </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
 
         <div class="row">
 
-            <h3 class="text-center my-3 text-success ">Manage Your Complaint</h3>
+            <asp:Label runat="server" ID="lblTitle" CssClass="h3 text-center my-3 text-success "></asp:Label>
             <div class="card mb-4">
                 <div class="card-body">
                     <p class="text-center">Create your PTCL online account easily by entering your email address and basic personal information. Please take a little time and submit your complaint, we will fix these complaints as soon as possible</p>
@@ -31,6 +38,12 @@
                                         <asp:DropDownList runat="server" ID="ddlComplaint" CssClass="form-control">
                                         </asp:DropDownList>
                                     </div>
+                                    <div class=""></div>
+                                    <asp:Panel runat="server" ID="RegeneratedArea" CssClass="form-group  d-none">
+                                        <label>Parent ID: </label>
+                                        <asp:TextBox runat="server" ID="txtParentID" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                    </asp:Panel>
+
                                     <div class="form-group mt-3">
                                         <label>Complaint Title: </label>
                                         <asp:RequiredFieldValidator runat="server" ID="RFV1" ControlToValidate="txtComplaintTitle" SetFocusOnError="true" Text="*" ForeColor="Red" ValidationGroup="Submit"></asp:RequiredFieldValidator>
@@ -68,11 +81,12 @@
                                             <asp:Label runat="server" ID="lblMsg" ForeColor="Red"></asp:Label>
                                         </div>
                                     </div>
+                                </asp:Panel>
                             </div>
-                        </asp:Panel>
-                        <asp:Panel runat="server" ID="PanelOverLimit" CssClass="d-none">
-                            <h3 class="text-center my-3 text-danger">Sorry You Already have Maximum Number of Complaints. Please Take a while and come back after some complaints are resolved</h3>
-                        </asp:Panel>
+
+                            <asp:Panel runat="server" ID="PanelOverLimit" CssClass="d-none">
+                                <h3 class="text-center my-3 text-danger">Sorry You Already have Maximum Number of Complaints. Please Take a while and come back after some complaints are resolved</h3>
+                            </asp:Panel>
                         </asp:Panel>
 
                         <%--Active --%>
@@ -88,7 +102,7 @@
                                     <asp:TemplateField HeaderText="RegeneratedID">
 
                                         <ItemTemplate>
-                                            <asp:Label ID="Label9" runat="server" Text='<%# Convert.ToInt32(Eval("RegeneratedID")) == 0 ? "No" : "Yes" %>' /> 
+                                            <asp:Label ID="Label9" runat="server" Text='<%# Convert.ToInt32(Eval("RegeneratedID")) == 0 ? "No" : "Yes" %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
@@ -96,7 +110,7 @@
                                         Text="Detail"
                                         HeaderText="More Info"
                                         DataNavigateUrlFields="ComplaintID"
-                                        DataNavigateUrlFormatString="UserComplaintDetails.aspx?ComplaintID={0}" />
+                                        DataNavigateUrlFormatString="UserComplaintDetails.aspx?ComplaintID={0}&start=1" />
                                     <asp:TemplateField HeaderText="Action">
                                         <ItemTemplate>
                                             <asp:LinkButton runat="server" ID="lnkDelete" Text="Delete" CommandName="delete" CommandArgument='<%# Bind("ComplaintID") %>' OnClientClick="return confirm('Are you sure you want to delete this Complaint?');"><i class="mx-3 text-center fas fa-trash fa-1x"></i></asp:LinkButton>
@@ -108,17 +122,20 @@
 
                         <%--Approved --%>
                         <asp:Panel ID="PanelApprovedComplaint" runat="server" CssClass="d-none">
-                            <asp:GridView runat="server" ID="GV2" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
+                            <asp:GridView runat="server" ID="GVApprovedComplaint" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
                                 <Columns>
-                                    <asp:BoundField DataField="ComplaintID" HeaderText="ComplaintID" />
+                                    <asp:BoundField DataField="FirstName" HeaderText="Complainant Name" />
+                                    <asp:BoundField DataField="ComplaintTitle" HeaderText="Complaint Title" />
+                                    <asp:BoundField DataField="ComplaintTypeName" HeaderText="Complaint Type" />
+                                    <asp:BoundField DataField="ComplaintCreationDate" HeaderText="Creation Date & Time" />
 
                                     <asp:HyperLinkField
                                         Text="Detail"
                                         HeaderText="More Info"
                                         DataNavigateUrlFields="ComplaintID"
-                                        DataNavigateUrlFormatString="AdminComplaintDetails.aspx?ComplaintID={0}"
-                                        Target="_blank" />
+                                        DataNavigateUrlFormatString="UserComplaintDetails.aspx?ComplaintID={0}&Last=1" />
                                     <asp:TemplateField HeaderText="Action">
+
                                         <ItemTemplate>
                                             <asp:LinkButton runat="server" ID="lnkDelete" Text="Delete" CommandName="delete" CommandArgument='<%# Bind("ComplaintID") %>' OnClientClick="return confirm('Are you sure you want to delete this Complaint?');"><i class="mx-3 text-center fas fa-trash fa-1x"></i></asp:LinkButton>
                                         </ItemTemplate>
