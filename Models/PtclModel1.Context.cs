@@ -160,5 +160,32 @@ namespace PtclCustomerService.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMyComplaints_Result>("GetMyComplaints", userIDParameter);
         }
+    
+        public virtual ObjectResult<GetComplaintbyCID_Result> GetComplaintbyCID(Nullable<int> complaintID)
+        {
+            var complaintIDParameter = complaintID.HasValue ?
+                new ObjectParameter("ComplaintID", complaintID) :
+                new ObjectParameter("ComplaintID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetComplaintbyCID_Result>("GetComplaintbyCID", complaintIDParameter);
+        }
+    
+        public virtual ObjectResult<ComplaintDetailsByCID_Result> ComplaintDetailsByCID(Nullable<int> complaintID)
+        {
+            var complaintIDParameter = complaintID.HasValue ?
+                new ObjectParameter("ComplaintID", complaintID) :
+                new ObjectParameter("ComplaintID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ComplaintDetailsByCID_Result>("ComplaintDetailsByCID", complaintIDParameter);
+        }
+    
+        public virtual ObjectResult<GetCustomerActiveComplaint_Result> GetCustomerActiveComplaint(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerActiveComplaint_Result>("GetCustomerActiveComplaint", userIDParameter);
+        }
     }
 }

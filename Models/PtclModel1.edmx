@@ -81,6 +81,9 @@
         </Association>
         <Function Name="ActiveC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="AdminApprovedComplaint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ComplaintDetailsByCID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ComplaintID" Type="int" Mode="In" />
+        </Function>
         <Function Name="DeleteComplaint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ComplaintID" Type="int" Mode="In" />
         </Function>
@@ -90,8 +93,14 @@
         <Function Name="DeletePtlcUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetComplaintbyCID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ComplaintID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetComplaintType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetCustomerActiveComplaint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetMyComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userID" Type="int" Mode="In" />
         </Function>
@@ -262,6 +271,15 @@
           <FunctionImport Name="GetMyComplaints" ReturnType="Collection(PTCLModel.GetMyComplaints_Result)">
           <Parameter Name="userID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetComplaintbyCID" ReturnType="Collection(PTCLModel.GetComplaintbyCID_Result)">
+          <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ComplaintDetailsByCID" ReturnType="Collection(PTCLModel.ComplaintDetailsByCID_Result)">
+          <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCustomerActiveComplaint" ReturnType="Collection(PTCLModel.GetCustomerActiveComplaint_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="AdminApprovedComplaint_Result">
           <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
@@ -311,6 +329,10 @@
           <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
           <Property Type="Int32" Name="UserID" Nullable="true" />
           <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+          <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="PtclAdminLogin_Result">
           <Property Type="Int32" Name="AdminID" Nullable="false" />
@@ -422,6 +444,40 @@
           <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetMyComplaints_Result">
+          <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+          <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
+          <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ComplaintDescription" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+          <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+          <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetComplaintbyCID_Result">
+          <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+          <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
+          <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ComplaintDescription" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+          <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+          <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="ComplaintDetailsByCID_Result">
+          <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+          <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+          <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CustomerDP" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetCustomerActiveComplaint_Result">
           <Property Type="Int32" Name="ComplaintID" Nullable="false" />
           <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
           <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
@@ -565,6 +621,10 @@
                 <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+                <ScalarProperty Name="RegeneratedID" ColumnName="RegeneratedID" />
+                <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+                <ScalarProperty Name="ComplaintImage" ColumnName="ComplaintImage" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -669,6 +729,52 @@
           <FunctionImportMapping FunctionImportName="GetMyComplaints" FunctionName="PTCLModel.Store.GetMyComplaints">
             <ResultMapping>
               <ComplexTypeMapping TypeName="PTCLModel.GetMyComplaints_Result">
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintTypeID" ColumnName="ComplaintTypeID" />
+                <ScalarProperty Name="ComplaintImage" ColumnName="ComplaintImage" />
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="ComplaintDescription" ColumnName="ComplaintDescription" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+                <ScalarProperty Name="RegeneratedID" ColumnName="RegeneratedID" />
+                <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetComplaintbyCID" FunctionName="PTCLModel.Store.GetComplaintbyCID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.GetComplaintbyCID_Result">
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintTypeID" ColumnName="ComplaintTypeID" />
+                <ScalarProperty Name="ComplaintImage" ColumnName="ComplaintImage" />
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="ComplaintDescription" ColumnName="ComplaintDescription" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+                <ScalarProperty Name="RegeneratedID" ColumnName="RegeneratedID" />
+                <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ComplaintDetailsByCID" FunctionName="PTCLModel.Store.ComplaintDetailsByCID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.ComplaintDetailsByCID_Result">
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="RegeneratedID" ColumnName="RegeneratedID" />
+                <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="CustomerDP" ColumnName="CustomerDP" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomerActiveComplaint" FunctionName="PTCLModel.Store.GetCustomerActiveComplaint">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.GetCustomerActiveComplaint_Result">
                 <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
                 <ScalarProperty Name="ComplaintTypeID" ColumnName="ComplaintTypeID" />
                 <ScalarProperty Name="ComplaintImage" ColumnName="ComplaintImage" />

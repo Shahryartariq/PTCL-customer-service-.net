@@ -28,14 +28,6 @@
                                     <asp:BoundField DataField="FirstName" HeaderText="Complainant Name" />
                                     <asp:BoundField DataField="ComplaintTypeName" HeaderText="Complaint Type" />
                                     <asp:BoundField DataField="ComplaintCreationDate" HeaderText="Creation Date & Time" />
-                                    <asp:BoundField DataField="RegeneratedID" HeaderText="RegeneratedID" />
-                                    <asp:TemplateField HeaderText="RegeneratedID">
-
-                                        <ItemTemplate>
-                                            <%# (String.IsNullOrEmpty(Eval("RegeneratedID").ToString()) ? String.Empty : Eval("RegeneratedID")) %>
-                                        </ItemTemplate>
-
-                                    </asp:TemplateField>
 
                                     <asp:HyperLinkField
                                         Text="Detail"
@@ -47,6 +39,7 @@
                             </asp:GridView>
                         </asp:Panel>
                         <%--Approved --%>
+                        <asp:HyperLink runat="server" NavigateUrl="~/UserLogin.aspx"></asp:HyperLink>
 
                         <asp:Panel ID="PanelApprovedComplaint" runat="server" CssClass="d-none">
                             <asp:GridView runat="server" ID="GVApprovedComplaint" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">

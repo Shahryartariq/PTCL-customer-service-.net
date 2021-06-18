@@ -7,119 +7,128 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PtclCustomerService
+namespace PtclCustomerService.ManageAccounts.Admin
 {
 
 
-    public partial class UserComplaintDetails
+    public partial class AdminCustomersProfile
     {
 
         /// <summary>
-        /// txtComplaintID control.
+        /// userPic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComplaintID;
+        protected global::System.Web.UI.WebControls.Image userPic;
 
         /// <summary>
-        /// txtComplaintTitle control.
+        /// PanelFirstName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComplaintTitle;
+        protected global::System.Web.UI.WebControls.Panel PanelFirstName;
 
         /// <summary>
-        /// txtComplaintUserID control.
+        /// PanelCustomerType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComplaintUserID;
+        protected global::System.Web.UI.WebControls.Panel PanelCustomerType;
 
         /// <summary>
-        /// ddlComplaintStatus control.
+        /// PanelLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlComplaintStatus;
+        protected global::System.Web.UI.WebControls.Panel PanelLocation;
 
         /// <summary>
-        /// txtComplaintRegenerated control.
+        /// PanelStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComplaintRegenerated;
+        protected global::System.Web.UI.WebControls.Panel PanelStatus;
 
         /// <summary>
-        /// HypRegeneratedComplaint control.
+        /// PanelFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HypRegeneratedComplaint;
+        protected global::System.Web.UI.WebControls.Panel PanelFullName;
 
         /// <summary>
-        /// txtDateTime control.
+        /// PanelEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDateTime;
+        protected global::System.Web.UI.WebControls.Panel PanelEmail;
 
         /// <summary>
-        /// txtComplaintDescription control.
+        /// PanelPhone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComplaintDescription;
+        protected global::System.Web.UI.WebControls.Panel PanelPhone;
 
         /// <summary>
-        /// HypDownloadUpload control.
+        /// PanelCnic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HypDownloadUpload;
+        protected global::System.Web.UI.WebControls.Panel PanelCnic;
 
         /// <summary>
-        /// HypCancel control.
+        /// PanelTotalC control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HypCancel;
+        protected global::System.Web.UI.WebControls.Panel PanelTotalC;
 
         /// <summary>
-        /// PanelRegenerate control.
+        /// PanelActiveC control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelRegenerate;
+        protected global::System.Web.UI.WebControls.Panel PanelActiveC;
 
         /// <summary>
-        /// btnRegenerate control.
+        /// HypEditProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegenerate;
+        protected global::System.Web.UI.WebControls.HyperLink HypEditProfile;
+
+        /// <summary>
+        /// HypBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HypBack;
     }
 }

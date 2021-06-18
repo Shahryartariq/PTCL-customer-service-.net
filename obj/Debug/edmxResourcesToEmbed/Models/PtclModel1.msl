@@ -128,6 +128,10 @@
           <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+          <ScalarProperty Name="RegeneratedID" ColumnName="RegeneratedID" />
+          <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+          <ScalarProperty Name="ComplaintImage" ColumnName="ComplaintImage" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -232,6 +236,52 @@
     <FunctionImportMapping FunctionImportName="GetMyComplaints" FunctionName="PTCLModel.Store.GetMyComplaints">
       <ResultMapping>
         <ComplexTypeMapping TypeName="PTCLModel.GetMyComplaints_Result">
+          <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+          <ScalarProperty Name="ComplaintTypeID" ColumnName="ComplaintTypeID" />
+          <ScalarProperty Name="ComplaintImage" ColumnName="ComplaintImage" />
+          <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+          <ScalarProperty Name="ComplaintDescription" ColumnName="ComplaintDescription" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+          <ScalarProperty Name="RegeneratedID" ColumnName="RegeneratedID" />
+          <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetComplaintbyCID" FunctionName="PTCLModel.Store.GetComplaintbyCID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PTCLModel.GetComplaintbyCID_Result">
+          <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+          <ScalarProperty Name="ComplaintTypeID" ColumnName="ComplaintTypeID" />
+          <ScalarProperty Name="ComplaintImage" ColumnName="ComplaintImage" />
+          <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+          <ScalarProperty Name="ComplaintDescription" ColumnName="ComplaintDescription" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+          <ScalarProperty Name="RegeneratedID" ColumnName="RegeneratedID" />
+          <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ComplaintDetailsByCID" FunctionName="PTCLModel.Store.ComplaintDetailsByCID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PTCLModel.ComplaintDetailsByCID_Result">
+          <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+          <ScalarProperty Name="RegeneratedID" ColumnName="RegeneratedID" />
+          <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+          <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+          <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="CustomerDP" ColumnName="CustomerDP" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetCustomerActiveComplaint" FunctionName="PTCLModel.Store.GetCustomerActiveComplaint">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PTCLModel.GetCustomerActiveComplaint_Result">
           <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
           <ScalarProperty Name="ComplaintTypeID" ColumnName="ComplaintTypeID" />
           <ScalarProperty Name="ComplaintImage" ColumnName="ComplaintImage" />

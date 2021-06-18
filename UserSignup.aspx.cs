@@ -70,7 +70,7 @@ namespace PtclCustomerService
                 }
                 else
                 {
-                    u.CustomerDP = "No File Uploaded";
+                    u.CustomerDP = "";
                 }
 
                 u.Password = txtPassword.Text;

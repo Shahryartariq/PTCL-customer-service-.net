@@ -1,9 +1,6 @@
 ﻿using PtclCustomerService.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace PtclCustomerService
@@ -18,14 +15,33 @@ namespace PtclCustomerService
             ApprovedGridView();
             if (Request.QueryString["register"] == "1")
             {
+                if (Request.QueryString["ComplaintID"] != null)
+                {
+                    RegeneratedArea.CssClass = " my-3";
+                    txtParentID.Text = Request.QueryString["ComplaintID"];
+                    /*using (PTCLEntities db = new PTCLEntities())
+                    {
+                        int ComplaintID = Convert.ToInt32(Request.QueryString["ComplaintID"]);
+
+                        tblComplaint s = db.tblComplaints.FirstOrDefault(v => v.ComplaintID == ComplaintID);
+                        ddlComplaint.SelectedValue = s.ComplaintTypeID.ToString();
+                        ddlComplaint.Enabled = false;
+
+                        txtComplaintTitle.Text = s.ComplaintTitle;
+                    }*/
+                }
+
+                lblTitle.Text = "Register Your Complaint";
                 PanelRegisterComplaint.CssClass = " ";
             }
             if (Request.QueryString["Active"] == "1")
             {
+                lblTitle.Text = "Active Complaints";
                 PanelPendingComplaint.CssClass = " ";
             }
             if (Request.QueryString["closed"] == "1")
             {
+                lblTitle.Text = "Closed Complaints";
                 PanelApprovedComplaint.CssClass = " ";
             }
             using (PTCLEntities db = new PTCLEntities())
@@ -68,8 +84,8 @@ namespace PtclCustomerService
                 var UserID = Convert.ToInt32(Session["UserID"]);
 
                 var MyApprovedComplaintData = db.MyApprovedComplaint(UserID).ToList();
-                GV2.DataSource = MyApprovedComplaintData;
-                GV2.DataBind();
+                GVApprovedComplaint.DataSource = MyApprovedComplaintData;
+                GVApprovedComplaint.DataBind();
             }
         }
 
@@ -139,13 +155,22 @@ namespace PtclCustomerService
                 {
                     s.ComplaintImage = "";
                 }
+                if (Request.QueryString["ComplaintID"] != null)
+                {
+                    s.RegeneratedID = Convert.ToInt32(Request.QueryString["ComplaintID"]);
+                }
+
                 txtComplaintDescription.Text = "";
                 txtComplaintTitle.Text = "";
                 db.tblComplaints.Add(s);
                 db.SaveChanges();
-                lblMsg.Text = "Complaint Submitted Successfully";
-                ddlComplaint.SelectedValue = "7";
 
+                lblMsg.Text = "Complaint Registered Successfully";
+                ddlComplaint.SelectedValue = "7";
+                if (Request.QueryString["ComplaintID"] != null)
+                {
+                    Response.Redirect("~/Complaints/User/UserComplaint.aspx?register=1");
+                }
             }
         }
 
