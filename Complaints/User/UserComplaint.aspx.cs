@@ -19,16 +19,7 @@ namespace PtclCustomerService
                 {
                     RegeneratedArea.CssClass = " my-3";
                     txtParentID.Text = Request.QueryString["ComplaintID"];
-                    /*using (PTCLEntities db = new PTCLEntities())
-                    {
-                        int ComplaintID = Convert.ToInt32(Request.QueryString["ComplaintID"]);
-
-                        tblComplaint s = db.tblComplaints.FirstOrDefault(v => v.ComplaintID == ComplaintID);
-                        ddlComplaint.SelectedValue = s.ComplaintTypeID.ToString();
-                        ddlComplaint.Enabled = false;
-
-                        txtComplaintTitle.Text = s.ComplaintTitle;
-                    }*/
+                    
                 }
 
                 lblTitle.Text = "Register Your Complaint";

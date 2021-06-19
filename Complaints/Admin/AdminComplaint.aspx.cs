@@ -16,6 +16,11 @@ namespace PtclCustomerService
             PendingGridView();
             ApprovedGridView();
             RegeneratedGridView();
+            if (Request.QueryString["Active"] == "1")
+            {
+                lblTitle.Text = "Active Complaints";
+                PanelPendingComplaint.CssClass = " ";
+            }
         }
 
         protected void PendingGridView()
@@ -25,6 +30,8 @@ namespace PtclCustomerService
                 var PendingComplaintsData = db.ActiveC().ToList();
                 GVPendingComplaint.DataSource = PendingComplaintsData;
                 GVPendingComplaint.DataBind();
+                GVPendingComplaint.UseAccessibleHeader = true;
+                GVPendingComplaint.HeaderRow.TableSection = TableRowSection.TableHeader;
             }
         }
 

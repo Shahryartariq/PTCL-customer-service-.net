@@ -50,6 +50,7 @@
             <div class="media-body ml-4">
                 <asp:Panel runat="server" ID="PanelFirstName" CssClass="font-weight-bold mb-0"></asp:Panel>
                 <asp:Panel runat="server" ID="PanelCID" CssClass="text-muted mb-2 text-center"></asp:Panel>
+                <asp:Panel runat="server" ID="PanelStatusComplaint" CssClass="text-muted mb-2 text-center"></asp:Panel>
                 <asp:HyperLink runat="server" ID="HypCustomerProfile" class="btn btn-primary btn-sm">Complainant Profile</asp:HyperLink>&nbsp;
                 <asp:HyperLink runat="server" ID="HypEmailIcon" class="btn btn-default btn-sm icon-btn"><i class="fas fa-envelope fa-2x"></i></asp:HyperLink>
             </div>
@@ -63,21 +64,21 @@
                     <div class="col-sm-2">
                         <label class="mb-0">Full Name</label>
                     </div>
-                    <asp:Panel runat="server" ID="Panel1" Text="Shehryar" CssClass="col-sm-10 text-secondary">Shehryar</asp:Panel>
+                    <asp:Panel runat="server" ID="PanelFullName" CssClass="col-sm-10 text-secondary"></asp:Panel>
                 </div>
 
                 <div class="row mt-3 mb-2">
                     <div class="col-sm-2">
-                        <label class="mb-0">Full Name</label>
+                        <label class="mb-0">Email</label>
                     </div>
-                    <asp:Panel runat="server" ID="Panel2" Text="Shehryar" CssClass="col-sm-10 text-secondary">Shehryar</asp:Panel>
+                    <asp:Panel runat="server" ID="PanelEmail" CssClass="col-sm-10 text-secondary"></asp:Panel>
                 </div>
 
                 <div class="row mt-3 mb-2">
                     <div class="col-sm-2">
-                        <label class="mb-0">Full Name</label>
+                        <label class="mb-0">Phone</label>
                     </div>
-                    <asp:Panel runat="server" ID="Panel6" Text="Shehryar" CssClass="col-sm-10 text-secondary">Shehryar</asp:Panel>
+                    <asp:Panel runat="server" ID="PanelPhone" CssClass="col-sm-10 text-secondary"></asp:Panel>
                 </div>
             </div>
             <hr class="border-light m-0">
@@ -95,9 +96,30 @@
 
                 <div class="row mt-3 mb-2">
                     <div class="col-sm-2">
-                        <label class="mb-0">Full Name</label>
+                        <label class="mb-0">Complaint Type</label>
                     </div>
-                    <asp:Panel runat="server" ID="Panel4" Text="Shehryar" CssClass="col-sm-10 text-secondary">Shehryar</asp:Panel>
+                    <asp:Panel runat="server" ID="PanelComplaintType" CssClass="col-sm-10 text-secondary"></asp:Panel>
+                </div>
+
+                <div class="row mt-3 mb-2">
+                    <div class="col-sm-2">
+                        <label class="mb-0">Creation Date & Time</label>
+                    </div>
+                    <asp:Panel runat="server" ID="PanelCreation" CssClass="col-sm-10 text-secondary"></asp:Panel>
+                </div>
+
+                <div class="row mt-3 mb-2">
+                    <div class="col-sm-2">
+                        <label class="mb-0">Regenerate</label>
+                    </div>
+                    <asp:Panel runat="server" ID="PanelRegenerate" CssClass="col-sm-10 text-secondary"></asp:Panel>
+                </div>
+
+                <div class="row mt-3 mb-2">
+                    <div class="col-sm-2">
+                        <label class="mb-0">Complaint Description</label>
+                    </div>
+                    <asp:Panel runat="server" ID="PanelComplaintDescription" CssClass="col-sm-10 text-secondary"></asp:Panel>
                 </div>
 
                 <div class="row mt-3 mb-2">
@@ -108,6 +130,34 @@
                 </div>
             </div>
             <hr class="border-light m-0">
+        </div>
+        <div class="col-sm-12 mb-2 pb-5 te">
+            <asp:Panel runat="server" ID="Panel1">
+                <!-- Button trigger modal -->
+                <button class="mx-3 btn btn-primary float-end" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Resolve Complaint
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Resolve Complaint</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are You sure this complaint is Resolved?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                <asp:Button ID="btnResolve" runat="server" Text="Yes" CssClass="btn btn-primary" OnClick="btnResolve_Click" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </asp:Panel>
+            <asp:HyperLink runat="server" ID="hypCacnel" CssClass="btn btn-primary  float-end " Text="Cancel"></asp:HyperLink>
         </div>
     </div>
 </asp:Content>

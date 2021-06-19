@@ -84,7 +84,7 @@
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <asp:HyperLink ID="HypLogout" Text="Logout" runat="server" CssClass="dropdown-item" NavigateUrl="~/Logout.aspx"></asp:HyperLink>
+                            <asp:HyperLink ID="HypLogout" Text="Logout" runat="server" CssClass="dropdown-item" NavigateUrl="~/Logout.aspx?adminSide=1"></asp:HyperLink>
                         </li>
                     </ul>
                 </li>

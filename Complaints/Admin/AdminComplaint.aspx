@@ -2,13 +2,30 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../../Js/scripts.js"></script>
+     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+    <script>
+        $(document).ready(function () {
+            $('#GVPendingComplaint').DataTable({
+                "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
+            });
+        });
+    </script>
+
+    <style>
+        .dataTables_filter {
+            margin-bottom: 1%;
+
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
 
         <div class="row">
 
-            <h3 class="text-center my-3 text-success ">Manage Your Complaint</h3>
+            <asp:Label runat="server" ID="lblTitle" CssClass="h3 text-center my-3 text-success "></asp:Label>
             <div class="card mb-4">
                 <div class="card-body">
                     <p class="text-center">Create your PTCL online account easily by entering your email address and basic personal information. Please take a little time and submit your complaint, we will fix these complaints as soon as possible</p>
@@ -22,7 +39,7 @@
 
                         <%--Pending --%>
                         <asp:Panel ID="PanelPendingComplaint" runat="server" CssClass="d-none">
-                            <asp:GridView runat="server" ID="GVPendingComplaint" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
+                            <asp:GridView runat="server" ClientIDMode="Static" ID="GVPendingComplaint" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
                                 <Columns>
                                     <asp:BoundField DataField="ComplaintID" HeaderText="Complaint ID" />
                                     <asp:BoundField DataField="FirstName" HeaderText="Complainant Name" />
