@@ -42,6 +42,15 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.Panel PanelCID;
 
         /// <summary>
+        /// PanelStatusComplaint control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelStatusComplaint;
+
+        /// <summary>
         /// HypCustomerProfile control.
         /// </summary>
         /// <remarks>
@@ -60,31 +69,31 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.HyperLink HypEmailIcon;
 
         /// <summary>
-        /// Panel1 control.
+        /// PanelFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
+        protected global::System.Web.UI.WebControls.Panel PanelFullName;
 
         /// <summary>
-        /// Panel2 control.
+        /// PanelEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel2;
+        protected global::System.Web.UI.WebControls.Panel PanelEmail;
 
         /// <summary>
-        /// Panel6 control.
+        /// PanelPhone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel6;
+        protected global::System.Web.UI.WebControls.Panel PanelPhone;
 
         /// <summary>
         /// PanelComplaintTitle control.
@@ -96,13 +105,40 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.Panel PanelComplaintTitle;
 
         /// <summary>
-        /// Panel4 control.
+        /// PanelComplaintType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel4;
+        protected global::System.Web.UI.WebControls.Panel PanelComplaintType;
+
+        /// <summary>
+        /// PanelCreation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelCreation;
+
+        /// <summary>
+        /// PanelRegenerate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelRegenerate;
+
+        /// <summary>
+        /// PanelComplaintDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelComplaintDescription;
 
         /// <summary>
         /// HypDownloadUpload control.
@@ -112,5 +148,32 @@ namespace PtclCustomerService
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink HypDownloadUpload;
+
+        /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+
+        /// <summary>
+        /// btnResolve control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnResolve;
+
+        /// <summary>
+        /// hypCacnel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hypCacnel;
     }
 }

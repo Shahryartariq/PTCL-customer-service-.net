@@ -13,7 +13,11 @@ namespace PtclCustomerService
         {
             Session.Abandon();
             Response.Cookies["PCS"].Expires = DateTime.Now.AddMinutes(-1);
-            Response.Redirect("UserLogin.aspx");
+            if (Request.QueryString["userSide"] != null)
+            {
+                Response.Redirect("~/UserLogin.aspx");
+            }
+            Response.Redirect("~/AdminLogin.aspx");
         }
     }
 }
