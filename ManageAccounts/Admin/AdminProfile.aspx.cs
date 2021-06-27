@@ -17,52 +17,61 @@ namespace PtclCustomerService
 
             using (PTCLEntities db = new PTCLEntities())
             {
-                if (Session["AdminID"] != null)
+                int? AdminID = null;
+                if (Request.QueryString["AdminID"] != null)
                 {
-                    int AdminID = (int)Session["AdminID"];
+                    AdminID = Convert.ToInt32(Request.QueryString["AdminID"]);
+                }
+                else if (Session["AdminID"] != null)
+                {
+                    AdminID = Convert.ToInt32(Session["AdminID"]);
+                }
+                else
+                {
+                    Response.Redirect("~/Errors/Something Went Wrong.aspx");
+                }
 
-                    HypProfile.NavigateUrl = "~/ManageAccounts/Admin/AdminSetup.aspx?profile=me&AdminID=" + AdminID;
-                    tblAdmin s = db.tblAdmins.FirstOrDefault(v => v.AdminID == AdminID);
+                HypProfile.NavigateUrl = "~/ManageAccounts/Admin/AdminSetup.aspx?profile=me&AdminID=" + AdminID;
+                tblAdmin s = db.tblAdmins.FirstOrDefault(v => v.AdminID == AdminID);
 
-                    Label lblUserName = new Label();
-                    lblUserName.Text = s.UserName;
-                    PanelUserName.Controls.Add(lblUserName);
+                Label lblUserName = new Label();
+                lblUserName.Text = s.UserName;
+                PanelUserName.Controls.Add(lblUserName);
 
-                    Label lbllocation = new Label();
-                    lbllocation.Text = s.Location;
-                    PanelLocation.Controls.Add(lbllocation);
+                Label lbllocation = new Label();
+                lbllocation.Text = s.Location;
+                PanelLocation.Controls.Add(lbllocation);
 
-                    Label lblFullName = new Label();
-                    lblFullName.Text = s.FullName;
-                    PanelFullName.Controls.Add(lblFullName);
+                Label lblFullName = new Label();
+                lblFullName.Text = s.FullName;
+                PanelFullName.Controls.Add(lblFullName);
 
-                    Label lblEmail = new Label();
-                    lblEmail.Text = s.EmailAddress;
-                    PanelEmail.Controls.Add(lblEmail);
+                Label lblEmail = new Label();
+                lblEmail.Text = s.EmailAddress;
+                PanelEmail.Controls.Add(lblEmail);
 
-                    Label lblPhone = new Label();
-                    lblPhone.Text = s.AdminPhone;
-                    PanelPhone.Controls.Add(lblPhone);
+                Label lblPhone = new Label();
+                lblPhone.Text = s.AdminPhone;
+                PanelPhone.Controls.Add(lblPhone);
 
-                    Label lblStatus = new Label();
-                    if (s.Status.ToString() == "True")
-                    {
-                        lblStatus.Text = "Active";
-                    }
-                    else
-                    {
-                        lblStatus.Text = "Inactive";
-                    }
-                    PanelStatus.Controls.Add(lblStatus);
+                Label lblStatus = new Label();
+                if (s.Status.ToString() == "True")
+                {
+                    lblStatus.Text = "Active";
+                }
+                else
+                {
+                    lblStatus.Text = "Inactive";
+                }
+                PanelStatus.Controls.Add(lblStatus);
 
-                    if (s.AdminDP != "" && s.AdminDP != null)
-                    {
-                        AdminPic.ImageUrl = "../../UploadFiles/AdminProfile/" + s.AdminDP;
-                    }
-                    else
-                    {
-                        AdminPic.ImageUrl = "../../assets/img/avatar.png";
-                    }
+                if (s.AdminDP != "" && s.AdminDP != null)
+                {
+                    AdminPic.ImageUrl = "../../UploadFiles/AdminProfile/" + s.AdminDP;
+                }
+                else
+                {
+                    AdminPic.ImageUrl = "../../assets/img/avatar.png";
                 }
             }
         }

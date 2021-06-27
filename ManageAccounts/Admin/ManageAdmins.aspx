@@ -5,9 +5,9 @@
         fixflow {
             overflow: hidden;
         }
+
         .dataTables_filter {
             margin-bottom: 1%;
-
         }
     </style>
     <script src="../../Js/scripts.js"></script>
@@ -39,14 +39,12 @@
                         <asp:BoundField DataField="Location" HeaderText="Location" />
                         <asp:BoundField DataField="Status" HeaderText="Status" />
 
-                        <asp:TemplateField HeaderText="View Profile">
-                            <ItemTemplate>
-                                <!-- AdminID-->
-                                <asp:LinkButton runat="server" ID="lnkEdit" Text="Edit" CommandName="edit" CommandArgument='<%# Bind("AdminID") %>'></asp:LinkButton>
-                                /
-                                <asp:LinkButton runat="server" ID="lnkDelete" Text="Delete" CommandName="delete" CommandArgument='<%# Bind("AdminID") %>' OnClientClick="return confirm('Are you sure you want to delete this Admin?');"></asp:LinkButton>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                        <asp:HyperLinkField
+                            Text="View"
+                            HeaderText="Admin Profile"
+                            DataNavigateUrlFields="AdminID"
+                            DataNavigateUrlFormatString="~/ManageAccounts/Admin/AdminProfile.aspx?AdminID={0}"
+                            Target="_blank" ControlStyle-CssClass="text-center m-auto" />
 
                         <asp:TemplateField HeaderText="Action">
                             <ItemTemplate>
@@ -58,6 +56,7 @@
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
+                <asp:Label runat="server" ID="lblAdminmsg" CssClass="text-center" ForeColor="Red"></asp:Label>
             </div>
         </div>
     </div>

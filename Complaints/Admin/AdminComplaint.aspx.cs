@@ -21,6 +21,16 @@ namespace PtclCustomerService
                 lblTitle.Text = "Active Complaints";
                 PanelPendingComplaint.CssClass = " ";
             }
+            if (Request.QueryString["Closed"] == "1")
+            {
+                lblTitle.Text = "Closed Complaints";
+                PanelApprovedComplaint.CssClass = " ";
+            }
+            if (Request.QueryString["Rcomp"] == "1")
+            {
+                lblTitle.Text = "Regenerated Complaints";
+                PanelRegeneratedComplaint.CssClass = " ";
+            }
         }
 
         protected void PendingGridView()
@@ -31,7 +41,15 @@ namespace PtclCustomerService
                 GVPendingComplaint.DataSource = PendingComplaintsData;
                 GVPendingComplaint.DataBind();
                 GVPendingComplaint.UseAccessibleHeader = true;
-                GVPendingComplaint.HeaderRow.TableSection = TableRowSection.TableHeader;
+
+                if (GVPendingComplaint.Rows.Count > 0)
+                {
+                    GVPendingComplaint.HeaderRow.TableSection = TableRowSection.TableHeader;
+                }
+                else
+                {
+                    lblTablePendingMsg.Text = "No Record to Show";
+                }
             }
         }
 
@@ -42,6 +60,15 @@ namespace PtclCustomerService
                 var MyApprovedComplaintData = db.AdminApprovedComplaint().ToList();
                 GVApprovedComplaint.DataSource = MyApprovedComplaintData;
                 GVApprovedComplaint.DataBind();
+                GVApprovedComplaint.UseAccessibleHeader = true;
+                if (GVApprovedComplaint.Rows.Count > 0)
+                {
+                    GVApprovedComplaint.HeaderRow.TableSection = TableRowSection.TableHeader;
+                }
+                else
+                {
+                    lblTableClosedMsg.Text = "No Record to Show";
+                }
             }
         }
 
@@ -52,6 +79,14 @@ namespace PtclCustomerService
                 var MyRegeneratedComplaintData = db.RegeneratedComplaints().ToList();
                 GVRegeneratedComplaint.DataSource = MyRegeneratedComplaintData;
                 GVRegeneratedComplaint.DataBind();
+                if (GVRegeneratedComplaint.Rows.Count > 0)
+                {
+                    GVRegeneratedComplaint.HeaderRow.TableSection = TableRowSection.TableHeader;
+                }
+                else
+                {
+                    lblTableRegeneratedMsg.Text = "No Record to Show";
+                }
             }
         }
 
@@ -64,6 +99,7 @@ namespace PtclCustomerService
 
         protected void PendingComplaint_Click(object sender, EventArgs e)
         {
+            Response.Redirect("~/Complaints/Admin/AdminComplaint.aspx?Active=1");
             PanelPendingComplaint.CssClass = " active";
             PanelApprovedComplaint.CssClass = " d-none";
             PanelRegeneratedComplaint.CssClass = " d-none";
@@ -74,6 +110,8 @@ namespace PtclCustomerService
 
         protected void ApprovedComplaint_Click(object sender, EventArgs e)
         {
+            Response.Redirect("~/Complaints/Admin/AdminComplaint.aspx?Closed=1");
+
             PanelApprovedComplaint.CssClass = " active";
             PanelPendingComplaint.CssClass = " d-none";
             PanelRegeneratedComplaint.CssClass = " d-none";
@@ -85,6 +123,7 @@ namespace PtclCustomerService
 
         protected void RegeneratedComplaint_Click(object sender, EventArgs e)
         {
+            Response.Redirect("~/Complaints/Admin/AdminComplaint.aspx?Rcomp=1");
             PanelRegeneratedComplaint.CssClass = " active";
             PanelPendingComplaint.CssClass = " d-none";
             PanelApprovedComplaint.CssClass = " d-none";

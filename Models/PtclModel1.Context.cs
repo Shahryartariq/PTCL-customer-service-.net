@@ -31,10 +31,25 @@ namespace PtclCustomerService.Models
         public virtual DbSet<tblComplaint> tblComplaints { get; set; }
         public virtual DbSet<tblComplaintType> tblComplaintTypes { get; set; }
         public virtual DbSet<tblPtclUser> tblPtclUsers { get; set; }
+        public virtual DbSet<tblUserLocation> tblUserLocations { get; set; }
+    
+        public virtual ObjectResult<ActiveC_Result> ActiveC()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ActiveC_Result>("ActiveC");
+        }
     
         public virtual ObjectResult<AdminApprovedComplaint_Result> AdminApprovedComplaint()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AdminApprovedComplaint_Result>("AdminApprovedComplaint");
+        }
+    
+        public virtual ObjectResult<ComplaintDetailsByCID_Result> ComplaintDetailsByCID(Nullable<int> complaintID)
+        {
+            var complaintIDParameter = complaintID.HasValue ?
+                new ObjectParameter("ComplaintID", complaintID) :
+                new ObjectParameter("ComplaintID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ComplaintDetailsByCID_Result>("ComplaintDetailsByCID", complaintIDParameter);
         }
     
         public virtual int DeleteComplaint(Nullable<int> complaintID)
@@ -64,6 +79,15 @@ namespace PtclCustomerService.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeletePtlcUser", userIDParameter);
         }
     
+        public virtual ObjectResult<GetComplaintbyCID_Result> GetComplaintbyCID(Nullable<int> complaintID)
+        {
+            var complaintIDParameter = complaintID.HasValue ?
+                new ObjectParameter("ComplaintID", complaintID) :
+                new ObjectParameter("ComplaintID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetComplaintbyCID_Result>("GetComplaintbyCID", complaintIDParameter);
+        }
+    
         public virtual ObjectResult<GetComplaints_Result> GetComplaints()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetComplaints_Result>("GetComplaints");
@@ -72,6 +96,24 @@ namespace PtclCustomerService.Models
         public virtual ObjectResult<GetComplaintType_Result> GetComplaintType()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetComplaintType_Result>("GetComplaintType");
+        }
+    
+        public virtual ObjectResult<GetCustomerActiveComplaint_Result> GetCustomerActiveComplaint(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerActiveComplaint_Result>("GetCustomerActiveComplaint", userIDParameter);
+        }
+    
+        public virtual ObjectResult<GetMyComplaints_Result> GetMyComplaints(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("userID", userID) :
+                new ObjectParameter("userID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMyComplaints_Result>("GetMyComplaints", userIDParameter);
         }
     
         public virtual ObjectResult<GetPtclAdmins_Result> GetPtclAdmins()
@@ -124,6 +166,16 @@ namespace PtclCustomerService.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RegeneratedComplaints_Result>("RegeneratedComplaints");
         }
     
+        public virtual ObjectResult<spGetLocation_Result> spGetLocation()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetLocation_Result>("spGetLocation");
+        }
+    
+        public virtual ObjectResult<temp_Result> temp()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<temp_Result>("temp");
+        }
+    
         public virtual ObjectResult<uniqueEmail_Result> uniqueEmail(string email)
         {
             var emailParameter = email != null ?
@@ -133,14 +185,13 @@ namespace PtclCustomerService.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uniqueEmail_Result>("uniqueEmail", emailParameter);
         }
     
-        public virtual ObjectResult<temp_Result> temp()
+        public virtual ObjectResult<uniqueUserName_Result> uniqueUserName(string userName)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<temp_Result>("temp");
-        }
+            var userNameParameter = userName != null ?
+                new ObjectParameter("userName", userName) :
+                new ObjectParameter("userName", typeof(string));
     
-        public virtual ObjectResult<ActiveC_Result> ActiveC()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ActiveC_Result>("ActiveC");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uniqueUserName_Result>("uniqueUserName", userNameParameter);
         }
     
         public virtual ObjectResult<UserPendingComplaints_Result> UserPendingComplaints(Nullable<int> userID)
@@ -150,42 +201,6 @@ namespace PtclCustomerService.Models
                 new ObjectParameter("userID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UserPendingComplaints_Result>("UserPendingComplaints", userIDParameter);
-        }
-    
-        public virtual ObjectResult<GetMyComplaints_Result> GetMyComplaints(Nullable<int> userID)
-        {
-            var userIDParameter = userID.HasValue ?
-                new ObjectParameter("userID", userID) :
-                new ObjectParameter("userID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMyComplaints_Result>("GetMyComplaints", userIDParameter);
-        }
-    
-        public virtual ObjectResult<GetComplaintbyCID_Result> GetComplaintbyCID(Nullable<int> complaintID)
-        {
-            var complaintIDParameter = complaintID.HasValue ?
-                new ObjectParameter("ComplaintID", complaintID) :
-                new ObjectParameter("ComplaintID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetComplaintbyCID_Result>("GetComplaintbyCID", complaintIDParameter);
-        }
-    
-        public virtual ObjectResult<ComplaintDetailsByCID_Result> ComplaintDetailsByCID(Nullable<int> complaintID)
-        {
-            var complaintIDParameter = complaintID.HasValue ?
-                new ObjectParameter("ComplaintID", complaintID) :
-                new ObjectParameter("ComplaintID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ComplaintDetailsByCID_Result>("ComplaintDetailsByCID", complaintIDParameter);
-        }
-    
-        public virtual ObjectResult<GetCustomerActiveComplaint_Result> GetCustomerActiveComplaint(Nullable<int> userID)
-        {
-            var userIDParameter = userID.HasValue ?
-                new ObjectParameter("UserID", userID) :
-                new ObjectParameter("UserID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerActiveComplaint_Result>("GetCustomerActiveComplaint", userIDParameter);
         }
     }
 }

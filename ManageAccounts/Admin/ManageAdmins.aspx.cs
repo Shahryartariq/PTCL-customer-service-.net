@@ -24,7 +24,14 @@ namespace PtclCustomerService
                 GVAdmin.DataSource = Admins;
                 GVAdmin.DataBind();
                 GVAdmin.UseAccessibleHeader = true;
-                GVAdmin.HeaderRow.TableSection = TableRowSection.TableHeader;
+                if (GVAdmin.Rows.Count > 0)
+                {
+                    GVAdmin.HeaderRow.TableSection = TableRowSection.TableHeader;
+                }
+                else
+                {
+                    lblAdminmsg.Text = "No Record to Show";
+                }
             }
         }
 

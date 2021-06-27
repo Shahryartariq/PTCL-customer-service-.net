@@ -69,6 +69,15 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.GridView GVPendingComplaint;
 
         /// <summary>
+        /// lblTablePendingMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTablePendingMsg;
+
+        /// <summary>
         /// PanelApprovedComplaint control.
         /// </summary>
         /// <remarks>
@@ -87,6 +96,15 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.GridView GVApprovedComplaint;
 
         /// <summary>
+        /// lblTableClosedMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTableClosedMsg;
+
+        /// <summary>
         /// PanelRegeneratedComplaint control.
         /// </summary>
         /// <remarks>
@@ -103,5 +121,14 @@ namespace PtclCustomerService
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GVRegeneratedComplaint;
+
+        /// <summary>
+        /// lblTableRegeneratedMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTableRegeneratedMsg;
     }
 }

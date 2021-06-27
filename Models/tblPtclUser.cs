@@ -29,9 +29,13 @@ namespace PtclCustomerService.Models
         public string Cnic { get; set; }
         public string Password { get; set; }
         public string CustomerDP { get; set; }
-        public string CustomerLocation { get; set; }
+        public Nullable<int> LocationID { get; set; }
+        public string landline { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblComplaint> tblComplaints { get; set; }
+        public virtual tblPtclUser tblPtclUser1 { get; set; }
+        public virtual tblPtclUser tblPtclUser2 { get; set; }
+        public virtual tblUserLocation tblUserLocation { get; set; }
     }
 }

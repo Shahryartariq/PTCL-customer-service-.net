@@ -39,9 +39,6 @@ namespace PtclCustomerService.ManageAccounts.Admin
                     lblFirstName.Text = a.FirstName;
                     PanelFirstName.Controls.Add(lblFirstName);
 
-                    Label lblLocation = new Label();
-                    lblLocation.Text = a.CustomerLocation;
-                    PanelLocation.Controls.Add(lblLocation);
 
                     Label LblFullName = new Label();
                     LblFullName.Text = a.FirstName + " " + a.LastName;

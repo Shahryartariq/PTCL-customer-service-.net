@@ -2,21 +2,21 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../../Js/scripts.js"></script>
-     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <script>
         $(document).ready(function () {
-            $('#GVPendingComplaint').DataTable({
+            $('.datatable').DataTable({
                 "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
             });
+
         });
     </script>
 
     <style>
         .dataTables_filter {
             margin-bottom: 1%;
-
         }
     </style>
 </asp:Content>
@@ -39,7 +39,7 @@
 
                         <%--Pending --%>
                         <asp:Panel ID="PanelPendingComplaint" runat="server" CssClass="d-none">
-                            <asp:GridView runat="server" ClientIDMode="Static" ID="GVPendingComplaint" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
+                            <asp:GridView runat="server" ClientIDMode="Static" ID="GVPendingComplaint" CssClass="datatable mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
                                 <Columns>
                                     <asp:BoundField DataField="ComplaintID" HeaderText="Complaint ID" />
                                     <asp:BoundField DataField="FirstName" HeaderText="Complainant Name" />
@@ -54,14 +54,19 @@
                                         Target="_blank" />
                                 </Columns>
                             </asp:GridView>
+
+                            <asp:Label runat="server" ID="lblTablePendingMsg" CssClass="text-center" ForeColor="Red"></asp:Label>
                         </asp:Panel>
                         <%--Approved --%>
                         <asp:HyperLink runat="server" NavigateUrl="~/UserLogin.aspx"></asp:HyperLink>
 
-                        <asp:Panel ID="PanelApprovedComplaint" runat="server" CssClass="d-none">
-                            <asp:GridView runat="server" ID="GVApprovedComplaint" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
+                        <asp:Panel ID="PanelApprovedComplaint" ClientIDMode="Static" runat="server" CssClass="d-none">
+                            <asp:GridView runat="server" ID="GVApprovedComplaint" CssClass="datatable mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
                                 <Columns>
-                                    <asp:BoundField DataField="ComplaintID" HeaderText="ComplaintID" />
+                                    <asp:BoundField DataField="ComplaintID" HeaderText="Complaint ID" />
+                                    <asp:BoundField DataField="FirstName" HeaderText="Complainant Name" />
+                                    <asp:BoundField DataField="ComplaintTypeName" HeaderText="Complaint Type" />
+                                    <asp:BoundField DataField="ComplaintCreationDate" HeaderText="Creation Date & Time" />
 
                                     <asp:HyperLinkField
                                         Text="Detail"
@@ -69,13 +74,9 @@
                                         DataNavigateUrlFields="ComplaintID"
                                         DataNavigateUrlFormatString="AdminComplaintDetails.aspx?ComplaintID={0}"
                                         Target="_blank" />
-                                    <asp:TemplateField HeaderText="Action">
-                                        <ItemTemplate>
-                                            <asp:LinkButton runat="server" ID="lnkDelete" Text="Delete" CommandName="delete" CommandArgument='<%# Bind("ComplaintID") %>' OnClientClick="return confirm('Are you sure you want to delete this Complaint?');"><i class="mx-3 text-center fas fa-trash fa-1x"></i></asp:LinkButton>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
                                 </Columns>
                             </asp:GridView>
+                            <asp:Label runat="server" ID="lblTableClosedMsg" CssClass="text-center" ForeColor="Red"></asp:Label>
                         </asp:Panel>
 
                         <%--Regenerated Complaints --%>
@@ -86,6 +87,7 @@
                                     <asp:BoundField DataField="RegeneratedID" HeaderText="RegeneratedID" />
                                 </Columns>
                             </asp:GridView>
+                            <asp:Label runat="server" ID="lblTableRegeneratedMsg" CssClass="text-center" ForeColor="Red"></asp:Label>
                         </asp:Panel>
                     </div>
                 </div>

@@ -89,10 +89,11 @@
     <Content Include="Complaints\Admin\AdminComplaint.aspx" />
     <Content Include="Complaints\Admin\AdminComplaintDetails.aspx" />
     <Content Include="AdminLogin.aspx" />
+    <Content Include="Errors\404NotFound.aspx" />
+    <Content Include="Errors\Something Went Wrong.aspx" />
     <Content Include="ManageAccounts\Admin\AdminCustomersProfile.aspx" />
     <Content Include="ManageCustomers\Admin\AdminManageCustomers.aspx" />
     <Content Include="Dashboard\Admin\AdminDashboard.aspx" />
-    <Content Include="Erros\404NotFound.aspx" />
     <Content Include="ManageAccounts\Admin\AdminProfile.aspx" />
     <Content Include="ManageAccounts\Admin\AdminSetup.aspx" />
     <Content Include="assets\demo\chart-area-demo.js" />
@@ -112,6 +113,8 @@
     <Content Include="Logout.aspx" />
     <Content Include="ManageAccounts\Admin\ManageAdmins.aspx" />
     <Content Include="ManageAccounts\User\UserProfile.aspx" />
+    <Content Include="assets\img\HomeCover.jpg" />
+    <Content Include="assets\img\PCS_Logo.png" />
     <Content Include="Models\PtclModel1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PtclModel1.edmx</DependentUpon>
@@ -122,8 +125,6 @@
       <DependentUpon>PtclModel1.edmx</DependentUpon>
       <LastGenOutput>PtclModel1.cs</LastGenOutput>
     </Content>
-    <Content Include="assets\img\HomeCover.jpg" />
-    <Content Include="assets\img\PCS_Logo.png" />
     <Content Include="temp.aspx" />
     <Content Include="Temp\401.html" />
     <Content Include="Temp\404.html" />
@@ -167,6 +168,21 @@
     <Compile Include="AdminLogin.aspx.designer.cs">
       <DependentUpon>AdminLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Email.cs" />
+    <Compile Include="Errors\404NotFound.aspx.cs">
+      <DependentUpon>404NotFound.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Errors\404NotFound.aspx.designer.cs">
+      <DependentUpon>404NotFound.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Errors\Something Went Wrong.aspx.cs">
+      <DependentUpon>Something Went Wrong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Errors\Something Went Wrong.aspx.designer.cs">
+      <DependentUpon>Something Went Wrong.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManageAccounts\Admin\AdminCustomersProfile.aspx.cs">
       <DependentUpon>AdminCustomersProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -194,13 +210,6 @@
     </Compile>
     <Compile Include="Dashboard\Admin\AdminDashboard.aspx.designer.cs">
       <DependentUpon>AdminDashboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Erros\404NotFound.aspx.cs">
-      <DependentUpon>404NotFound.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Erros\404NotFound.aspx.designer.cs">
-      <DependentUpon>404NotFound.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManageAccounts\Admin\AdminProfile.aspx.cs">
       <DependentUpon>AdminProfile.aspx</DependentUpon>
@@ -287,9 +296,6 @@
     <Compile Include="Models\MyApprovedComplaint_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PendingComplaints_Result.cs">
-      <DependentUpon>PtclModel1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\PtclAdminLogin_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
@@ -314,6 +320,9 @@
     <Compile Include="Models\RegeneratedComplaints_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spGetLocation_Result.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblAdmin.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
@@ -326,13 +335,16 @@
     <Compile Include="Models\tblPtclUser.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblUserLocation.cs">
+      <DependentUpon>PtclModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\temp_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ThePendings_Result.cs">
+    <Compile Include="Models\uniqueEmail_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\uniqueEmail_Result.cs">
+    <Compile Include="Models\uniqueUserName_Result.cs">
       <DependentUpon>PtclModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserPendingComplaints_Result.cs">

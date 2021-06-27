@@ -14,42 +14,41 @@ namespace PtclCustomerService
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*if (IsCallback == false)
+            using (PTCLEntities db = new PTCLEntities())
             {
-                txtFirstName.Text = "";
-                txtLastName.Text = "";
-                txtPhone.Text = "";
-                txtCnic.Text = "";
-                txtEmail.Text = "";
-                txtPassword.Text = "";
-                txtLocation.Text = "";
-            }*/
+                if (IsPostBack == true) return;
+                var LocationData = db.spGetLocation().ToList();
+                ddlLocationCode.DataSource = LocationData;
+                ddlLocationCode.DataTextField = "LocationCode";
+                ddlLocationCode.DataValueField = "LocationID";
+                ddlLocationCode.DataBind();
+            }
         }
 
-        //Hashing Start
+        /*
 
-        private byte[] CreateSalt()
-        {
-            var buffer = new byte[16];
-            string x = "SherryBSSE40";
-            buffer = System.Text.Encoding.UTF8.GetBytes(x);
-            return buffer;
-        }
+         private byte[] CreateSalt()
+         {
+             var buffer = new byte[16];
+             string x = "SherryBSSE40";
+             buffer = System.Text.Encoding.UTF8.GetBytes(x);
+             return buffer;
+         }
 
-        private byte[] HashPassword(string password, byte[] salt)
-        {
-            var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
+         private byte[] HashPassword(string password, byte[] salt)
+         {
+             var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
 
-            argon2.Salt = salt;
-            argon2.DegreeOfParallelism = 8; // four cores
-            argon2.Iterations = 4;
-            argon2.MemorySize = 1024 * 1024; // 1 GB
-            argon2.MemorySize = 8194;
+             argon2.Salt = salt;
+             argon2.DegreeOfParallelism = 8; // four cores
+             argon2.Iterations = 4;
+             argon2.MemorySize = 1024 * 1024; // 1 GB
+             argon2.MemorySize = 8194;
 
-            return argon2.GetBytes(16);
-        }
+             return argon2.GetBytes(16);
+         }
 
-        //Hashing End
+         //Hashing End8 */
 
         protected void cmdRegister_Click(object sender, EventArgs e)
         {
@@ -61,7 +60,12 @@ namespace PtclCustomerService
                 u.EmailAddress = txtEmail.Text;
                 u.Cnic = txtCnic.Text;
                 u.Phone = txtPhone.Text;
-                u.CustomerLocation = txtLocation.Text;
+                u.Status = true;
+
+                u.landline = txtLandLineNumber.Text;
+
+                //Location Code
+                u.LocationID = Convert.ToInt32(ddlLocationCode.SelectedValue);
 
                 if (FileUpload.HasFile)
                 {
