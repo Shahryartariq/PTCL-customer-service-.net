@@ -4,13 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9ab7ecc4f0c64e5682ec1a40fbba3664" Name="Diagram1" ZoomLevel="61">
-        <EntityTypeShape EntityType="PTCLModel.tblAdmin" Width="1.5" PointX="5.375" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTCLModel.tblComplaint" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTCLModel.tblComplaintType" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PTCLModel.tblPtclUser" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+      <Diagram DiagramId="d715e07ccb3445788fbc78bd630ab74f" Name="Diagram1">
+        <EntityTypeShape EntityType="PTCLModel.tblAdmin" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTCLModel.tblComplaint" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTCLModel.tblComplaintType" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTCLModel.tblPtclUser" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PTCLModel.tblUserLocation" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="PTCLModel.FK_tblAdmin_tblAdmin" ManuallyRouted="false" />
         <AssociationConnector Association="PTCLModel.FK_tblComplaint_tblComplaintType" ManuallyRouted="false" />
         <AssociationConnector Association="PTCLModel.FK_tblComplaint_tblPtclUser" ManuallyRouted="false" />
+        <AssociationConnector Association="PTCLModel.FK_tblPtclUser_tblPtclUser" ManuallyRouted="false" />
+        <AssociationConnector Association="PTCLModel.FK_tblPtclUser_tblUserLocation" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

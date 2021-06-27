@@ -186,13 +186,40 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RFV7;
 
         /// <summary>
-        /// txtLocation control.
+        /// ddlLocationCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLocation;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLocationCode;
+
+        /// <summary>
+        /// RFV8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFV8;
+
+        /// <summary>
+        /// REV5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator REV5;
+
+        /// <summary>
+        /// txtLandLineNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLandLineNumber;
 
         /// <summary>
         /// RegExValFileUploadFileType control.

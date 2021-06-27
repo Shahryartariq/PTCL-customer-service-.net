@@ -24,13 +24,26 @@ namespace PtclCustomerService.ManageAccounts.User
                     int UserID = (int)Session["UserID"];
                     tblPtclUser s = db.tblPtclUsers.FirstOrDefault(v => v.UserID == UserID);
 
+                    tblUserLocation l = db.tblUserLocations.FirstOrDefault(x => x.LocationID == s.LocationID);
+
                     Label lblFirstName = new Label();
                     lblFirstName.Text = s.FirstName;
                     PanelFirstName.Controls.Add(lblFirstName);
 
                     Label lblLocation = new Label();
-                    lblLocation.Text = s.CustomerLocation;
-                    PanelLocation.Controls.Add(lblLocation);
+                    if (l.LocationName.ToString() == "")
+                    {
+                        lblLocation.Text = "No location";
+                    }
+                    else
+                    {
+                        lblLocation.Text = l.LocationName;
+                    }
+                    PanelLocationName.Controls.Add(lblLocation);
+
+                    Label lblLandline = new Label();
+                    lblLandline.Text = "Landline:  " + s.landline;
+                    PanelLandline.Controls.Add(lblLandline);
 
                     Label LblFullName = new Label();
                     LblFullName.Text = s.FirstName + " " + s.LastName;

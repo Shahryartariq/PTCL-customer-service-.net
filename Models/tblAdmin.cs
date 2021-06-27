@@ -23,5 +23,8 @@ namespace PtclCustomerService.Models
         public string Location { get; set; }
         public string AdminDP { get; set; }
         public string AdminPhone { get; set; }
+    
+        public virtual tblAdmin tblAdmin1 { get; set; }
+        public virtual tblAdmin tblAdmin2 { get; set; }
     }
 }

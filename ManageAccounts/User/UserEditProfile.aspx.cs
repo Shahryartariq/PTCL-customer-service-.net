@@ -21,6 +21,12 @@ namespace PtclCustomerService
             using (PTCLEntities db = new PTCLEntities())
             {
                 if (IsPostBack == true) return;
+                var DataLocation = db.spGetLocation().ToList();
+                ddlLocationCode.DataSource = DataLocation;
+                ddlLocationCode.DataTextField = "LocationCode";
+                ddlLocationCode.DataValueField = "LocationID";
+                ddlLocationCode.DataBind();
+
                 if (Session["UserID"] != null)
                 {
                     int UserID = (int)Session["UserID"];
@@ -33,8 +39,10 @@ namespace PtclCustomerService
                     txtPassword.Text = s.Password;
                     txtConfirmPassword.Text = s.Password;
                     txtStatus.Text = s.Status.ToString();
-                    txtLocation.Text = s.CustomerLocation;
+                    //txtLocation.Text = s.CustomerLocation;
                     lblUpload.Text = s.CustomerDP;
+                    txtLandLineNumber.Text = s.landline;
+                    ddlLocationCode.SelectedValue = s.LocationID.ToString();
                 }
             }
         }
@@ -53,7 +61,9 @@ namespace PtclCustomerService
                     u.Phone = txtPhone.Text;
                     u.Cnic = txtCnic.Text;
                     u.Password = txtPassword.Text;
-                    u.CustomerLocation = txtLocation.Text;
+                    u.landline = txtLandLineNumber.Text;
+
+                    u.LocationID = Convert.ToInt32(ddlLocationCode.SelectedValue);
 
                     if (FileUpload.HasFile)
                     {

@@ -13,6 +13,8 @@
     <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="AdminDP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="AdminPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblAdmin1" Relationship="Self.FK_tblAdmin_tblAdmin" FromRole="tblAdmin" ToRole="tblAdmin1" />
+    <NavigationProperty Name="tblAdmin2" Relationship="Self.FK_tblAdmin_tblAdmin" FromRole="tblAdmin1" ToRole="tblAdmin" />
   </EntityType>
   <EntityType Name="tblComplaint">
     <Key>
@@ -26,9 +28,9 @@
     <Property Name="UserID" Type="Int32" />
     <Property Name="ComplaintStatus" Type="Boolean" />
     <Property Name="RegeneratedID" Type="Int32" />
+    <Property Name="ComplaintCreationDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="tblComplaintType" Relationship="Self.FK_tblComplaint_tblComplaintType" FromRole="tblComplaint" ToRole="tblComplaintType" />
     <NavigationProperty Name="tblPtclUser" Relationship="Self.FK_tblComplaint_tblPtclUser" FromRole="tblComplaint" ToRole="tblPtclUser" />
-    <Property Name="ComplaintCreationDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="tblComplaintType">
     <Key>
@@ -50,10 +52,35 @@
     <Property Name="Status" Type="Boolean" Nullable="false" />
     <Property Name="Cnic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="tblComplaints" Relationship="Self.FK_tblComplaint_tblPtclUser" FromRole="tblPtclUser" ToRole="tblComplaint" />
     <Property Name="CustomerDP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="CustomerLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LocationID" Type="Int32" />
+    <Property Name="landline" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblComplaints" Relationship="Self.FK_tblComplaint_tblPtclUser" FromRole="tblPtclUser" ToRole="tblComplaint" />
+    <NavigationProperty Name="tblPtclUser1" Relationship="Self.FK_tblPtclUser_tblPtclUser" FromRole="tblPtclUser" ToRole="tblPtclUser1" />
+    <NavigationProperty Name="tblPtclUser2" Relationship="Self.FK_tblPtclUser_tblPtclUser" FromRole="tblPtclUser1" ToRole="tblPtclUser" />
+    <NavigationProperty Name="tblUserLocation" Relationship="Self.FK_tblPtclUser_tblUserLocation" FromRole="tblPtclUser" ToRole="tblUserLocation" />
   </EntityType>
+  <EntityType Name="tblUserLocation">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LocationCode" Type="Int32" />
+    <Property Name="LocationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblPtclUsers" Relationship="Self.FK_tblPtclUser_tblUserLocation" FromRole="tblUserLocation" ToRole="tblPtclUser" />
+  </EntityType>
+  <Association Name="FK_tblAdmin_tblAdmin">
+    <End Role="tblAdmin" Type="Self.tblAdmin" Multiplicity="1" />
+    <End Role="tblAdmin1" Type="Self.tblAdmin" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblAdmin">
+        <PropertyRef Name="AdminID" />
+      </Principal>
+      <Dependent Role="tblAdmin1">
+        <PropertyRef Name="AdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tblComplaint_tblComplaintType">
     <End Role="tblComplaintType" Type="Self.tblComplaintType" Multiplicity="1" />
     <End Role="tblComplaint" Type="Self.tblComplaint" Multiplicity="*" />
@@ -78,11 +105,40 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tblPtclUser_tblPtclUser">
+    <End Role="tblPtclUser" Type="Self.tblPtclUser" Multiplicity="1" />
+    <End Role="tblPtclUser1" Type="Self.tblPtclUser" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblPtclUser">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tblPtclUser1">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPtclUser_tblUserLocation">
+    <End Role="tblUserLocation" Type="Self.tblUserLocation" Multiplicity="0..1" />
+    <End Role="tblPtclUser" Type="Self.tblPtclUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUserLocation">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="tblPtclUser">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="PTCLEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tblAdmins" EntityType="Self.tblAdmin" />
     <EntitySet Name="tblComplaints" EntityType="Self.tblComplaint" />
     <EntitySet Name="tblComplaintTypes" EntityType="Self.tblComplaintType" />
     <EntitySet Name="tblPtclUsers" EntityType="Self.tblPtclUser" />
+    <EntitySet Name="tblUserLocations" EntityType="Self.tblUserLocation" />
+    <AssociationSet Name="FK_tblAdmin_tblAdmin" Association="Self.FK_tblAdmin_tblAdmin">
+      <End Role="tblAdmin" EntitySet="tblAdmins" />
+      <End Role="tblAdmin1" EntitySet="tblAdmins" />
+    </AssociationSet>
     <AssociationSet Name="FK_tblComplaint_tblComplaintType" Association="Self.FK_tblComplaint_tblComplaintType">
       <End Role="tblComplaintType" EntitySet="tblComplaintTypes" />
       <End Role="tblComplaint" EntitySet="tblComplaints" />
@@ -91,7 +147,19 @@
       <End Role="tblPtclUser" EntitySet="tblPtclUsers" />
       <End Role="tblComplaint" EntitySet="tblComplaints" />
     </AssociationSet>
+    <AssociationSet Name="FK_tblPtclUser_tblPtclUser" Association="Self.FK_tblPtclUser_tblPtclUser">
+      <End Role="tblPtclUser" EntitySet="tblPtclUsers" />
+      <End Role="tblPtclUser1" EntitySet="tblPtclUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPtclUser_tblUserLocation" Association="Self.FK_tblPtclUser_tblUserLocation">
+      <End Role="tblUserLocation" EntitySet="tblUserLocations" />
+      <End Role="tblPtclUser" EntitySet="tblPtclUsers" />
+    </AssociationSet>
+    <FunctionImport Name="ActiveC" ReturnType="Collection(PTCLModel.ActiveC_Result)" />
     <FunctionImport Name="AdminApprovedComplaint" ReturnType="Collection(PTCLModel.AdminApprovedComplaint_Result)" />
+    <FunctionImport Name="ComplaintDetailsByCID" ReturnType="Collection(PTCLModel.ComplaintDetailsByCID_Result)">
+      <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="DeleteComplaint">
       <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -101,8 +169,17 @@
     <FunctionImport Name="DeletePtlcUser">
       <Parameter Name="UserID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="GetComplaintbyCID" ReturnType="Collection(PTCLModel.GetComplaintbyCID_Result)">
+      <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="GetComplaints" ReturnType="Collection(PTCLModel.GetComplaints_Result)" />
     <FunctionImport Name="GetComplaintType" ReturnType="Collection(PTCLModel.GetComplaintType_Result)" />
+    <FunctionImport Name="GetCustomerActiveComplaint" ReturnType="Collection(PTCLModel.GetCustomerActiveComplaint_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetMyComplaints" ReturnType="Collection(PTCLModel.GetMyComplaints_Result)">
+      <Parameter Name="userID" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="GetPtclAdmins" ReturnType="Collection(PTCLModel.GetPtclAdmins_Result)" />
     <FunctionImport Name="GetPtclUsers" ReturnType="Collection(PTCLModel.GetPtclUsers_Result)" />
     <FunctionImport Name="MyApprovedComplaint" ReturnType="Collection(PTCLModel.MyApprovedComplaint_Result)">
@@ -117,33 +194,60 @@
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="RegeneratedComplaints" ReturnType="Collection(PTCLModel.RegeneratedComplaints_Result)" />
+    <FunctionImport Name="spGetLocation" ReturnType="Collection(PTCLModel.spGetLocation_Result)" />
+    <FunctionImport Name="temp" ReturnType="Collection(PTCLModel.temp_Result)" />
     <FunctionImport Name="uniqueEmail" ReturnType="Collection(PTCLModel.uniqueEmail_Result)">
       <Parameter Name="Email" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="temp" ReturnType="Collection(PTCLModel.temp_Result)" />
-    <FunctionImport Name="ActiveC" ReturnType="Collection(PTCLModel.ActiveC_Result)" />
+    <FunctionImport Name="uniqueUserName" ReturnType="Collection(PTCLModel.uniqueUserName_Result)">
+      <Parameter Name="userName" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="UserPendingComplaints" ReturnType="Collection(PTCLModel.UserPendingComplaints_Result)">
       <Parameter Name="userID" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="GetMyComplaints" ReturnType="Collection(PTCLModel.GetMyComplaints_Result)">
-      <Parameter Name="userID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="GetComplaintbyCID" ReturnType="Collection(PTCLModel.GetComplaintbyCID_Result)">
-      <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="ComplaintDetailsByCID" ReturnType="Collection(PTCLModel.ComplaintDetailsByCID_Result)">
-      <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="GetCustomerActiveComplaint" ReturnType="Collection(PTCLModel.GetCustomerActiveComplaint_Result)">
-      <Parameter Name="UserID" Mode="In" Type="Int32" />
-    </FunctionImport>
   </EntityContainer>
-  <ComplexType Name="AdminApprovedComplaint_Result">
+  <ComplexType Name="ActiveC_Result">
     <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
     <Property Type="Int32" Name="ComplaintID" Nullable="false" />
     <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
     <Property Type="Int32" Name="UserID" Nullable="true" />
     <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="AdminApprovedComplaint_Result">
+    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ComplaintDetailsByCID_Result">
+    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CustomerDP" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetComplaintbyCID_Result">
+    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+    <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
+    <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ComplaintDescription" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
   </ComplexType>
   <ComplexType Name="GetComplaints_Result">
     <Property Type="Int32" Name="ComplaintID" Nullable="false" />
@@ -154,10 +258,33 @@
     <Property Type="Int32" Name="UserID" Nullable="true" />
     <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
     <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
   </ComplexType>
   <ComplexType Name="GetComplaintType_Result">
     <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
     <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetCustomerActiveComplaint_Result">
+    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+    <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
+    <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ComplaintDescription" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="GetMyComplaints_Result">
+    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+    <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
+    <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ComplaintDescription" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
   </ComplexType>
   <ComplexType Name="GetPtclAdmins_Result">
     <Property Type="Int32" Name="AdminID" Nullable="false" />
@@ -179,16 +306,19 @@
     <Property Type="Boolean" Name="Status" Nullable="false" />
     <Property Type="String" Name="Cnic" Nullable="false" MaxLength="100" />
     <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CustomerDP" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="LocationID" Nullable="true" />
+    <Property Type="String" Name="landline" Nullable="true" MaxLength="50" />
   </ComplexType>
   <ComplexType Name="MyApprovedComplaint_Result">
     <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
-    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
-    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
-    <Property Type="Int32" Name="UserID" Nullable="true" />
-    <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
     <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
     <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
     <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
   </ComplexType>
   <ComplexType Name="PtclAdminLogin_Result">
@@ -211,6 +341,9 @@
     <Property Type="Boolean" Name="Status" Nullable="false" />
     <Property Type="String" Name="Cnic" Nullable="false" MaxLength="100" />
     <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CustomerDP" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="LocationID" Nullable="true" />
+    <Property Type="String" Name="landline" Nullable="true" MaxLength="50" />
   </ComplexType>
   <ComplexType Name="RegeneratedComplaints_Result">
     <Property Type="Int32" Name="ComplaintID" Nullable="false" />
@@ -221,6 +354,20 @@
     <Property Type="Int32" Name="UserID" Nullable="true" />
     <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
     <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="spGetLocation_Result">
+    <Property Type="Int32" Name="LocationID" Nullable="false" />
+    <Property Type="Int32" Name="LocationCode" Nullable="true" />
+    <Property Type="String" Name="LocationName" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="temp_Result">
+    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
   </ComplexType>
   <ComplexType Name="uniqueEmail_Result">
     <Property Type="Int32" Name="UserID" Nullable="false" />
@@ -231,118 +378,30 @@
     <Property Type="Boolean" Name="Status" Nullable="false" />
     <Property Type="String" Name="Cnic" Nullable="false" MaxLength="100" />
     <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CustomerDP" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="LocationID" Nullable="true" />
+    <Property Type="String" Name="landline" Nullable="true" MaxLength="50" />
   </ComplexType>
-  <ComplexType Name="ThePendings_Result">
-    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
-    <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
-    <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="ComplaintDescription" Nullable="true" MaxLength="1000" />
-    <Property Type="Int32" Name="UserID" Nullable="true" />
-    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
-    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
-    <Property Type="Int32" Name="UserID1" Nullable="true" />
-    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="LastName" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="EmailAddress" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="Phone" Nullable="true" MaxLength="100" />
-    <Property Type="Boolean" Name="Status" Nullable="true" />
-    <Property Type="String" Name="Cnic" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="Password" Nullable="true" MaxLength="100" />
-  </ComplexType>
-  <ComplexType Name="temp_Result">
-    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
-    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
-    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
-    <Property Type="Int32" Name="UserID" Nullable="true" />
-    <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
-  </ComplexType>
-  <ComplexType Name="PendingComplaints_Result">
-    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
-    <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
-    <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="ComplaintDescription" Nullable="true" MaxLength="1000" />
-    <Property Type="Int32" Name="UserID" Nullable="true" />
-    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
-    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
-    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="ComplaintTypeID1" Nullable="true" />
-    <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="UserID1" Nullable="false" />
-    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="Phone" Nullable="false" MaxLength="100" />
-    <Property Type="Boolean" Name="Status" Nullable="false" />
-    <Property Type="String" Name="Cnic" Nullable="false" MaxLength="100" />
+  <ComplexType Name="uniqueUserName_Result">
+    <Property Type="Int32" Name="AdminID" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
     <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
-  </ComplexType>
-  <ComplexType Name="ActiveC_Result">
-    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
-    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
-    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
-    <Property Type="Int32" Name="UserID" Nullable="true" />
-    <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
-    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+    <Property Type="Boolean" Name="Status" Nullable="false" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EmailAddress" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="AdminDP" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AdminPhone" Nullable="true" MaxLength="50" />
   </ComplexType>
   <ComplexType Name="UserPendingComplaints_Result">
-    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
     <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
-    <Property Type="Int32" Name="UserID" Nullable="true" />
-    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
-    <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
     <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
-    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
     <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
-    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="GetMyComplaints_Result">
-    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
-    <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
-    <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="ComplaintDescription" Nullable="true" MaxLength="1000" />
-    <Property Type="Int32" Name="UserID" Nullable="true" />
-    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
-    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
-    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
-  </ComplexType>
-  <ComplexType Name="GetComplaintbyCID_Result">
-    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
-    <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
-    <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="ComplaintDescription" Nullable="true" MaxLength="1000" />
-    <Property Type="Int32" Name="UserID" Nullable="true" />
-    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
-    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
-    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
-  </ComplexType>
-  <ComplexType Name="ComplaintDetailsByCID_Result">
-    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
-    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
-    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
-    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
     <Property Type="Int32" Name="UserID" Nullable="true" />
     <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" />
-    <Property Type="String" Name="CustomerDP" Nullable="true" MaxLength="100" />
-  </ComplexType>
-  <ComplexType Name="GetCustomerActiveComplaint_Result">
-    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
-    <Property Type="Int32" Name="ComplaintTypeID" Nullable="false" />
-    <Property Type="String" Name="ComplaintImage" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="ComplaintDescription" Nullable="true" MaxLength="1000" />
-    <Property Type="Int32" Name="UserID" Nullable="true" />
-    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
-    <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
-    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
   </ComplexType>
 </Schema>

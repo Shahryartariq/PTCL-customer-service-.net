@@ -69,6 +69,15 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.HyperLink HypEmailIcon;
 
         /// <summary>
+        /// lblEmailMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmailMessage;
+
+        /// <summary>
         /// PanelFullName control.
         /// </summary>
         /// <remarks>
@@ -150,13 +159,13 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.HyperLink HypDownloadUpload;
 
         /// <summary>
-        /// Panel1 control.
+        /// PanelResolveComplaint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
+        protected global::System.Web.UI.WebControls.Panel PanelResolveComplaint;
 
         /// <summary>
         /// btnResolve control.

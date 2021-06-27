@@ -42,13 +42,22 @@ namespace PtclCustomerService.ManageAccounts.User
         protected global::System.Web.UI.WebControls.Panel PanelCustomerType;
 
         /// <summary>
-        /// PanelLocation control.
+        /// PanelLocationName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelLocation;
+        protected global::System.Web.UI.WebControls.Panel PanelLocationName;
+
+        /// <summary>
+        /// PanelLandline control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelLandline;
 
         /// <summary>
         /// PanelFullName control.

@@ -48,8 +48,29 @@
     <Property Name="Cnic" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="CustomerDP" Type="nvarchar" MaxLength="100" />
-    <Property Name="CustomerLocation" Type="nvarchar" MaxLength="100" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="landline" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="tblUserLocation">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationCode" Type="int" />
+    <Property Name="LocationName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_tblAdmin_tblAdmin">
+    <End Role="tblAdmin" Type="Self.tblAdmin" Multiplicity="1" />
+    <End Role="tblAdmin1" Type="Self.tblAdmin" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblAdmin">
+        <PropertyRef Name="AdminID" />
+      </Principal>
+      <Dependent Role="tblAdmin1">
+        <PropertyRef Name="AdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tblComplaint_tblComplaintType">
     <End Role="tblComplaintType" Type="Self.tblComplaintType" Multiplicity="1" />
     <End Role="tblComplaint" Type="Self.tblComplaint" Multiplicity="*" />
@@ -71,6 +92,30 @@
       </Principal>
       <Dependent Role="tblComplaint">
         <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPtclUser_tblPtclUser">
+    <End Role="tblPtclUser" Type="Self.tblPtclUser" Multiplicity="1" />
+    <End Role="tblPtclUser1" Type="Self.tblPtclUser" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblPtclUser">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tblPtclUser1">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPtclUser_tblUserLocation">
+    <End Role="tblUserLocation" Type="Self.tblUserLocation" Multiplicity="0..1" />
+    <End Role="tblPtclUser" Type="Self.tblPtclUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUserLocation">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="tblPtclUser">
+        <PropertyRef Name="LocationID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -113,9 +158,13 @@
     <Parameter Name="Password" Type="varchar" Mode="In" />
   </Function>
   <Function Name="RegeneratedComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="temp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="uniqueEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Email" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="uniqueUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userName" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="UserPendingComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userID" Type="int" Mode="In" />
@@ -125,6 +174,11 @@
     <EntitySet Name="tblComplaint" EntityType="Self.tblComplaint" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblComplaintType" EntityType="Self.tblComplaintType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPtclUser" EntityType="Self.tblPtclUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserLocation" EntityType="Self.tblUserLocation" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblAdmin_tblAdmin" Association="Self.FK_tblAdmin_tblAdmin">
+      <End Role="tblAdmin" EntitySet="tblAdmin" />
+      <End Role="tblAdmin1" EntitySet="tblAdmin" />
+    </AssociationSet>
     <AssociationSet Name="FK_tblComplaint_tblComplaintType" Association="Self.FK_tblComplaint_tblComplaintType">
       <End Role="tblComplaintType" EntitySet="tblComplaintType" />
       <End Role="tblComplaint" EntitySet="tblComplaint" />
@@ -132,6 +186,14 @@
     <AssociationSet Name="FK_tblComplaint_tblPtclUser" Association="Self.FK_tblComplaint_tblPtclUser">
       <End Role="tblPtclUser" EntitySet="tblPtclUser" />
       <End Role="tblComplaint" EntitySet="tblComplaint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPtclUser_tblPtclUser" Association="Self.FK_tblPtclUser_tblPtclUser">
+      <End Role="tblPtclUser" EntitySet="tblPtclUser" />
+      <End Role="tblPtclUser1" EntitySet="tblPtclUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPtclUser_tblUserLocation" Association="Self.FK_tblPtclUser_tblUserLocation">
+      <End Role="tblUserLocation" EntitySet="tblUserLocation" />
+      <End Role="tblPtclUser" EntitySet="tblPtclUser" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

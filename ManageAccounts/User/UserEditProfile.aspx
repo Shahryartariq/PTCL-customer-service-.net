@@ -79,14 +79,35 @@
                 </div>
             </div>
 
-            <div class="form-group mt-4">
-                <!-- Location -->
-                <label>Location: </label>
-                <asp:RequiredFieldValidator runat="server" ID="RFV7" ControlToValidate="txtLocation" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your Current Location" ForeColor="Red" ValidationGroup="UserUpdate"></asp:RequiredFieldValidator>
-                <asp:TextBox runat="server" ID="txtLocation" CssClass="form-control"></asp:TextBox>
+
+
+             <div class="col-lg-6 mt-4">
+                <div class="form-group">
+                    <label>Area Code: </label>
+                    <asp:RequiredFieldValidator runat="server" ID="RFV7" ControlToValidate="ddlLocationCode" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your Area Code" ForeColor="Red" ValidationGroup="UserUpdate"></asp:RequiredFieldValidator>
+
+                     <asp:DropDownList runat="server" ID="ddlLocationCode" CssClass="form-control">
+                </asp:DropDownList>
+                </div>
             </div>
 
-            <div class="form-group mt-4">
+            <div class="col-lg-6 mt-4">
+                <div class="form-group">
+                    <label>LandLine Number: </label>
+                    <asp:RequiredFieldValidator runat="server" ID="RFV8" ControlToValidate="txtLandLineNumber" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Landline Number" ForeColor="Red" ValidationGroup="UserUpdate"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator runat="server" ID="REV5" ControlToValidate="txtLandLineNumber" SetFocusOnError="true" Text="*" ErrorMessage="Invalid LandLine Number" ForeColor="Red" ValidationExpression="^[0-9]{7}$" ValidationGroup="UserUpdate"></asp:RegularExpressionValidator>
+
+                    <asp:TextBox runat="server" ID="txtLandLineNumber" CssClass="form-control"></asp:TextBox>
+                </div>
+            </div>
+
+
+
+
+
+
+
+                   <div class="form-group mt-4">
                 <!-- profile -->
                 <label>Update Your Profile Picture </label>
                 <asp:RegularExpressionValidator ID="RegExValFileUploadFileType" runat="server"

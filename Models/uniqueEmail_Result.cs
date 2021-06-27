@@ -21,5 +21,8 @@ namespace PtclCustomerService.Models
         public bool Status { get; set; }
         public string Cnic { get; set; }
         public string Password { get; set; }
+        public string CustomerDP { get; set; }
+        public Nullable<int> LocationID { get; set; }
+        public string landline { get; set; }
     }
 }

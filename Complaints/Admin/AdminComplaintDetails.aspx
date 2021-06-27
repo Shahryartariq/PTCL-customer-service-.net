@@ -55,6 +55,8 @@
                 <asp:HyperLink runat="server" ID="HypEmailIcon" class="btn btn-default btn-sm icon-btn"><i class="fas fa-envelope fa-2x"></i></asp:HyperLink>
             </div>
         </div>
+        <asp:Label runat="server" ID="lblEmailMessage" ForeColor="Red"></asp:Label>
+
         <div class="card mb-4">
 
             <div class="card-body">
@@ -132,7 +134,7 @@
             <hr class="border-light m-0">
         </div>
         <div class="col-sm-12 mb-2 pb-5 te">
-            <asp:Panel runat="server" ID="Panel1">
+            <asp:Panel runat="server" ID="PanelResolveComplaint">
                 <!-- Button trigger modal -->
                 <button class="mx-3 btn btn-primary float-end" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Resolve Complaint

@@ -7,7 +7,7 @@
     <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#GV').DataTable();
+            $('#GVCustomers').DataTable();
         });
         /*$(function () {
             $("[id*=GV]").DataTable(
@@ -23,10 +23,9 @@
     <style>
         .dataTables_filter {
             margin-bottom: 1%;
-
         }
 
-       /* .dataTables_filter input {
+        /* .dataTables_filter input {
         border-radius: 115px;
         }
         .dataTables_filter {
@@ -49,7 +48,7 @@
     <div class="card mb-4">
         <div class="card-body">
 
-            <asp:GridView runat="server" ID="GV" ClientIDMode="Static" CssClass="display compact table table-bordered table-hover table-responsive" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting" OnRowEditing="GV_RowEditing">
+            <asp:GridView runat="server" ID="GVCustomers" ClientIDMode="Static" CssClass="display compact table table-bordered table-hover table-responsive" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting" OnRowEditing="GV_RowEditing">
                 <Columns>
                     <asp:BoundField DataField="FirstName" HeaderText="First Name" />
                     <asp:BoundField DataField="EmailAddress" HeaderText="Email" />
@@ -65,6 +64,7 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
+            <asp:Label runat="server" ID="lblCustomersMsg" CssClass="text-center" ForeColor="Red"></asp:Label>
         </div>
     </div>
 </asp:Content>

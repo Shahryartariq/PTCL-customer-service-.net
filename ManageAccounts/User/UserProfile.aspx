@@ -34,8 +34,6 @@
             min-height: 1px;
             padding: 1rem;
         }
-
-       
     </style>
     <script src="../../Js/scripts.js"></script>
 </asp:Content>
@@ -66,7 +64,8 @@
                                 <div class="mt-3">
                                     <asp:Panel runat="server" ID="PanelFirstName"></asp:Panel>
                                     <asp:Panel runat="server" CssClass="ext-secondary mb-1" ID="PanelCustomerType">User at PTCL Customer Care</asp:Panel>
-                                    <asp:Panel runat="server" CssClass="text-muted font-size-sm" ID="PanelLocation"></asp:Panel>
+                                    <asp:Panel runat="server" CssClass="text-muted font-size-sm" ID="PanelLocationName"></asp:Panel>
+                                    <asp:Panel runat="server" CssClass="text-muted font-size-sm" ID="PanelLandline"></asp:Panel>
                                 </div>
                             </div>
                         </div>

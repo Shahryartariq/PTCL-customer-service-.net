@@ -24,10 +24,17 @@ namespace PtclCustomerService
             using (PTCLEntities db = new PTCLEntities())
             {
                 var Users = db.GetPtclUsers().ToList();
-                GV.DataSource = Users;
-                GV.DataBind();
-                //GV.UseAccessibleHeader = true;
-                GV.HeaderRow.TableSection = TableRowSection.TableHeader;
+                GVCustomers.DataSource = Users;
+                GVCustomers.DataBind();
+                GVCustomers.UseAccessibleHeader = true;
+                if (GVCustomers.Rows.Count > 0)
+                {
+                    GVCustomers.HeaderRow.TableSection = TableRowSection.TableHeader;
+                }
+                else
+                {
+                    lblCustomersMsg.Text = "No Record to Show";
+                }
             }
         }
 

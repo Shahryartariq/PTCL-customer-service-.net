@@ -11,15 +11,10 @@ namespace PtclCustomerService.Models
 {
     using System;
     
-    public partial class AdminApprovedComplaint_Result
+    public partial class spGetLocation_Result
     {
-        public string ComplaintTitle { get; set; }
-        public Nullable<int> RegeneratedID { get; set; }
-        public Nullable<System.DateTime> ComplaintCreationDate { get; set; }
-        public int ComplaintID { get; set; }
-        public Nullable<bool> ComplaintStatus { get; set; }
-        public Nullable<int> UserID { get; set; }
-        public string ComplaintTypeName { get; set; }
-        public string FirstName { get; set; }
+        public int LocationID { get; set; }
+        public Nullable<int> LocationCode { get; set; }
+        public string LocationName { get; set; }
     }
 }

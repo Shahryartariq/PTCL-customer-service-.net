@@ -5,6 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Net.Mail;
+
+/// <summary>
+/// Summary description for Email
+/// </summary>
 
 namespace PtclCustomerService
 {
@@ -12,6 +17,15 @@ namespace PtclCustomerService
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.QueryString["Email"] == "1")
+            {
+                lblEmailMessage.Text = "Email Send to the Customer Successfully";
+            }
+            if (Request.QueryString["Email"] == "0")
+            {
+                lblEmailMessage.Text = "Email Send to the Customer Failed";
+            }
+
             hypCacnel.NavigateUrl = "~/Complaints/Admin/AdminComplaint.aspx?Active=1";
             using (PTCLEntities db = new PTCLEntities())
             {
@@ -47,6 +61,8 @@ namespace PtclCustomerService
                     else
                     {
                         lblStatusComplaint.Text = "Solved";
+                        PanelResolveComplaint.CssClass = " d-none";
+                        hypCacnel.NavigateUrl = "~/Complaints/Admin/AdminComplaint.aspx?Closed=1";
                     }
 
                     PanelStatusComplaint.Controls.Add(lblStatusComplaint);
@@ -121,12 +137,28 @@ namespace PtclCustomerService
                 int ComplaintID = Convert.ToInt32(Request.QueryString["ComplaintID"]);
                 tblComplaint a = db.tblComplaints.FirstOrDefault(b => b.ComplaintID == ComplaintID);
 
-                a.ComplaintStatus = bool.Parse("true");
+                var userid = a.UserID;
+                tblPtclUser u = db.tblPtclUsers.FirstOrDefault(c => c.UserID == userid);
+
+                a.ComplaintStatus = bool.Parse("false");
                 db.SaveChanges();
 
-                var linkUrl = "~/Complaints/Admin/AdminComplaintDetails.aspx?ComplaintID=" + ComplaintID;
-                Response.Redirect(linkUrl);
+                var message = "Dear Custmer, Your PTCL complaint ( " + a.ComplaintTitle + " ) is Resovled by our team. Please check and let as know. Say hello to the future ";
+
+                //btnResolve.SendEmail("Shahryartaruq57@gmail.com", "asdasd", "asdasdasd");
+                if (Email.SendEmail(u.EmailAddress, "Dear Customer Your Issue has been Resolved", message))
+                {
+                    var linkUrl = "~/Complaints/Admin/AdminComplaintDetails.aspx?ComplaintID=" + ComplaintID + "&Email=1";
+                    Response.Redirect(linkUrl);
+                }
+                else
+                {
+                    var linkUrl = "~/Complaints/Admin/AdminComplaintDetails.aspx?ComplaintID=" + ComplaintID + "&Email=0";
+                    Response.Redirect(linkUrl);
+                }
             }
         }
+
+        //Email
     }
 }
