@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PTCLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PTCLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblAdmin">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -63,6 +63,7 @@
           <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LocationCode" Type="int" />
           <Property Name="LocationName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Locationprovince" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_tblAdmin_tblAdmin">
           <End Role="tblAdmin" Type="Self.tblAdmin" Multiplicity="1" />
@@ -96,18 +97,6 @@
               <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="tblComplaint">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPtclUser_tblPtclUser">
-          <End Role="tblPtclUser" Type="Self.tblPtclUser" Multiplicity="1" />
-          <End Role="tblPtclUser1" Type="Self.tblPtclUser" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tblPtclUser">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="tblPtclUser1">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -164,6 +153,8 @@
         </Function>
         <Function Name="RegeneratedComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spGetLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetRegeneratedComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spUserWithLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="temp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="uniqueEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Email" Type="varchar" Mode="In" />
@@ -192,17 +183,12 @@
             <End Role="tblPtclUser" EntitySet="tblPtclUser" />
             <End Role="tblComplaint" EntitySet="tblComplaint" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblPtclUser_tblPtclUser" Association="Self.FK_tblPtclUser_tblPtclUser">
-            <End Role="tblPtclUser" EntitySet="tblPtclUser" />
-            <End Role="tblPtclUser1" EntitySet="tblPtclUser" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblPtclUser_tblUserLocation" Association="Self.FK_tblPtclUser_tblUserLocation">
             <End Role="tblUserLocation" EntitySet="tblUserLocation" />
             <End Role="tblPtclUser" EntitySet="tblPtclUser" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PTCLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -274,6 +260,7 @@
           <Property Name="LocationCode" Type="Int32" />
           <Property Name="LocationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblPtclUsers" Relationship="Self.FK_tblPtclUser_tblUserLocation" FromRole="tblUserLocation" ToRole="tblPtclUser" />
+          <Property Name="Locationprovince" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_tblAdmin_tblAdmin">
           <End Role="tblAdmin" Type="Self.tblAdmin" Multiplicity="1" />
@@ -364,32 +351,32 @@
           <FunctionImport Name="ActiveC" ReturnType="Collection(PTCLModel.ActiveC_Result)" />
           <FunctionImport Name="AdminApprovedComplaint" ReturnType="Collection(PTCLModel.AdminApprovedComplaint_Result)" />
           <FunctionImport Name="ComplaintDetailsByCID" ReturnType="Collection(PTCLModel.ComplaintDetailsByCID_Result)">
-            <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
+          <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeleteComplaint">
-            <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
+          <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeletePtclAdmin">
-            <Parameter Name="AdminID" Mode="In" Type="Int32" />
+          <Parameter Name="AdminID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeletePtlcUser">
-            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetComplaintbyCID" ReturnType="Collection(PTCLModel.GetComplaintbyCID_Result)">
-            <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
+          <Parameter Name="ComplaintID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetComplaints" ReturnType="Collection(PTCLModel.GetComplaints_Result)" />
           <FunctionImport Name="GetComplaintType" ReturnType="Collection(PTCLModel.GetComplaintType_Result)" />
           <FunctionImport Name="GetCustomerActiveComplaint" ReturnType="Collection(PTCLModel.GetCustomerActiveComplaint_Result)">
-            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetMyComplaints" ReturnType="Collection(PTCLModel.GetMyComplaints_Result)">
-            <Parameter Name="userID" Mode="In" Type="Int32" />
+          <Parameter Name="userID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPtclAdmins" ReturnType="Collection(PTCLModel.GetPtclAdmins_Result)" />
           <FunctionImport Name="GetPtclUsers" ReturnType="Collection(PTCLModel.GetPtclUsers_Result)" />
           <FunctionImport Name="MyApprovedComplaint" ReturnType="Collection(PTCLModel.MyApprovedComplaint_Result)">
-            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PtclAdminLogin" ReturnType="Collection(PTCLModel.PtclAdminLogin_Result)">
             <Parameter Name="UserName" Mode="In" Type="String" />
@@ -403,14 +390,16 @@
           <FunctionImport Name="spGetLocation" ReturnType="Collection(PTCLModel.spGetLocation_Result)" />
           <FunctionImport Name="temp" ReturnType="Collection(PTCLModel.temp_Result)" />
           <FunctionImport Name="uniqueEmail" ReturnType="Collection(PTCLModel.uniqueEmail_Result)">
-            <Parameter Name="Email" Mode="In" Type="String" />
+          <Parameter Name="Email" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="uniqueUserName" ReturnType="Collection(PTCLModel.uniqueUserName_Result)">
-            <Parameter Name="userName" Mode="In" Type="String" />
+          <Parameter Name="userName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UserPendingComplaints" ReturnType="Collection(PTCLModel.UserPendingComplaints_Result)">
-            <Parameter Name="userID" Mode="In" Type="Int32" />
+          <Parameter Name="userID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="spGetRegeneratedComplaints" ReturnType="Collection(PTCLModel.spGetRegeneratedComplaints_Result)" />
+          <FunctionImport Name="spUserWithLocation" ReturnType="Collection(PTCLModel.spUserWithLocation_Result)" />
         </EntityContainer>
         <ComplexType Name="ActiveC_Result">
           <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
@@ -610,6 +599,26 @@
           <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="spGetRegeneratedComplaints_Result">
+          <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="RegeneratedID" Nullable="true" />
+          <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+          <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="spUserWithLocation_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="LocationID" Nullable="true" />
+          <Property Type="String" Name="landline" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LocationName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="LocationCode" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -674,6 +683,7 @@
           <EntitySetMapping Name="tblUserLocations">
             <EntityTypeMapping TypeName="PTCLModel.tblUserLocation">
               <MappingFragment StoreEntitySet="tblUserLocation">
+                <ScalarProperty Name="Locationprovince" ColumnName="Locationprovince" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
                 <ScalarProperty Name="LocationName" ColumnName="LocationName" />
@@ -954,6 +964,34 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetRegeneratedComplaints" FunctionName="PTCLModel.Store.spGetRegeneratedComplaints">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.spGetRegeneratedComplaints_Result">
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="RegeneratedID" ColumnName="RegeneratedID" />
+                <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spUserWithLocation" FunctionName="PTCLModel.Store.spUserWithLocation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.spUserWithLocation_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="landline" ColumnName="landline" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

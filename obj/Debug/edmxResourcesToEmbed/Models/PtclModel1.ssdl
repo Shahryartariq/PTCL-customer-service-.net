@@ -58,6 +58,7 @@
     <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="LocationCode" Type="int" />
     <Property Name="LocationName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Locationprovince" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_tblAdmin_tblAdmin">
     <End Role="tblAdmin" Type="Self.tblAdmin" Multiplicity="1" />
@@ -91,18 +92,6 @@
         <PropertyRef Name="UserID" />
       </Principal>
       <Dependent Role="tblComplaint">
-        <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tblPtclUser_tblPtclUser">
-    <End Role="tblPtclUser" Type="Self.tblPtclUser" Multiplicity="1" />
-    <End Role="tblPtclUser1" Type="Self.tblPtclUser" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="tblPtclUser">
-        <PropertyRef Name="UserID" />
-      </Principal>
-      <Dependent Role="tblPtclUser1">
         <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
@@ -159,6 +148,8 @@
   </Function>
   <Function Name="RegeneratedComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="spGetLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetRegeneratedComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spUserWithLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="temp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="uniqueEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Email" Type="varchar" Mode="In" />
@@ -186,10 +177,6 @@
     <AssociationSet Name="FK_tblComplaint_tblPtclUser" Association="Self.FK_tblComplaint_tblPtclUser">
       <End Role="tblPtclUser" EntitySet="tblPtclUser" />
       <End Role="tblComplaint" EntitySet="tblComplaint" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tblPtclUser_tblPtclUser" Association="Self.FK_tblPtclUser_tblPtclUser">
-      <End Role="tblPtclUser" EntitySet="tblPtclUser" />
-      <End Role="tblPtclUser1" EntitySet="tblPtclUser" />
     </AssociationSet>
     <AssociationSet Name="FK_tblPtclUser_tblUserLocation" Association="Self.FK_tblPtclUser_tblUserLocation">
       <End Role="tblUserLocation" EntitySet="tblUserLocation" />

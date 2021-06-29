@@ -140,7 +140,7 @@ namespace PtclCustomerService
                 var userid = a.UserID;
                 tblPtclUser u = db.tblPtclUsers.FirstOrDefault(c => c.UserID == userid);
 
-                a.ComplaintStatus = bool.Parse("false");
+                a.ComplaintStatus = bool.Parse("true");
                 db.SaveChanges();
 
                 var message = "Dear Custmer, Your PTCL complaint ( " + a.ComplaintTitle + " ) is Resovled by our team. Please check and let as know. Say hello to the future ";

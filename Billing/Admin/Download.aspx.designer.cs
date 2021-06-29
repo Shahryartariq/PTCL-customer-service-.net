@@ -7,119 +7,110 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PtclCustomerService
+namespace PtclCustomerService.Billing.Admin
 {
 
 
-    public partial class AdminPanelMasterPage
+    public partial class Download
     {
 
         /// <summary>
-        /// head control.
+        /// RFV0 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFV0;
 
         /// <summary>
-        /// form1 control.
+        /// ddMonthList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.DropDownList ddMonthList;
 
         /// <summary>
-        /// HypAdminProfile control.
+        /// panelBill control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HypAdminProfile;
+        protected global::System.Web.UI.WebControls.Panel panelBill;
 
         /// <summary>
-        /// HypLogout control.
+        /// lblBillName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HypLogout;
+        protected global::System.Web.UI.WebControls.Label lblBillName;
 
         /// <summary>
-        /// HypDashBoard control.
+        /// lblDueDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HypDashBoard;
+        protected global::System.Web.UI.WebControls.Label lblDueDate;
 
         /// <summary>
-        /// HypManangeAdmin control.
+        /// lbluserID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HypManangeAdmin;
+        protected global::System.Web.UI.WebControls.Label lbluserID;
 
         /// <summary>
-        /// HypAdminPanel control.
+        /// tblLandline control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HypAdminPanel;
+        protected global::System.Web.UI.WebControls.Label tblLandline;
 
         /// <summary>
-        /// HypConplaints control.
+        /// lblLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HypConplaints;
+        protected global::System.Web.UI.WebControls.Label lblLocation;
 
         /// <summary>
-        /// HypAdminBill control.
+        /// lblMonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HypAdminBill;
+        protected global::System.Web.UI.WebControls.Label lblMonth;
 
         /// <summary>
-        /// HypProfile control.
+        /// lblNoBill control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HypProfile;
+        protected global::System.Web.UI.WebControls.Label lblNoBill;
 
         /// <summary>
-        /// lblName control.
+        /// lblNoMonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblName;
-
-        /// <summary>
-        /// ContentPlaceHolder1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.Label lblNoMonth;
     }
 }

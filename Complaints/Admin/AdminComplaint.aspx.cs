@@ -76,7 +76,7 @@ namespace PtclCustomerService
         {
             using (PTCLEntities db = new PTCLEntities())
             {
-                var MyRegeneratedComplaintData = db.RegeneratedComplaints().ToList();
+                var MyRegeneratedComplaintData = db.spGetRegeneratedComplaints().ToList();
                 GVRegeneratedComplaint.DataSource = MyRegeneratedComplaintData;
                 GVRegeneratedComplaint.DataBind();
                 if (GVRegeneratedComplaint.Rows.Count > 0)

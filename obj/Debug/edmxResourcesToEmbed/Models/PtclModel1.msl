@@ -59,6 +59,7 @@
     <EntitySetMapping Name="tblUserLocations">
       <EntityTypeMapping TypeName="PTCLModel.tblUserLocation">
         <MappingFragment StoreEntitySet="tblUserLocation">
+          <ScalarProperty Name="Locationprovince" ColumnName="Locationprovince" />
           <ScalarProperty Name="LocationID" ColumnName="LocationID" />
           <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
           <ScalarProperty Name="LocationName" ColumnName="LocationName" />
@@ -339,6 +340,34 @@
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spGetRegeneratedComplaints" FunctionName="PTCLModel.Store.spGetRegeneratedComplaints">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PTCLModel.spGetRegeneratedComplaints_Result">
+          <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+          <ScalarProperty Name="RegeneratedID" ColumnName="RegeneratedID" />
+          <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+          <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+          <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spUserWithLocation" FunctionName="PTCLModel.Store.spUserWithLocation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PTCLModel.spUserWithLocation_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="landline" ColumnName="landline" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
