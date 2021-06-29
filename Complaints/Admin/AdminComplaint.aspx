@@ -81,10 +81,18 @@
 
                         <%--Regenerated Complaints --%>
                         <asp:Panel ID="PanelRegeneratedComplaint" runat="server" CssClass="d-none">
-                            <asp:GridView runat="server" ID="GVRegeneratedComplaint" CssClass="mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
+                            <asp:GridView runat="server" ClientIDMode="Static" ID="GVRegeneratedComplaint" CssClass="datatable mt-3 table table-bordered table-hover" AutoGenerateColumns="false" OnRowCommand="GV_RowCommand" OnRowDeleting="GV_RowDeleting">
                                 <Columns>
-                                    <asp:BoundField DataField="ComplaintID" HeaderText="ComplaintID" />
-                                    <asp:BoundField DataField="RegeneratedID" HeaderText="RegeneratedID" />
+                                    <asp:BoundField DataField="ComplaintID" HeaderText="Complaint ID" />
+                                    <asp:BoundField DataField="FirstName" HeaderText="Complainant Name" />
+                                    <asp:BoundField DataField="ComplaintTypeName" HeaderText="Complaint Type" />
+                                    <asp:BoundField DataField="ComplaintCreationDate" HeaderText="Creation Date & Time" />
+                                    <asp:HyperLinkField
+                                        Text="Detail"
+                                        HeaderText="More Info"
+                                        DataNavigateUrlFields="ComplaintID"
+                                        DataNavigateUrlFormatString="AdminComplaintDetails.aspx?ComplaintID={0}"
+                                        Target="_blank" />
                                 </Columns>
                             </asp:GridView>
                             <asp:Label runat="server" ID="lblTableRegeneratedMsg" CssClass="text-center" ForeColor="Red"></asp:Label>

@@ -202,5 +202,15 @@ namespace PtclCustomerService.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UserPendingComplaints_Result>("UserPendingComplaints", userIDParameter);
         }
+    
+        public virtual ObjectResult<spGetRegeneratedComplaints_Result> spGetRegeneratedComplaints()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetRegeneratedComplaints_Result>("spGetRegeneratedComplaints");
+        }
+    
+        public virtual ObjectResult<spUserWithLocation_Result> spUserWithLocation()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spUserWithLocation_Result>("spUserWithLocation");
+        }
     }
 }

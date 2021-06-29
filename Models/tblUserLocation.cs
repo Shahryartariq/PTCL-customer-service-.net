@@ -23,6 +23,7 @@ namespace PtclCustomerService.Models
         public int LocationID { get; set; }
         public Nullable<int> LocationCode { get; set; }
         public string LocationName { get; set; }
+        public string Locationprovince { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblPtclUser> tblPtclUsers { get; set; }

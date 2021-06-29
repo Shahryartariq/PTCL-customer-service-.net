@@ -87,6 +87,15 @@ namespace PtclCustomerService
         protected global::System.Web.UI.WebControls.HyperLink HypConplaints;
 
         /// <summary>
+        /// HypAdminBill control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HypAdminBill;
+
+        /// <summary>
         /// HypProfile control.
         /// </summary>
         /// <remarks>

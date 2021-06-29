@@ -62,7 +62,7 @@
     <form id="form1" runat="server">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">PCS Admin Panel</a>
+            <asp:HyperLink runat="server" cssClass="navbar-brand ps-3" NavigateUrl="~/Dashboard/Admin/AdminDashboard.aspx">PCS Admin Panel</asp:HyperLink>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -118,6 +118,11 @@
                                 Complaints
                             </asp:HyperLink>
 
+                            <asp:HyperLink ID="HypAdminBill" runat="server" CssClass="nav-link" NavigateUrl="~/Billing/Admin/adminBill.aspx">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
+                                Get Bill
+                            </asp:HyperLink>
+
                             <div class="sb-sidenav-menu-heading">Account Information</div>
                             <asp:HyperLink ID="HypProfile" runat="server" CssClass="nav-link" NavigateUrl="~/ManageAccounts/Admin/AdminProfile.aspx">
                                        <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
@@ -140,7 +145,6 @@
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; Your Website 2021 By Muhammad Shehyar</div>
-                           
                         </div>
                     </div>
                 </footer>
