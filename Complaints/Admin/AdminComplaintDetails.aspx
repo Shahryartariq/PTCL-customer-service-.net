@@ -129,6 +129,7 @@
                         <label class="mb-0">Uploaded Data</label>
                     </div>
                     <asp:HyperLink ID="HypDownloadUpload" runat="server" CssClass="col-sm-3 btn btn-outline-danger" Target="_blank">Show Attachment</asp:HyperLink>
+                    <asp:HyperLink ID="HypParentComplaint" runat="server" Visible="false" CssClass="col-sm-3 btn btn-outline-danger mx-2" Target="_blank"></asp:HyperLink>
                 </div>
             </div>
             <hr class="border-light m-0">

@@ -65,7 +65,6 @@
                     <label>Password: </label>
                     <asp:CompareValidator runat="server" ID="CMV4" ControlToValidate="txtPassword" ControlToCompare="txtConfirmPassword" SetFocusOnError="true" Text="*" ErrorMessage="Password Donot Match" ForeColor="Red" ValidationGroup="UserUpdate"></asp:CompareValidator>
                     <asp:RequiredFieldValidator runat="server" ID="RFV5" ControlToValidate="txtPassword" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your Password" ForeColor="Red" ValidationGroup="UserUpdate"></asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator runat="server" ID="REV4" ControlToValidate="txtPassword" SetFocusOnError="true" Text="*" ErrorMessage="Password Must be Minimum eight characters, at least one letter and one number" ForeColor="Red" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" ValidationGroup="UserUpdate"></asp:RegularExpressionValidator>
 
                     <asp:TextBox runat="server" ID="txtPassword" CssClass="form-control"></asp:TextBox>
                 </div>

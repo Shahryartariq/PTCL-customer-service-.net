@@ -83,13 +83,16 @@ namespace PtclCustomerService
 
                     //Regerate
                     Label lblRegenerate = new Label();
-                    if (s.RegeneratedID.ToString() == "0" || s.RegeneratedID == null)
+                    if (s.RegeneratedID == 0 || s.RegeneratedID == null)
                     {
-                        lblRegenerate.Text = "No"; lblRegenerate.Text = "No";
+                        lblRegenerate.Text = "Nooo";
                     }
                     else
                     {
-                        lblRegenerate.Text = "Yes";
+                        lblRegenerate.Text = "Yess";
+                        HypParentComplaint.Visible = true;
+                        HypParentComplaint.Text = "Goto Parent";
+                        HypParentComplaint.NavigateUrl = "~/Complaints/Admin/AdminComplaintDetails.aspx?ComplaintID=" + s.RegeneratedID;
                     }
                     PanelRegenerate.Controls.Add(lblRegenerate);
 
@@ -139,6 +142,13 @@ namespace PtclCustomerService
 
                 var userid = a.UserID;
                 tblPtclUser u = db.tblPtclUsers.FirstOrDefault(c => c.UserID == userid);
+
+                var AdminID = a.AdminID;
+                //tblAdmin z = db.tblAdmins.FirstOrDefault(y => y.AdminID == AdminID);
+
+                // z.ComplaintsResolved = z.ComplaintsResolved + 1;
+
+                a.AdminID = Convert.ToInt32(Session["AdminID"]);
 
                 a.ComplaintStatus = bool.Parse("true");
                 db.SaveChanges();

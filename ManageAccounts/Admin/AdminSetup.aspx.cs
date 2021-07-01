@@ -1,7 +1,9 @@
-﻿using PtclCustomerService.Models;
+﻿using Konscious.Security.Cryptography;
+using PtclCustomerService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -50,6 +52,27 @@ namespace PtclCustomerService
             }
         }
 
+        private byte[] CreateSalt()
+        {
+            var buffer = new byte[16];
+            string x = "SherryBSSE40";
+            buffer = System.Text.Encoding.UTF8.GetBytes(x);
+            return buffer;
+        }
+
+        private byte[] HashPassword(string password, byte[] salt)
+        {
+            var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
+
+            argon2.Salt = salt;
+            argon2.DegreeOfParallelism = 8; // four cores
+            argon2.Iterations = 4;
+            argon2.MemorySize = 1024;
+            argon2.MemorySize = 8194;
+
+            return argon2.GetBytes(16);
+        }
+
         protected void cmdCreate_Click(object sender, EventArgs e)
         {
             using (PTCLEntities db = new PTCLEntities())
@@ -58,7 +81,7 @@ namespace PtclCustomerService
                 {
                     tblAdmin s = new tblAdmin();
                     s.UserName = txtUserName.Text;
-                    s.Password = txtPassword.Text;
+                    //s.Password = txtPassword.Text;
                     s.FullName = txtFullName.Text;
                     s.EmailAddress = txtEmailAddress.Text;
                     s.Location = txtLocation.Text;
@@ -74,19 +97,42 @@ namespace PtclCustomerService
                         s.AdminDP = "";
                     }
 
+                    var password = txtPassword.Text;
+                    var salt = CreateSalt();
+                    var hash = HashPassword(password, salt);
+                    s.Password = Convert.ToBase64String(hash);
+
                     //s.Status = txtStatus.Text;
                     s.Status = bool.Parse(ddlStatus.SelectedValue.ToString());
                     // s.Status = Boolean.TryParse(ddlStatus.SelectedValue.ToString);
-                    db.tblAdmins.Add(s);
-                    db.SaveChanges();
-                    lblMsg.Text = "Admin Inserted Successfully";
+                    var check = db.uniqueEmail(txtEmailAddress.Text).ToList();
+                    var check1 = db.uniqueUserName(txtUserName.Text).ToList();
+                    if (check.Count == 0)
+                    {
+                        if (check1.Count == 0)
+                        {
+                            db.tblAdmins.Add(s);
+                            db.SaveChanges();
+                            lblMsg.Text = "Admin Inserted Successfully";
+                        }
+                        else
+                        {
+                            lblMsg.Text = "UserName Already Takken";
+                        }
+                    }
+                    else
+                        lblMsg.Text = "Email Already Takken";
                 }
                 else
                 {
+                    var password = txtPassword.Text;
+                    var salt = CreateSalt();
+                    var hash = HashPassword(password, salt);
                     int AdminID = Convert.ToInt32(Request.QueryString["AdminID"]);
                     tblAdmin s = db.tblAdmins.FirstOrDefault(v => v.AdminID == AdminID);
+                    s.Password = Convert.ToBase64String(hash);
                     s.UserName = txtUserName.Text;
-                    s.Password = txtPassword.Text;
+                    //s.Password = txtPassword.Text;
                     s.FullName = txtFullName.Text;
                     s.EmailAddress = txtEmailAddress.Text;
                     s.Location = txtLocation.Text;
@@ -106,9 +152,22 @@ namespace PtclCustomerService
                     s.Status = bool.Parse(ddlStatus.SelectedValue);
                     //s.Status = bool.Parse(ddlStatus.SelectedValue.ToString());
                     //s.Status = Convert.ToBoolean(ddlStatus.SelectedValue);
-
-                    db.SaveChanges();
-                    lblMsg.Text = "Admin Updated Successfully";
+                    var check = db.uniqueEmail(txtEmailAddress.Text).ToList();
+                    var check1 = db.uniqueUserName(txtUserName.Text).ToList();
+                    if (check.Count == 1)
+                    {
+                        if (check1.Count == 1)
+                        {
+                            db.SaveChanges();
+                            lblMsg.Text = "Admin Updated Successfully";
+                        }
+                        else
+                        {
+                            lblMsg.Text = "UserName Already Takken";
+                        }
+                    }
+                    else
+                        lblMsg.Text = "Email Already Takken";
                 }
             }
         }

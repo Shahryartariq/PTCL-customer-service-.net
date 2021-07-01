@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
+  <siteMapNode url="~/Home" title="Home"  description="Home Page">
+    <siteMapNode url="~/ManageAccounts/Admin/ManageAdmins.aspx" title="Manage Admins"  description="Manage Admins Page" />
+    <siteMapNode url="~/ManageCustomers/Admin/AdminManageCustomers" title="Manange Customers"  description="Manage Customers Page" />
+    <siteMapNode url="~/Complaints/Admin/AdminComplaint.aspx" title="Manange Complaints"  description="Manage Complaints Page" />
+    <siteMapNode url="~/Billing/Admin/adminBill.aspx" title="Manange Bills"  description="Manage Bill Page" />
+    <siteMapNode url="~/ManageAccounts/Admin/AdminProfile.aspx" title="Admin Profile"  description="Admin Profile Page" />
+  </siteMapNode>
+</siteMap>

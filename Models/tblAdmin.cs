@@ -14,6 +14,12 @@ namespace PtclCustomerService.Models
     
     public partial class tblAdmin
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblAdmin()
+        {
+            this.tblComplaints = new HashSet<tblComplaint>();
+        }
+    
         public int AdminID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -23,8 +29,11 @@ namespace PtclCustomerService.Models
         public string Location { get; set; }
         public string AdminDP { get; set; }
         public string AdminPhone { get; set; }
+        public Nullable<int> ComplaintsResolved { get; set; }
     
         public virtual tblAdmin tblAdmin1 { get; set; }
         public virtual tblAdmin tblAdmin2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblComplaint> tblComplaints { get; set; }
     }
 }

@@ -4,6 +4,7 @@
     <EntitySetMapping Name="tblAdmins">
       <EntityTypeMapping TypeName="PTCLModel.tblAdmin">
         <MappingFragment StoreEntitySet="tblAdmin">
+          <ScalarProperty Name="ComplaintsResolved" ColumnName="ComplaintsResolved" />
           <ScalarProperty Name="AdminID" ColumnName="AdminID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
@@ -19,6 +20,7 @@
     <EntitySetMapping Name="tblComplaints">
       <EntityTypeMapping TypeName="PTCLModel.tblComplaint">
         <MappingFragment StoreEntitySet="tblComplaint">
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
           <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
           <ScalarProperty Name="ComplaintTypeID" ColumnName="ComplaintTypeID" />
           <ScalarProperty Name="ComplaintImage" ColumnName="ComplaintImage" />
@@ -368,6 +370,87 @@
           <ScalarProperty Name="LocationName" ColumnName="LocationName" />
           <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
           <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spUniqueLandline" FunctionName="PTCLModel.Store.spUniqueLandline">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PTCLModel.spUniqueLandline_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Cnic" ColumnName="Cnic" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="CustomerDP" ColumnName="CustomerDP" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="landline" ColumnName="landline" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spFilterAdminWithLocation" FunctionName="PTCLModel.Store.spFilterAdminWithLocation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PTCLModel.spFilterAdminWithLocation_Result">
+          <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+          <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+          <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+          <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+          <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spReportData" FunctionName="PTCLModel.Store.spReportData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PTCLModel.spReportData_Result">
+          <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+          <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+          <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+          <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+          <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spFilterAdminOnly" FunctionName="PTCLModel.Store.spFilterAdminOnly">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PTCLModel.spFilterAdminOnly_Result">
+          <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+          <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+          <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+          <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+          <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spFilterLocationOnly" FunctionName="PTCLModel.Store.spFilterLocationOnly">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PTCLModel.spFilterLocationOnly_Result">
+          <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+          <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+          <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+          <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+          <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

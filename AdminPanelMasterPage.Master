@@ -62,7 +62,7 @@
     <form id="form1" runat="server">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <asp:HyperLink runat="server" cssClass="navbar-brand ps-3" NavigateUrl="~/Dashboard/Admin/AdminDashboard.aspx">PCS Admin Panel</asp:HyperLink>
+            <asp:HyperLink runat="server" CssClass="navbar-brand ps-3" NavigateUrl="~/Dashboard/Admin/AdminDashboard.aspx">PCS Admin Panel</asp:HyperLink>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -121,6 +121,11 @@
                             <asp:HyperLink ID="HypAdminBill" runat="server" CssClass="nav-link" NavigateUrl="~/Billing/Admin/adminBill.aspx">
                             <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
                                 Get Bill
+                            </asp:HyperLink>
+
+                            <asp:HyperLink ID="HypReport" runat="server" CssClass="nav-link" NavigateUrl="~/Report/Admin/AdminReport.aspx">
+                            <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
+                                Report
                             </asp:HyperLink>
 
                             <div class="sb-sidenav-menu-heading">Account Information</div>

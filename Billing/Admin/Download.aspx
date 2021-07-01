@@ -5,8 +5,6 @@
     <script src="../../Js/html2canvas.min.js"></script>
     <script src="../../Js/pdfmake.min.js"></script>
 
-    <script src="jsfiles/html2canvas.min.js"></script>
-    <script src="jsfiles/pdfmake.min.js"></script>
     <script type="text/javascript">
         function Export() {
             html2canvas(document.getElementById('target'), {

@@ -7,6 +7,7 @@
     <script src="../../Js/scripts.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div class="container-fluid px-5">
         <h1 class="mt-2">Admin Dashboard</h1>
         <ol class="breadcrumb mb-4">
@@ -44,7 +45,7 @@
                 </div>
             </div>
 
-               <div class="col-xl-3 col-md-6 ">
+            <div class="col-xl-3 col-md-6 ">
                 <div class="card bg-primary text-white mb-4 ">
                     <div class="card-body text-center text-capitalize fw-bold">
                         Total Complaints
@@ -60,6 +61,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </asp:Content>

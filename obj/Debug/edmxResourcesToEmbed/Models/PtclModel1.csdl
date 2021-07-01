@@ -15,6 +15,8 @@
     <Property Name="AdminPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tblAdmin1" Relationship="Self.FK_tblAdmin_tblAdmin" FromRole="tblAdmin" ToRole="tblAdmin1" />
     <NavigationProperty Name="tblAdmin2" Relationship="Self.FK_tblAdmin_tblAdmin" FromRole="tblAdmin1" ToRole="tblAdmin" />
+    <Property Name="ComplaintsResolved" Type="Int32" />
+    <NavigationProperty Name="tblComplaints" Relationship="PTCLModel.FK_tblComplaint_tblAdmin" FromRole="tblAdmin" ToRole="tblComplaint" />
   </EntityType>
   <EntityType Name="tblComplaint">
     <Key>
@@ -31,6 +33,10 @@
     <Property Name="ComplaintCreationDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="tblComplaintType" Relationship="Self.FK_tblComplaint_tblComplaintType" FromRole="tblComplaint" ToRole="tblComplaintType" />
     <NavigationProperty Name="tblPtclUser" Relationship="Self.FK_tblComplaint_tblPtclUser" FromRole="tblComplaint" ToRole="tblPtclUser" />
+    <Property Name="AdminID" Type="Int32" />
+    <NavigationProperty Name="tblAdmin" Relationship="PTCLModel.FK_tblComplaint_tblAdmin" FromRole="tblComplaint" ToRole="tblAdmin" />
+    <NavigationProperty Name="tblComplaint1" Relationship="PTCLModel.FK_tblComplaint_tblComplaint" FromRole="tblComplaint" ToRole="tblComplaint1" />
+    <NavigationProperty Name="tblComplaint2" Relationship="PTCLModel.FK_tblComplaint_tblComplaint" FromRole="tblComplaint1" ToRole="tblComplaint" />
   </EntityType>
   <EntityType Name="tblComplaintType">
     <Key>
@@ -208,6 +214,28 @@
     </FunctionImport>
     <FunctionImport Name="spGetRegeneratedComplaints" ReturnType="Collection(PTCLModel.spGetRegeneratedComplaints_Result)" />
     <FunctionImport Name="spUserWithLocation" ReturnType="Collection(PTCLModel.spUserWithLocation_Result)" />
+    <FunctionImport Name="spUniqueLandline" ReturnType="Collection(PTCLModel.spUniqueLandline_Result)">
+      <Parameter Name="landline" Mode="In" Type="String" />
+    </FunctionImport>
+    <AssociationSet Name="FK_tblComplaint_tblAdmin" Association="PTCLModel.FK_tblComplaint_tblAdmin">
+      <End Role="tblAdmin" EntitySet="tblAdmins" />
+      <End Role="tblComplaint" EntitySet="tblComplaints" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblComplaint_tblComplaint" Association="PTCLModel.FK_tblComplaint_tblComplaint">
+      <End Role="tblComplaint" EntitySet="tblComplaints" />
+      <End Role="tblComplaint1" EntitySet="tblComplaints" />
+    </AssociationSet>
+    <FunctionImport Name="spFilterAdminWithLocation" ReturnType="Collection(PTCLModel.spFilterAdminWithLocation_Result)">
+      <Parameter Name="adminID" Mode="In" Type="Int32" />
+      <Parameter Name="locationID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spReportData" ReturnType="Collection(PTCLModel.spReportData_Result)" />
+    <FunctionImport Name="spFilterAdminOnly" ReturnType="Collection(PTCLModel.spFilterAdminOnly_Result)">
+      <Parameter Name="adminID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spFilterLocationOnly" ReturnType="Collection(PTCLModel.spFilterLocationOnly_Result)">
+      <Parameter Name="locationID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ActiveC_Result">
     <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
@@ -426,5 +454,90 @@
     <Property Type="String" Name="LocationName" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" />
     <Property Type="Int32" Name="LocationCode" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spUniqueLandline_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Phone" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="Status" Nullable="false" />
+    <Property Type="String" Name="Cnic" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CustomerDP" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="LocationID" Nullable="true" />
+    <Property Type="String" Name="landline" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <Association Name="FK_tblComplaint_tblAdmin">
+    <End Type="PTCLModel.tblAdmin" Role="tblAdmin" Multiplicity="0..1" />
+    <End Type="PTCLModel.tblComplaint" Role="tblComplaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblAdmin">
+        <PropertyRef Name="AdminID" />
+      </Principal>
+      <Dependent Role="tblComplaint">
+        <PropertyRef Name="AdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblComplaint_tblComplaint">
+    <End Type="PTCLModel.tblComplaint" Role="tblComplaint" Multiplicity="1" />
+    <End Type="PTCLModel.tblComplaint" Role="tblComplaint1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblComplaint">
+        <PropertyRef Name="ComplaintID" />
+      </Principal>
+      <Dependent Role="tblComplaint1">
+        <PropertyRef Name="ComplaintID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="spFilterAdminWithLocation_Result">
+    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="Int32" Name="AdminID" Nullable="true" />
+    <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="LocationID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spReportData_Result">
+    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="Int32" Name="AdminID" Nullable="true" />
+    <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="LocationID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spFilterAdminOnly_Result">
+    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="Int32" Name="AdminID" Nullable="true" />
+    <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="LocationID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spFilterLocationOnly_Result">
+    <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+    <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+    <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="Int32" Name="AdminID" Nullable="true" />
+    <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="LocationID" Nullable="true" />
   </ComplexType>
 </Schema>

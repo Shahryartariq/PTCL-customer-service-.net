@@ -13,6 +13,7 @@
     <Property Name="Location" Type="nvarchar" MaxLength="50" />
     <Property Name="AdminDP" Type="nvarchar" MaxLength="100" />
     <Property Name="AdminPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="ComplaintsResolved" Type="int" />
   </EntityType>
   <EntityType Name="tblComplaint">
     <Key>
@@ -27,6 +28,7 @@
     <Property Name="ComplaintStatus" Type="bit" />
     <Property Name="RegeneratedID" Type="int" />
     <Property Name="ComplaintCreationDate" Type="datetime" />
+    <Property Name="AdminID" Type="int" />
   </EntityType>
   <EntityType Name="tblComplaintType">
     <Key>
@@ -60,15 +62,27 @@
     <Property Name="LocationName" Type="nvarchar" MaxLength="50" />
     <Property Name="Locationprovince" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <Association Name="FK_tblAdmin_tblAdmin">
-    <End Role="tblAdmin" Type="Self.tblAdmin" Multiplicity="1" />
-    <End Role="tblAdmin1" Type="Self.tblAdmin" Multiplicity="0..1" />
+  <Association Name="FK_tblComplaint_tblAdmin">
+    <End Role="tblAdmin" Type="Self.tblAdmin" Multiplicity="0..1" />
+    <End Role="tblComplaint" Type="Self.tblComplaint" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tblAdmin">
         <PropertyRef Name="AdminID" />
       </Principal>
-      <Dependent Role="tblAdmin1">
+      <Dependent Role="tblComplaint">
         <PropertyRef Name="AdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblComplaint_tblComplaint">
+    <End Role="tblComplaint" Type="Self.tblComplaint" Multiplicity="1" />
+    <End Role="tblComplaint1" Type="Self.tblComplaint" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblComplaint">
+        <PropertyRef Name="ComplaintID" />
+      </Principal>
+      <Dependent Role="tblComplaint1">
+        <PropertyRef Name="ComplaintID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -147,8 +161,22 @@
     <Parameter Name="Password" Type="varchar" Mode="In" />
   </Function>
   <Function Name="RegeneratedComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spFilterAdminOnly" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="adminID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spFilterAdminWithLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="adminID" Type="int" Mode="In" />
+    <Parameter Name="locationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spFilterLocationOnly" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="locationID" Type="int" Mode="In" />
+  </Function>
   <Function Name="spGetLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="spGetRegeneratedComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spReportData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spUniqueLandline" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="landline" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="spUserWithLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="temp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="uniqueEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -166,9 +194,13 @@
     <EntitySet Name="tblComplaintType" EntityType="Self.tblComplaintType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPtclUser" EntityType="Self.tblPtclUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUserLocation" EntityType="Self.tblUserLocation" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_tblAdmin_tblAdmin" Association="Self.FK_tblAdmin_tblAdmin">
+    <AssociationSet Name="FK_tblComplaint_tblAdmin" Association="Self.FK_tblComplaint_tblAdmin">
       <End Role="tblAdmin" EntitySet="tblAdmin" />
-      <End Role="tblAdmin1" EntitySet="tblAdmin" />
+      <End Role="tblComplaint" EntitySet="tblComplaint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblComplaint_tblComplaint" Association="Self.FK_tblComplaint_tblComplaint">
+      <End Role="tblComplaint" EntitySet="tblComplaint" />
+      <End Role="tblComplaint1" EntitySet="tblComplaint" />
     </AssociationSet>
     <AssociationSet Name="FK_tblComplaint_tblComplaintType" Association="Self.FK_tblComplaint_tblComplaintType">
       <End Role="tblComplaintType" EntitySet="tblComplaintType" />
