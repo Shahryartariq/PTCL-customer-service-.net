@@ -212,5 +212,50 @@ namespace PtclCustomerService.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spUserWithLocation_Result>("spUserWithLocation");
         }
+    
+        public virtual ObjectResult<spUniqueLandline_Result> spUniqueLandline(string landline)
+        {
+            var landlineParameter = landline != null ?
+                new ObjectParameter("landline", landline) :
+                new ObjectParameter("landline", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spUniqueLandline_Result>("spUniqueLandline", landlineParameter);
+        }
+    
+        public virtual ObjectResult<spFilterAdminWithLocation_Result> spFilterAdminWithLocation(Nullable<int> adminID, Nullable<int> locationID)
+        {
+            var adminIDParameter = adminID.HasValue ?
+                new ObjectParameter("adminID", adminID) :
+                new ObjectParameter("adminID", typeof(int));
+    
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("locationID", locationID) :
+                new ObjectParameter("locationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spFilterAdminWithLocation_Result>("spFilterAdminWithLocation", adminIDParameter, locationIDParameter);
+        }
+    
+        public virtual ObjectResult<spReportData_Result> spReportData()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReportData_Result>("spReportData");
+        }
+    
+        public virtual ObjectResult<spFilterAdminOnly_Result> spFilterAdminOnly(Nullable<int> adminID)
+        {
+            var adminIDParameter = adminID.HasValue ?
+                new ObjectParameter("adminID", adminID) :
+                new ObjectParameter("adminID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spFilterAdminOnly_Result>("spFilterAdminOnly", adminIDParameter);
+        }
+    
+        public virtual ObjectResult<spFilterLocationOnly_Result> spFilterLocationOnly(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("locationID", locationID) :
+                new ObjectParameter("locationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spFilterLocationOnly_Result>("spFilterLocationOnly", locationIDParameter);
+        }
     }
 }

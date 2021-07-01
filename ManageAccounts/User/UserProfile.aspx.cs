@@ -21,7 +21,7 @@ namespace PtclCustomerService.ManageAccounts.User
                 //User Session
                 if (Session["UserID"] != null)
                 {
-                    int UserID = (int)Session["UserID"];
+                    int UserID = Convert.ToInt32(Session["UserID"]);
                     tblPtclUser s = db.tblPtclUsers.FirstOrDefault(v => v.UserID == UserID);
 
                     tblUserLocation l = db.tblUserLocations.FirstOrDefault(x => x.LocationID == s.LocationID);

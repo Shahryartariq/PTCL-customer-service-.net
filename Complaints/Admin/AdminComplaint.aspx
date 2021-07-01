@@ -68,6 +68,13 @@
                                     <asp:BoundField DataField="ComplaintTypeName" HeaderText="Complaint Type" />
                                     <asp:BoundField DataField="ComplaintCreationDate" HeaderText="Creation Date & Time" />
 
+                                     <asp:TemplateField HeaderText="RegeneratedID">
+
+                                        <ItemTemplate>
+                                            <asp:Label ID="Label9" runat="server" Text='<%# Convert.ToInt32(Eval("RegeneratedID")) == 0 ? "No" : "Yes" %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
                                     <asp:HyperLinkField
                                         Text="Detail"
                                         HeaderText="More Info"

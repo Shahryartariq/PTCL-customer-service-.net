@@ -23,8 +23,12 @@ namespace PtclCustomerService.Models
         public Nullable<bool> ComplaintStatus { get; set; }
         public Nullable<int> RegeneratedID { get; set; }
         public Nullable<System.DateTime> ComplaintCreationDate { get; set; }
+        public Nullable<int> AdminID { get; set; }
     
         public virtual tblComplaintType tblComplaintType { get; set; }
         public virtual tblPtclUser tblPtclUser { get; set; }
+        public virtual tblAdmin tblAdmin { get; set; }
+        public virtual tblComplaint tblComplaint1 { get; set; }
+        public virtual tblComplaint tblComplaint2 { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d715e07ccb3445788fbc78bd630ab74f" Name="Diagram1">
+      <Diagram DiagramId="d715e07ccb3445788fbc78bd630ab74f" Name="Diagram1" ZoomLevel="73">
         <EntityTypeShape EntityType="PTCLModel.tblAdmin" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PTCLModel.tblComplaint" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PTCLModel.tblComplaintType" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
@@ -15,6 +15,8 @@
         <AssociationConnector Association="PTCLModel.FK_tblComplaint_tblPtclUser" ManuallyRouted="false" />
         <AssociationConnector Association="PTCLModel.FK_tblPtclUser_tblPtclUser" ManuallyRouted="false" />
         <AssociationConnector Association="PTCLModel.FK_tblPtclUser_tblUserLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="PTCLModel.FK_tblComplaint_tblAdmin" />
+        <AssociationConnector Association="PTCLModel.FK_tblComplaint_tblComplaint" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,6 +18,7 @@
           <Property Name="Location" Type="nvarchar" MaxLength="50" />
           <Property Name="AdminDP" Type="nvarchar" MaxLength="100" />
           <Property Name="AdminPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="ComplaintsResolved" Type="int" />
         </EntityType>
         <EntityType Name="tblComplaint">
           <Key>
@@ -32,6 +33,7 @@
           <Property Name="ComplaintStatus" Type="bit" />
           <Property Name="RegeneratedID" Type="int" />
           <Property Name="ComplaintCreationDate" Type="datetime" />
+          <Property Name="AdminID" Type="int" />
         </EntityType>
         <EntityType Name="tblComplaintType">
           <Key>
@@ -65,15 +67,27 @@
           <Property Name="LocationName" Type="nvarchar" MaxLength="50" />
           <Property Name="Locationprovince" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_tblAdmin_tblAdmin">
-          <End Role="tblAdmin" Type="Self.tblAdmin" Multiplicity="1" />
-          <End Role="tblAdmin1" Type="Self.tblAdmin" Multiplicity="0..1" />
+        <Association Name="FK_tblComplaint_tblAdmin">
+          <End Role="tblAdmin" Type="Self.tblAdmin" Multiplicity="0..1" />
+          <End Role="tblComplaint" Type="Self.tblComplaint" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblAdmin">
               <PropertyRef Name="AdminID" />
             </Principal>
-            <Dependent Role="tblAdmin1">
+            <Dependent Role="tblComplaint">
               <PropertyRef Name="AdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblComplaint_tblComplaint">
+          <End Role="tblComplaint" Type="Self.tblComplaint" Multiplicity="1" />
+          <End Role="tblComplaint1" Type="Self.tblComplaint" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblComplaint">
+              <PropertyRef Name="ComplaintID" />
+            </Principal>
+            <Dependent Role="tblComplaint1">
+              <PropertyRef Name="ComplaintID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -152,8 +166,22 @@
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
         <Function Name="RegeneratedComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spFilterAdminOnly" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="adminID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spFilterAdminWithLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="adminID" Type="int" Mode="In" />
+          <Parameter Name="locationID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spFilterLocationOnly" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="locationID" Type="int" Mode="In" />
+        </Function>
         <Function Name="spGetLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spGetRegeneratedComplaints" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spReportData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spUniqueLandline" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="landline" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="spUserWithLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="temp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="uniqueEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -171,9 +199,13 @@
           <EntitySet Name="tblComplaintType" EntityType="Self.tblComplaintType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPtclUser" EntityType="Self.tblPtclUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUserLocation" EntityType="Self.tblUserLocation" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_tblAdmin_tblAdmin" Association="Self.FK_tblAdmin_tblAdmin">
+          <AssociationSet Name="FK_tblComplaint_tblAdmin" Association="Self.FK_tblComplaint_tblAdmin">
             <End Role="tblAdmin" EntitySet="tblAdmin" />
-            <End Role="tblAdmin1" EntitySet="tblAdmin" />
+            <End Role="tblComplaint" EntitySet="tblComplaint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblComplaint_tblComplaint" Association="Self.FK_tblComplaint_tblComplaint">
+            <End Role="tblComplaint" EntitySet="tblComplaint" />
+            <End Role="tblComplaint1" EntitySet="tblComplaint" />
           </AssociationSet>
           <AssociationSet Name="FK_tblComplaint_tblComplaintType" Association="Self.FK_tblComplaint_tblComplaintType">
             <End Role="tblComplaintType" EntitySet="tblComplaintType" />
@@ -207,6 +239,8 @@
           <Property Name="AdminPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblAdmin1" Relationship="Self.FK_tblAdmin_tblAdmin" FromRole="tblAdmin" ToRole="tblAdmin1" />
           <NavigationProperty Name="tblAdmin2" Relationship="Self.FK_tblAdmin_tblAdmin" FromRole="tblAdmin1" ToRole="tblAdmin" />
+          <Property Name="ComplaintsResolved" Type="Int32" />
+          <NavigationProperty Name="tblComplaints" Relationship="PTCLModel.FK_tblComplaint_tblAdmin" FromRole="tblAdmin" ToRole="tblComplaint" />
         </EntityType>
         <EntityType Name="tblComplaint">
           <Key>
@@ -223,6 +257,10 @@
           <Property Name="ComplaintCreationDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tblComplaintType" Relationship="Self.FK_tblComplaint_tblComplaintType" FromRole="tblComplaint" ToRole="tblComplaintType" />
           <NavigationProperty Name="tblPtclUser" Relationship="Self.FK_tblComplaint_tblPtclUser" FromRole="tblComplaint" ToRole="tblPtclUser" />
+          <Property Name="AdminID" Type="Int32" />
+          <NavigationProperty Name="tblAdmin" Relationship="PTCLModel.FK_tblComplaint_tblAdmin" FromRole="tblComplaint" ToRole="tblAdmin" />
+          <NavigationProperty Name="tblComplaint1" Relationship="PTCLModel.FK_tblComplaint_tblComplaint" FromRole="tblComplaint" ToRole="tblComplaint1" />
+          <NavigationProperty Name="tblComplaint2" Relationship="PTCLModel.FK_tblComplaint_tblComplaint" FromRole="tblComplaint1" ToRole="tblComplaint" />
         </EntityType>
         <EntityType Name="tblComplaintType">
           <Key>
@@ -400,6 +438,28 @@
           </FunctionImport>
           <FunctionImport Name="spGetRegeneratedComplaints" ReturnType="Collection(PTCLModel.spGetRegeneratedComplaints_Result)" />
           <FunctionImport Name="spUserWithLocation" ReturnType="Collection(PTCLModel.spUserWithLocation_Result)" />
+          <FunctionImport Name="spUniqueLandline" ReturnType="Collection(PTCLModel.spUniqueLandline_Result)">
+          <Parameter Name="landline" Mode="In" Type="String" />
+          </FunctionImport>
+          <AssociationSet Name="FK_tblComplaint_tblAdmin" Association="PTCLModel.FK_tblComplaint_tblAdmin">
+            <End Role="tblAdmin" EntitySet="tblAdmins" />
+            <End Role="tblComplaint" EntitySet="tblComplaints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblComplaint_tblComplaint" Association="PTCLModel.FK_tblComplaint_tblComplaint">
+            <End Role="tblComplaint" EntitySet="tblComplaints" />
+            <End Role="tblComplaint1" EntitySet="tblComplaints" />
+          </AssociationSet>
+          <FunctionImport Name="spFilterAdminWithLocation" ReturnType="Collection(PTCLModel.spFilterAdminWithLocation_Result)">
+            <Parameter Name="adminID" Mode="In" Type="Int32" />
+            <Parameter Name="locationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spReportData" ReturnType="Collection(PTCLModel.spReportData_Result)" />
+          <FunctionImport Name="spFilterAdminOnly" ReturnType="Collection(PTCLModel.spFilterAdminOnly_Result)">
+          <Parameter Name="adminID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spFilterLocationOnly" ReturnType="Collection(PTCLModel.spFilterLocationOnly_Result)">
+          <Parameter Name="locationID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ActiveC_Result">
           <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
@@ -619,6 +679,91 @@
           <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" />
           <Property Type="Int32" Name="LocationCode" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="spUniqueLandline_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="Status" Nullable="false" />
+          <Property Type="String" Name="Cnic" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CustomerDP" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="LocationID" Nullable="true" />
+          <Property Type="String" Name="landline" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <Association Name="FK_tblComplaint_tblAdmin">
+          <End Type="PTCLModel.tblAdmin" Role="tblAdmin" Multiplicity="0..1" />
+          <End Type="PTCLModel.tblComplaint" Role="tblComplaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAdmin">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="tblComplaint">
+              <PropertyRef Name="AdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblComplaint_tblComplaint">
+          <End Type="PTCLModel.tblComplaint" Role="tblComplaint" Multiplicity="1" />
+          <End Type="PTCLModel.tblComplaint" Role="tblComplaint1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblComplaint">
+              <PropertyRef Name="ComplaintID" />
+            </Principal>
+            <Dependent Role="tblComplaint1">
+              <PropertyRef Name="ComplaintID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="spFilterAdminWithLocation_Result">
+          <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+          <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Int32" Name="AdminID" Nullable="true" />
+          <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="LocationID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spReportData_Result">
+          <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+          <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Int32" Name="AdminID" Nullable="true" />
+          <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="LocationID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spFilterAdminOnly_Result">
+          <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+          <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Int32" Name="AdminID" Nullable="true" />
+          <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="LocationID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spFilterLocationOnly_Result">
+          <Property Type="String" Name="ComplaintTitle" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="ComplaintCreationDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ComplaintID" Nullable="false" />
+          <Property Type="Boolean" Name="ComplaintStatus" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Int32" Name="AdminID" Nullable="true" />
+          <Property Type="String" Name="ComplaintTypeName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="LocationID" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -628,6 +773,7 @@
           <EntitySetMapping Name="tblAdmins">
             <EntityTypeMapping TypeName="PTCLModel.tblAdmin">
               <MappingFragment StoreEntitySet="tblAdmin">
+                <ScalarProperty Name="ComplaintsResolved" ColumnName="ComplaintsResolved" />
                 <ScalarProperty Name="AdminID" ColumnName="AdminID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -643,6 +789,7 @@
           <EntitySetMapping Name="tblComplaints">
             <EntityTypeMapping TypeName="PTCLModel.tblComplaint">
               <MappingFragment StoreEntitySet="tblComplaint">
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
                 <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
                 <ScalarProperty Name="ComplaintTypeID" ColumnName="ComplaintTypeID" />
                 <ScalarProperty Name="ComplaintImage" ColumnName="ComplaintImage" />
@@ -992,6 +1139,87 @@
                 <ScalarProperty Name="LocationName" ColumnName="LocationName" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spUniqueLandline" FunctionName="PTCLModel.Store.spUniqueLandline">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.spUniqueLandline_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Cnic" ColumnName="Cnic" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CustomerDP" ColumnName="CustomerDP" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="landline" ColumnName="landline" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spFilterAdminWithLocation" FunctionName="PTCLModel.Store.spFilterAdminWithLocation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.spFilterAdminWithLocation_Result">
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spReportData" FunctionName="PTCLModel.Store.spReportData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.spReportData_Result">
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spFilterAdminOnly" FunctionName="PTCLModel.Store.spFilterAdminOnly">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.spFilterAdminOnly_Result">
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spFilterLocationOnly" FunctionName="PTCLModel.Store.spFilterLocationOnly">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PTCLModel.spFilterLocationOnly_Result">
+                <ScalarProperty Name="ComplaintTitle" ColumnName="ComplaintTitle" />
+                <ScalarProperty Name="ComplaintCreationDate" ColumnName="ComplaintCreationDate" />
+                <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+                <ScalarProperty Name="ComplaintStatus" ColumnName="ComplaintStatus" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="ComplaintTypeName" ColumnName="ComplaintTypeName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -12,6 +12,9 @@ namespace PtclCustomerService
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            txtPassword.Attributes["type"] = "password";
+            txtConfirmPassword.Attributes["type"] = "password";
+
             using (PTCLEntities db = new PTCLEntities())
             {
                 if (IsPostBack == true) return;

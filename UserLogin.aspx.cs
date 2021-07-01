@@ -18,10 +18,9 @@ namespace PtclCustomerService
                 Session["UserID"] = Request.Cookies["PCS"]["UserID"];
                 Session["FirstName"] = Request.Cookies["PCS"]["FirstName"];
                 Session.Timeout = 720;
+                Response.Redirect("Home.aspx");
             }
         }
-
-        //Hashing Start
 
         private byte[] CreateSalt()
         {
@@ -38,7 +37,8 @@ namespace PtclCustomerService
             argon2.Salt = salt;
             argon2.DegreeOfParallelism = 8; // four cores
             argon2.Iterations = 4;
-            argon2.MemorySize = 1024 * 1024; // 1 GB
+            argon2.MemorySize = 1024;
+            argon2.MemorySize = 8194;
 
             return argon2.GetBytes(16);
         }
@@ -47,12 +47,12 @@ namespace PtclCustomerService
         {
             using (PTCLEntities db = new PTCLEntities())
             {
-                //var password = txtPassword.Text;
-                // var salt = CreateSalt();
-                // var hash = HashPassword(password, salt);
+                var password = txtPassword.Text;
+                var salt = CreateSalt();
+                var hash = HashPassword(password, salt);
 
-                //var query = db.PtclUserLogin(txtEmail.Text, Convert.ToBase64String(hash)).ToList();
-                var query = db.PtclUserLogin(txtEmail.Text, txtPassword.Text).ToList();
+                var query = db.PtclUserLogin(txtEmail.Text, Convert.ToBase64String(hash)).ToList();
+                //var query = db.PtclUserLogin(txtEmail.Text, txtPassword.Text).ToList();
                 if (query.Count > 0)
                 {
                     Session["UserID"] = query[0].UserID;
