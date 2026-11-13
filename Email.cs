@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Net.Mail;
 
 /// <summary>
@@ -20,9 +21,10 @@ public class Email
         try
         {
             string SendingEmail = "", MailServer = "", SendingPassword = "";
-            SendingEmail = "REMOVED";
+            // Gmail address and app password come from Secrets.config (not committed)
+            SendingEmail = ConfigurationManager.AppSettings["SmtpEmail"];
             MailServer = "smtp.gmail.com"; //If use Hotmail/outlook then change the server name accordingly
-            SendingPassword = "REMOVED";
+            SendingPassword = ConfigurationManager.AppSettings["SmtpPassword"];
             int ServerPort = 587;
 
             message.IsBodyHtml = true;
