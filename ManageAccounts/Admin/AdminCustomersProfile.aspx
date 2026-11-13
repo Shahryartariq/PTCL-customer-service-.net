@@ -116,7 +116,7 @@
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <asp:HyperLink runat="server" ID="HypEditProfile" CssClass="btn btn-primary " Text="EditProfile"></asp:HyperLink>
+                                        <asp:HyperLink runat="server" ID="HypEditProfile" CssClass="btn btn-primary " Text="Edit Profile"></asp:HyperLink>
                                         <asp:HyperLink runat="server" ID="HypBack" CssClass="btn btn-primary " Text="Cancel"></asp:HyperLink>
                                     </div>
                                 </div>
