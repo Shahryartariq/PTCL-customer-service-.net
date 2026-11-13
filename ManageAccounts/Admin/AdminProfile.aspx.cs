@@ -33,25 +33,29 @@ namespace PtclCustomerService
 
                 HypProfile.NavigateUrl = "~/ManageAccounts/Admin/AdminSetup.aspx?profile=me&AdminID=" + AdminID;
                 tblAdmin s = db.tblAdmins.FirstOrDefault(v => v.AdminID == AdminID);
+                if (s == null)
+                {
+                    Response.Redirect("~/Errors/404NotFound.aspx");
+                }
 
                 Label lblUserName = new Label();
-                lblUserName.Text = s.UserName;
+                lblUserName.Text = HttpUtility.HtmlEncode(s.UserName);
                 PanelUserName.Controls.Add(lblUserName);
 
                 Label lbllocation = new Label();
-                lbllocation.Text = s.Location;
+                lbllocation.Text = HttpUtility.HtmlEncode(s.Location);
                 PanelLocation.Controls.Add(lbllocation);
 
                 Label lblFullName = new Label();
-                lblFullName.Text = s.FullName;
+                lblFullName.Text = HttpUtility.HtmlEncode(s.FullName);
                 PanelFullName.Controls.Add(lblFullName);
 
                 Label lblEmail = new Label();
-                lblEmail.Text = s.EmailAddress;
+                lblEmail.Text = HttpUtility.HtmlEncode(s.EmailAddress);
                 PanelEmail.Controls.Add(lblEmail);
 
                 Label lblPhone = new Label();
-                lblPhone.Text = s.AdminPhone;
+                lblPhone.Text = HttpUtility.HtmlEncode(s.AdminPhone);
                 PanelPhone.Controls.Add(lblPhone);
 
                 Label lblStatus = new Label();

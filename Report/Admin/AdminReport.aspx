@@ -62,7 +62,6 @@
             <!-- Sub Category -->
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:RequiredFieldValidator runat="server" ID="RFV1" ControlToValidate="ddlLocation" SetFocusOnError="true" Text="*" InitialValue="1" ForeColor="Red"></asp:RequiredFieldValidator>
                     <label>Location</label>
                     <br />
                     <asp:DropDownList runat="server" ID="ddlLocation" CssClass="form-control"></asp:DropDownList>
@@ -76,11 +75,11 @@
         </div>
         <asp:GridView runat="server" ID="GVAdmin" ClientIDMode="Static" CssClass="table table-bordered table-hover" AutoGenerateColumns="false">
             <Columns>
-                <asp:BoundField DataField="ComplaintID" HeaderText="Admin ID" />
+                <asp:BoundField DataField="ComplaintID" HeaderText="Complaint ID" />
                 <asp:BoundField DataField="ComplaintTitle" HeaderText="Title" />
                 <asp:BoundField DataField="FirstName" HeaderText="Customer Name" />
                 <asp:BoundField DataField="FullName" HeaderText="Resolved by" />
-                <asp:BoundField DataField="ComplaintCreationDate" HeaderText="ComplaintCreationDate" />
+                <asp:BoundField DataField="ComplaintCreationDate" HeaderText="Creation Date & Time" />
             </Columns>
         </asp:GridView>
     </div>

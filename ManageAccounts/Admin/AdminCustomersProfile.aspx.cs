@@ -18,6 +18,10 @@ namespace PtclCustomerService.ManageAccounts.Admin
                 {
                     int UserID = Convert.ToInt32(Request.QueryString["UserID"]);
                     tblPtclUser a = db.tblPtclUsers.FirstOrDefault(b => b.UserID == UserID);
+                    if (a == null)
+                    {
+                        Response.Redirect("~/Errors/404NotFound.aspx");
+                    }
 
                     //Total Comapints
                     var GetMyComplaints = db.GetMyComplaints(UserID).ToList();
@@ -36,24 +40,24 @@ namespace PtclCustomerService.ManageAccounts.Admin
                     PanelActiveC.Controls.Add(lblActiveC);
 
                     Label lblFirstName = new Label();
-                    lblFirstName.Text = a.FirstName;
+                    lblFirstName.Text = HttpUtility.HtmlEncode(a.FirstName);
                     PanelFirstName.Controls.Add(lblFirstName);
 
 
                     Label LblFullName = new Label();
-                    LblFullName.Text = a.FirstName + " " + a.LastName;
+                    LblFullName.Text = HttpUtility.HtmlEncode(a.FirstName + " " + a.LastName);
                     PanelFullName.Controls.Add(LblFullName);
 
                     Label lblEmail = new Label();
-                    lblEmail.Text = a.EmailAddress;
+                    lblEmail.Text = HttpUtility.HtmlEncode(a.EmailAddress);
                     PanelEmail.Controls.Add(lblEmail);
 
                     Label lblCnic = new Label();
-                    lblCnic.Text = a.Cnic;
+                    lblCnic.Text = HttpUtility.HtmlEncode(a.Cnic);
                     PanelCnic.Controls.Add(lblCnic);
 
                     Label lblPhone = new Label();
-                    lblPhone.Text = a.Phone;
+                    lblPhone.Text = HttpUtility.HtmlEncode(a.Phone);
                     PanelPhone.Controls.Add(lblPhone);
 
                     Label lblStatus = new Label();
@@ -76,6 +80,8 @@ namespace PtclCustomerService.ManageAccounts.Admin
                         userPic.ImageUrl = "../../assets/img/avatar.png";
                     }
 
+                    HypEditProfile.NavigateUrl = "~/ManageCustomers/Admin/CustomerSetup.aspx?UserID=" + UserID;
+                    HypBack.NavigateUrl = "~/ManageCustomers/Admin/AdminManageCustomers.aspx";
                     if (Request.QueryString["ComplaintID"] != null)
                     {
                         int ComplaintID = Convert.ToInt32(Request.QueryString["ComplaintID"]);

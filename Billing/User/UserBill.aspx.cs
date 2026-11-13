@@ -23,23 +23,23 @@ namespace PtclCustomerService.Billing.User
                     ddMonthList.SelectedValue = "0";
                     int UserID = Convert.ToInt32(Session["UserID"]);
                     tblPtclUser s = db.tblPtclUsers.FirstOrDefault(v => v.UserID == UserID);
-                    lblBillName.Text = s.FirstName + " " + s.LastName;
+                    lblBillName.Text = HttpUtility.HtmlEncode(s.FirstName + " " + s.LastName);
                     lbluserID.Text = s.UserID.ToString();
 
                     DateTime dateAndTime = DateTime.Now.AddDays(10);
                     lblDueDate.Text = "Due Date: " + dateAndTime.ToString("dd/MM/yyyy");
 
-                    tblLandline.Text = s.landline;
+                    tblLandline.Text = HttpUtility.HtmlEncode(s.landline);
 
                     //location
                     tblUserLocation l = db.tblUserLocations.FirstOrDefault(x => x.LocationID == s.LocationID);
-                    if (l.LocationName.ToString() == "")
+                    if (l == null || string.IsNullOrEmpty(l.LocationName))
                     {
                         lblLocation.Text = "No location";
                     }
                     else
                     {
-                        lblLocation.Text = l.LocationName;
+                        lblLocation.Text = HttpUtility.HtmlEncode(l.LocationName);
                     }
                     FillList();
                 }
@@ -102,7 +102,7 @@ namespace PtclCustomerService.Billing.User
             }
             else
             {
-                Response.Redirect("~/Errors.Something Went Wrong.aspx");
+                Response.Redirect("~/Errors/Something Went Wrong.aspx");
             }
         }
 
@@ -129,7 +129,7 @@ namespace PtclCustomerService.Billing.User
             {
                 panelBill.Visible = false;
                 lblNoMonth.Text = "";
-                lblNoBill.Text = "Bill Will be Displayed Soon.Keep Patience Beloved Customer";
+                lblNoBill.Text = "Bill Will be Displayed Soon. Keep Patience Beloved Customer";
             }
         }
     }
