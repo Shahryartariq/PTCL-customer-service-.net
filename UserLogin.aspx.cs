@@ -1,8 +1,7 @@
-﻿using Konscious.Security.Cryptography;
+﻿using PtclCustomerService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -24,51 +23,40 @@ namespace PtclCustomerService
             }
         }
 
-        private byte[] CreateSalt()
-        {
-            var buffer = new byte[16];
-            string x = "SherryBSSE40";
-            buffer = System.Text.Encoding.UTF8.GetBytes(x);
-            return buffer;
-        }
-
-        private byte[] HashPassword(string password, byte[] salt)
-        {
-            var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
-
-            argon2.Salt = salt;
-            argon2.DegreeOfParallelism = 8; // four cores
-            argon2.Iterations = 4;
-            argon2.MemorySize = 1024;
-            argon2.MemorySize = 8194;
-
-            return argon2.GetBytes(16);
-        }
-
         protected void cmdLoginUser_Click(object sender, EventArgs e)
         {
+            if (!Page.IsValid) return;
+
             using (PTCLEntities db = new PTCLEntities())
             {
-                var password = txtPassword.Text;
-                var salt = CreateSalt();
-                var hash = HashPassword(password, salt);
+                string email = txtEmail.Text.Trim();
+                tblPtclUser u = db.tblPtclUsers.FirstOrDefault(v => v.EmailAddress == email);
 
-                var query = db.PtclUserLogin(txtEmail.Text, Convert.ToBase64String(hash)).ToList();
-                //var query = db.PtclUserLogin(txtEmail.Text, txtPassword.Text).ToList();
-                if (query.Count > 0)
-                {
-                    Session["UserID"] = query[0].UserID;
-                    Session["FirstName"] = query[0].FirstName;
-                    Session.Timeout = 720;
-
-                    AuthCookie.Save(Response, "user", query[0].UserID, query[0].FirstName, 1);
-
-                    Response.Redirect("Home.aspx");
-                }
-                else
+                if (u == null || !PasswordHasher.Verify(txtPassword.Text, u.Password))
                 {
                     lblMsg.Text = "Invalid Email or Password";
+                    return;
                 }
+                if (u.Status == false)
+                {
+                    lblMsg.Text = "Your account is inactive. Please contact PTCL customer service";
+                    return;
+                }
+
+                // passwords saved with the old fixed salt get a new salted hash
+                if (PasswordHasher.IsOldHash(u.Password))
+                {
+                    u.Password = PasswordHasher.Hash(txtPassword.Text);
+                    db.SaveChanges();
+                }
+
+                Session["UserID"] = u.UserID;
+                Session["FirstName"] = u.FirstName;
+                Session.Timeout = 720;
+
+                AuthCookie.Save(Response, "user", u.UserID, u.FirstName, 1);
+
+                Response.Redirect("Home.aspx");
             }
         }
 

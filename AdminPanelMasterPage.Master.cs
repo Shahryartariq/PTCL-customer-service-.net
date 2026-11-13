@@ -10,20 +10,23 @@ namespace PtclCustomerService
 {
     public partial class AdminPanelMasterPage : System.Web.UI.MasterPage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        // Init runs before the content page's Page_Load, so no admin page code runs for someone who isn't logged in
+        protected void Page_Init(object sender, EventArgs e)
         {
-
             if (Session["AdminID"] == null)
             {
                 Response.Redirect("~/AdminLogin.aspx");
             }
-
             using (PTCLEntities db = new PTCLEntities())
             {
                 int AdminID = Convert.ToInt32(Session["AdminID"]);
                 tblAdmin s = db.tblAdmins.FirstOrDefault(v => v.AdminID == AdminID);
-                //lblName.Text = s.UserName;
-                lblName.Text = "Login as: " + s.UserName;
+                if (s == null || s.Status == false)
+                {
+                    // account deleted or set to inactive while logged in
+                    Response.Redirect("~/Logout.aspx");
+                }
+                lblName.Text = "Login as: " + HttpUtility.HtmlEncode(s.UserName);
             }
         }
     }

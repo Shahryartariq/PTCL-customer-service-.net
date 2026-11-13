@@ -44,6 +44,11 @@ namespace PtclCustomerService
             else if (e.CommandName == "delete")
             {
                 int AdminID = Convert.ToInt32(e.CommandArgument);
+                if (AdminID == Convert.ToInt32(Session["AdminID"]))
+                {
+                    lblAdminmsg.Text = "You can't delete your own account";
+                    return;
+                }
                 using (PTCLEntities db = new PTCLEntities())
                 {
                     db.DeletePtclAdmin(AdminID);
