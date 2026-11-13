@@ -13,10 +13,12 @@ namespace PtclCustomerService
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.Cookies["PCS"] != null)
+            int userId;
+            string firstName;
+            if (AuthCookie.TryRead(Request, "user", out userId, out firstName))
             {
-                Session["UserID"] = Request.Cookies["PCS"]["UserID"];
-                Session["FirstName"] = Request.Cookies["PCS"]["FirstName"];
+                Session["UserID"] = userId;
+                Session["FirstName"] = firstName;
                 Session.Timeout = 720;
                 Response.Redirect("Home.aspx");
             }
@@ -59,9 +61,7 @@ namespace PtclCustomerService
                     Session["FirstName"] = query[0].FirstName;
                     Session.Timeout = 720;
 
-                    Response.Cookies["PCS"]["UserID"] = query[0].UserID.ToString();
-                    Response.Cookies["PCS"]["FirstName"] = query[0].FirstName.ToString();
-                    Response.Cookies["PCS"].Expires = DateTime.Now.AddDays(1);
+                    AuthCookie.Save(Response, "user", query[0].UserID, query[0].FirstName, 1);
 
                     Response.Redirect("Home.aspx");
                 }

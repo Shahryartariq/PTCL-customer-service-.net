@@ -196,6 +196,7 @@
     <Compile Include="AdminLogin.aspx.designer.cs">
       <DependentUpon>AdminLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AuthCookie.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="Errors\404NotFound.aspx.cs">
       <DependentUpon>404NotFound.aspx</DependentUpon>

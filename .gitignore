@@ -1,0 +1,19 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build output
+bin/
+obj/
+
+# NuGet packages (restored on build)
+packages/
+
+# Local secrets (copy Secrets.config.example to Secrets.config)
+Secrets.config
+
+# Files uploaded while running the app
+UploadFiles/**/*
+!UploadFiles/**/
+!UploadFiles/**/.gitkeep
