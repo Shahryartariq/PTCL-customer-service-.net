@@ -100,37 +100,16 @@ namespace PtclCustomerService
         protected void PendingComplaint_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Complaints/Admin/AdminComplaint.aspx?Active=1");
-            PanelPendingComplaint.CssClass = " active";
-            PanelApprovedComplaint.CssClass = " d-none";
-            PanelRegeneratedComplaint.CssClass = " d-none";
-            PendingComplaint.CssClass += " active";
-            ApprovedComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
-            RegeneratedComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
         }
 
         protected void ApprovedComplaint_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Complaints/Admin/AdminComplaint.aspx?Closed=1");
-
-            PanelApprovedComplaint.CssClass = " active";
-            PanelPendingComplaint.CssClass = " d-none";
-            PanelRegeneratedComplaint.CssClass = " d-none";
-
-            ApprovedComplaint.CssClass += " active";
-            PendingComplaint.CssClass = PendingComplaint.CssClass.Replace("active", "");
-            RegeneratedComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
         }
 
         protected void RegeneratedComplaint_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Complaints/Admin/AdminComplaint.aspx?Rcomp=1");
-            PanelRegeneratedComplaint.CssClass = " active";
-            PanelPendingComplaint.CssClass = " d-none";
-            PanelApprovedComplaint.CssClass = " d-none";
-
-            RegeneratedComplaint.CssClass += " active";
-            PendingComplaint.CssClass = PendingComplaint.CssClass.Replace("active", "");
-            ApprovedComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
         }
 
         protected void GV_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -142,12 +121,13 @@ namespace PtclCustomerService
             if (e.CommandName == "delete")
             {
                 int ComplaintID = Convert.ToInt32(e.CommandArgument);
-                Response.Write(ComplaintID);
                 using (PTCLEntities db = new PTCLEntities())
                 {
                     db.DeleteComplaint(ComplaintID);
                 }
                 PendingGridView();
+                ApprovedGridView();
+                RegeneratedGridView();
             }
         }
     }

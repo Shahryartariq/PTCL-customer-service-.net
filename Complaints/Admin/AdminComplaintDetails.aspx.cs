@@ -5,11 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Net.Mail;
-
-/// <summary>
-/// Summary description for Email
-/// </summary>
 
 namespace PtclCustomerService
 {
@@ -19,118 +14,95 @@ namespace PtclCustomerService
         {
             if (Request.QueryString["Email"] == "1")
             {
-                lblEmailMessage.Text = "Email Send to the Customer Successfully";
+                lblEmailMessage.Text = "Email Sent to the Customer Successfully";
             }
             if (Request.QueryString["Email"] == "0")
             {
-                lblEmailMessage.Text = "Email Send to the Customer Failed";
+                lblEmailMessage.Text = "Complaint Resolved, but the Email to the Customer could not be Sent";
             }
 
             hypCacnel.NavigateUrl = "~/Complaints/Admin/AdminComplaint.aspx?Active=1";
             using (PTCLEntities db = new PTCLEntities())
             {
-                if (Request.QueryString["ComplaintID"] != null)
+                int ComplaintID;
+                int.TryParse(Request.QueryString["ComplaintID"], out ComplaintID);
+                tblComplaint s = db.tblComplaints.FirstOrDefault(v => v.ComplaintID == ComplaintID);
+                if (s == null)
                 {
-                    int ComplaintID = Convert.ToInt32(Request.QueryString["ComplaintID"]);
-                    tblComplaint s = db.tblComplaints.FirstOrDefault(v => v.ComplaintID == ComplaintID);
+                    Response.Redirect("~/Errors/404NotFound.aspx");
+                }
 
-                    Label lblCID = new Label();
-                    lblCID.Text = "Complaint ID: " + s.ComplaintID.ToString();
-                    PanelCID.Controls.Add(lblCID);
+                AddText(PanelCID, "Complaint ID: " + s.ComplaintID.ToString());
 
-                    // Download File
-                    if (s.ComplaintImage != "" && s.ComplaintImage != null)
+                // Download File
+                if (!string.IsNullOrEmpty(s.ComplaintImage))
+                {
+                    HypDownloadUpload.NavigateUrl = "~/UploadFiles/ComplaintData/" + s.ComplaintImage;
+                }
+                else
+                {
+                    HypDownloadUpload.NavigateUrl = "";
+                    HypDownloadUpload.Text = "NO FILE TO DOWNLOAD";
+                }
+
+                AddText(PanelComplaintTitle, s.ComplaintTitle);
+
+                if (s.ComplaintStatus == true)
+                {
+                    AddText(PanelStatusComplaint, "Solved");
+                    PanelResolveComplaint.CssClass = " d-none";
+                    hypCacnel.NavigateUrl = "~/Complaints/Admin/AdminComplaint.aspx?Closed=1";
+                }
+                else
+                {
+                    AddText(PanelStatusComplaint, "Not Solved");
+                }
+
+                AddText(PanelComplaintDescription, s.ComplaintDescription);
+                AddText(PanelCreation, s.ComplaintCreationDate.ToString());
+
+                // Regenerated
+                if (s.RegeneratedID.HasValue && s.RegeneratedID.Value > 0)
+                {
+                    AddText(PanelRegenerate, "Yes");
+                    HypParentComplaint.Visible = true;
+                    HypParentComplaint.Text = "Goto Parent";
+                    HypParentComplaint.NavigateUrl = "~/Complaints/Admin/AdminComplaintDetails.aspx?ComplaintID=" + s.RegeneratedID;
+                }
+                else
+                {
+                    AddText(PanelRegenerate, "No");
+                }
+
+                // User Data
+                var userid = s.UserID;
+                tblPtclUser a = db.tblPtclUsers.FirstOrDefault(b => b.UserID == userid);
+                if (a != null)
+                {
+                    AddText(PanelFullName, a.FirstName + " " + a.LastName);
+                    AddText(PanelFirstName, a.FirstName);
+                    AddText(PanelEmail, a.EmailAddress);
+                    AddText(PanelPhone, a.Phone);
+                    if (!string.IsNullOrEmpty(a.CustomerDP))
                     {
-                        HypDownloadUpload.NavigateUrl = "../../UploadFiles/ComplaintData/" + s.ComplaintImage;
+                        CustomerPic.ImageUrl = "~/UploadFiles/CustomerProfile/" + a.CustomerDP;
                     }
-                    else
-                    {
-                        HypDownloadUpload.NavigateUrl = "";
-                        HypDownloadUpload.Text = "NO FILE TO DOWNLOAD";
-                    }
-
-                    Label lbltitle = new Label();
-                    lbltitle.Text = s.ComplaintTitle;
-                    PanelComplaintTitle.Controls.Add(lbltitle);
-
-                    Label lblStatusComplaint = new Label();
-                    if (s.ComplaintStatus.ToString() == "False")
-                    {
-                        lblStatusComplaint.Text = "Not Solved";
-                    }
-                    else
-                    {
-                        lblStatusComplaint.Text = "Solved";
-                        PanelResolveComplaint.CssClass = " d-none";
-                        hypCacnel.NavigateUrl = "~/Complaints/Admin/AdminComplaint.aspx?Closed=1";
-                    }
-
-                    PanelStatusComplaint.Controls.Add(lblStatusComplaint);
-
-                    //Complaint Description
-                    Label lblComplaintDesription = new Label();
-                    lblComplaintDesription.Text = s.ComplaintDescription;
-                    PanelComplaintDescription.Controls.Add(lblComplaintDesription);
-
-                    //Date
-                    Label lblCreation = new Label();
-                    lblCreation.Text = s.ComplaintCreationDate.ToString();
-                    PanelCreation.Controls.Add(lblCreation);
-
-                    //User Data
-                    var userid = s.UserID;
-                    tblPtclUser a = db.tblPtclUsers.FirstOrDefault(b => b.UserID == userid);
-
-                    //Regerate
-                    Label lblRegenerate = new Label();
-                    if (s.RegeneratedID == 0 || s.RegeneratedID == null)
-                    {
-                        lblRegenerate.Text = "Nooo";
-                    }
-                    else
-                    {
-                        lblRegenerate.Text = "Yess";
-                        HypParentComplaint.Visible = true;
-                        HypParentComplaint.Text = "Goto Parent";
-                        HypParentComplaint.NavigateUrl = "~/Complaints/Admin/AdminComplaintDetails.aspx?ComplaintID=" + s.RegeneratedID;
-                    }
-                    PanelRegenerate.Controls.Add(lblRegenerate);
-
-                    //FullName
-                    Label lblFullName = new Label();
-                    lblFullName.Text = a.FirstName + " " + a.LastName;
-                    PanelFullName.Controls.Add(lblFullName);
-
-                    Label lblFirstName = new Label();
-                    lblFirstName.Text = a.FirstName;
-                    PanelFirstName.Controls.Add(lblFirstName);
-
-                    Label lblEmail = new Label();
-                    lblEmail.Text = a.EmailAddress;
-                    PanelEmail.Controls.Add(lblEmail);
-
-                    Label LblPhone = new Label();
-                    LblPhone.Text = a.Phone;
-                    PanelPhone.Controls.Add(LblPhone);
-
-                    if (a.CustomerDP != "" && a.CustomerDP != null)
-                    {
-                        CustomerPic.ImageUrl = "../../UploadFiles/CustomerProfile/" + a.CustomerDP;
-                    }
-                    else
-                    {
-                    }
-
                     HypEmailIcon.NavigateUrl = "mailto:" + a.EmailAddress;
                     HypCustomerProfile.NavigateUrl = "~/ManageAccounts/Admin/AdminCustomersProfile.aspx?UserID=" + userid + "&ComplaintID=" + ComplaintID;
-
-                    var complaintTypeID = s.ComplaintTypeID;
-                    tblComplaintType c = db.tblComplaintTypes.FirstOrDefault(d => d.ComplaintTypeID == complaintTypeID);
-                    Label lblcomplaintTypeID = new Label();
-                    lblcomplaintTypeID.Text = c.ComplaintTypeName;
-                    PanelComplaintType.Controls.Add(lblcomplaintTypeID);
                 }
+
+                var complaintTypeID = s.ComplaintTypeID;
+                tblComplaintType c = db.tblComplaintTypes.FirstOrDefault(d => d.ComplaintTypeID == complaintTypeID);
+                AddText(PanelComplaintType, c != null ? c.ComplaintTypeName : "");
             }
+        }
+
+        // text from the database is encoded, so a title like "<script>" shows as text
+        private static void AddText(Panel panel, string text)
+        {
+            Label label = new Label();
+            label.Text = HttpUtility.HtmlEncode(text);
+            panel.Controls.Add(label);
         }
 
         protected void btnResolve_Click(object sender, EventArgs e)
@@ -139,36 +111,32 @@ namespace PtclCustomerService
             {
                 int ComplaintID = Convert.ToInt32(Request.QueryString["ComplaintID"]);
                 tblComplaint a = db.tblComplaints.FirstOrDefault(b => b.ComplaintID == ComplaintID);
+                if (a == null || a.ComplaintStatus == true)
+                {
+                    // already solved (e.g. by another admin a moment ago)
+                    Response.Redirect("~/Complaints/Admin/AdminComplaintDetails.aspx?ComplaintID=" + ComplaintID);
+                }
 
                 var userid = a.UserID;
                 tblPtclUser u = db.tblPtclUsers.FirstOrDefault(c => c.UserID == userid);
 
-                var AdminID = a.AdminID;
-                //tblAdmin z = db.tblAdmins.FirstOrDefault(y => y.AdminID == AdminID);
+                int AdminID = Convert.ToInt32(Session["AdminID"]);
+                tblAdmin z = db.tblAdmins.FirstOrDefault(y => y.AdminID == AdminID);
+                if (z != null)
+                {
+                    z.ComplaintsResolved = (z.ComplaintsResolved ?? 0) + 1;
+                }
 
-                // z.ComplaintsResolved = z.ComplaintsResolved + 1;
-
-                a.AdminID = Convert.ToInt32(Session["AdminID"]);
-
-                a.ComplaintStatus = bool.Parse("true");
+                a.AdminID = AdminID;
+                a.ComplaintStatus = true;
                 db.SaveChanges();
 
-                var message = "Dear Custmer, Your PTCL complaint ( " + a.ComplaintTitle + " ) is Resovled by our team. Please check and let as know. Say hello to the future ";
+                var message = "Dear Customer, your PTCL complaint (" + HttpUtility.HtmlEncode(a.ComplaintTitle)
+                    + ") has been resolved by our team. Please check and let us know. Say hello to the future.";
 
-                //btnResolve.SendEmail("Shahryartaruq57@gmail.com", "asdasd", "asdasdasd");
-                if (Email.SendEmail(u.EmailAddress, "Dear Customer Your Issue has been Resolved", message))
-                {
-                    var linkUrl = "~/Complaints/Admin/AdminComplaintDetails.aspx?ComplaintID=" + ComplaintID + "&Email=1";
-                    Response.Redirect(linkUrl);
-                }
-                else
-                {
-                    var linkUrl = "~/Complaints/Admin/AdminComplaintDetails.aspx?ComplaintID=" + ComplaintID + "&Email=0";
-                    Response.Redirect(linkUrl);
-                }
+                bool sent = u != null && Email.SendEmail(u.EmailAddress, "Dear Customer, your issue has been resolved", message);
+                Response.Redirect("~/Complaints/Admin/AdminComplaintDetails.aspx?ComplaintID=" + ComplaintID + "&Email=" + (sent ? "1" : "0"));
             }
         }
-
-        //Email
     }
 }

@@ -1,8 +1,7 @@
-﻿using Konscious.Security.Cryptography;
+﻿using PtclCustomerService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -24,51 +23,40 @@ namespace PtclCustomerService
             }
         }
 
-        private byte[] CreateSalt()
-        {
-            var buffer = new byte[16];
-            string x = "SherryBSSE40";
-            buffer = System.Text.Encoding.UTF8.GetBytes(x);
-            return buffer;
-        }
-
-        private byte[] HashPassword(string password, byte[] salt)
-        {
-            var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
-
-            argon2.Salt = salt;
-            argon2.DegreeOfParallelism = 8; // four cores
-            argon2.Iterations = 4;
-            argon2.MemorySize = 1024;
-            argon2.MemorySize = 8194;
-
-            return argon2.GetBytes(16);
-        }
-
         protected void cmdLoginAdmin_Click(object sender, EventArgs e)
         {
+            if (!Page.IsValid) return;
+
             using (PTCLEntities db = new PTCLEntities())
             {
-                var password = txtPassword.Text;
-                var salt = CreateSalt();
-                var hash = HashPassword(password, salt);
+                string userName = txtUserName.Text.Trim();
+                tblAdmin a = db.tblAdmins.FirstOrDefault(v => v.UserName == userName);
 
-                var query = db.PtclAdminLogin(txtUserName.Text, Convert.ToBase64String(hash)).ToList();
-                //var query = db.PtclAdminLogin(txtUserName.Text, txtPassword.Text).ToList();
-                if (query.Count > 0)
-                {
-                    Session["AdminID"] = query[0].AdminID;
-                    Session["UserName"] = query[0].UserName;
-                    Session.Timeout = 720;
-
-                    AuthCookie.Save(Response, "admin", query[0].AdminID, query[0].UserName, 3);
-
-                    Response.Redirect("Home.aspx");
-                }
-                else
+                if (a == null || !PasswordHasher.Verify(txtPassword.Text, a.Password))
                 {
                     lblMsg.Text = "Invalid Username or Password";
+                    return;
                 }
+                if (a.Status == false)
+                {
+                    lblMsg.Text = "This admin account is inactive";
+                    return;
+                }
+
+                // passwords saved with the old fixed salt get a new salted hash
+                if (PasswordHasher.IsOldHash(a.Password))
+                {
+                    a.Password = PasswordHasher.Hash(txtPassword.Text);
+                    db.SaveChanges();
+                }
+
+                Session["AdminID"] = a.AdminID;
+                Session["UserName"] = a.UserName;
+                Session.Timeout = 720;
+
+                AuthCookie.Save(Response, "admin", a.AdminID, a.UserName, 3);
+
+                Response.Redirect("Home.aspx");
             }
         }
 

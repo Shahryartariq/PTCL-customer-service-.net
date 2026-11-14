@@ -132,18 +132,6 @@
       <LastGenOutput>PtclModel1.cs</LastGenOutput>
     </Content>
     <Content Include="Report\Admin\AdminReport.aspx" />
-    <Content Include="temp.aspx" />
-    <Content Include="Temp\401.html" />
-    <Content Include="Temp\404.html" />
-    <Content Include="Temp\500.html" />
-    <Content Include="Temp\charts.html" />
-    <Content Include="Temp\index.html" />
-    <Content Include="Temp\layout-sidenav-light.html" />
-    <Content Include="Temp\layout-static.html" />
-    <Content Include="Temp\login.html" />
-    <Content Include="Temp\password.html" />
-    <Content Include="Temp\register.html" />
-    <Content Include="Temp\tables.html" />
     <Content Include="Complaints\User\UserComplaint.aspx" />
     <Content Include="Complaints\User\UserComplaintDetails.aspx" />
     <Content Include="Dashboard\User\UserDashboard.aspx" />
@@ -197,6 +185,9 @@
       <DependentUpon>AdminLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="AuthCookie.cs" />
+    <Compile Include="Locations.cs" />
+    <Compile Include="PasswordHasher.cs" />
+    <Compile Include="Uploads.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="Errors\404NotFound.aspx.cs">
       <DependentUpon>404NotFound.aspx</DependentUpon>
@@ -415,13 +406,6 @@
     </Compile>
     <Compile Include="Report\Admin\AdminReport.aspx.designer.cs">
       <DependentUpon>AdminReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="temp.aspx.cs">
-      <DependentUpon>temp.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="temp.aspx.designer.cs">
-      <DependentUpon>temp.aspx</DependentUpon>
     </Compile>
     <Compile Include="Complaints\User\UserComplaint.aspx.cs">
       <DependentUpon>UserComplaint.aspx</DependentUpon>

@@ -7,6 +7,9 @@ namespace PtclCustomerService
 {
     public partial class UserComplaint : System.Web.UI.Page
     {
+        // a customer can have this many complaints that are not solved yet
+        private const int MaxOpenComplaints = 10;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             HyperLink activeHyp = Master.FindControl("HypComplaint") as HyperLink;
@@ -18,8 +21,7 @@ namespace PtclCustomerService
                 if (Request.QueryString["ComplaintID"] != null)
                 {
                     RegeneratedArea.CssClass = " my-3";
-                    txtParentID.Text = Request.QueryString["ComplaintID"];
-                    
+                    txtParentID.Text = ParentComplaintID().ToString();
                 }
 
                 lblTitle.Text = "Register Your Complaint";
@@ -38,13 +40,34 @@ namespace PtclCustomerService
             using (PTCLEntities db = new PTCLEntities())
             {
                 if (IsPostBack == true) return;
-                ddlComplaint.SelectedValue = "7";
                 var ComplaintTypes = db.GetComplaintType().ToList();
                 ddlComplaint.DataSource = ComplaintTypes;
                 ddlComplaint.DataTextField = "ComplaintTypeName";
                 ddlComplaint.DataValueField = "ComplaintTypeID";
                 ddlComplaint.DataBind();
+                SelectDefaultType();
             }
+        }
+
+        // "Other" is selected by default when it exists
+        private void SelectDefaultType()
+        {
+            if (ddlComplaint.Items.FindByValue("7") != null)
+            {
+                ddlComplaint.SelectedValue = "7";
+            }
+        }
+
+        private int ParentComplaintID()
+        {
+            int id;
+            int.TryParse(Request.QueryString["ComplaintID"], out id);
+            return id;
+        }
+
+        private int OpenComplaintCount(PTCLEntities db, int UserID)
+        {
+            return db.tblComplaints.Count(c => c.UserID == UserID && c.ComplaintStatus != true);
         }
 
         protected void PendingGridView()
@@ -52,18 +75,19 @@ namespace PtclCustomerService
             using (PTCLEntities db = new PTCLEntities())
             {
                 var UserID = Convert.ToInt32(Session["UserID"]);
-                //change bad ma
                 var PendingComplaintsData = db.UserPendingComplaints(UserID).ToList();
                 GVPendingComplaint.DataSource = PendingComplaintsData;
                 GVPendingComplaint.DataBind();
 
-                var totalCount = db.GetMyComplaints(UserID).ToList();
-                int count = totalCount.Count;
-                if (count > 10)
+                if (PendingComplaintsData.Count >= MaxOpenComplaints)
                 {
-                    Response.Write("Limit Exceed");
                     RegisterComplaintSection.CssClass = " d-none";
                     PanelOverLimit.CssClass = " ";
+                }
+                else
+                {
+                    RegisterComplaintSection.CssClass = "";
+                    PanelOverLimit.CssClass = "d-none";
                 }
             }
         }
@@ -90,78 +114,77 @@ namespace PtclCustomerService
         protected void RegisterComplaint_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Complaints/User/UserComplaint.aspx?register=1");
-            PanelRegisterComplaint.CssClass = " ";
-            PanelPendingComplaint.CssClass = " d-none";
-            PanelApprovedComplaint.CssClass = " d-none";
-
-            RegisterComplaint.CssClass += " active";
-            PendingComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
-            ApprovedComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
         }
 
         protected void PendingComplaint_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Complaints/User/UserComplaint.aspx?active=1");
-            PanelPendingComplaint.CssClass = " ";
-            PanelRegisterComplaint.CssClass = " d-none";
-            PanelApprovedComplaint.CssClass = " d-none";
-
-            PendingComplaint.CssClass += " active";
-            RegisterComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
-            ApprovedComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
         }
 
         protected void ApprovedComplaint_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Complaints/User/UserComplaint.aspx?closed=1");
-            PanelPendingComplaint.CssClass = " d-none";
-            PanelRegisterComplaint.CssClass = " d-none";
-            PanelApprovedComplaint.CssClass = " ";
-
-            ApprovedComplaint.CssClass += " active";
-            RegisterComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
-            PendingComplaint.CssClass = ApprovedComplaint.CssClass.Replace("active", "");
         }
 
         protected void cmdSubmit_Click(object sender, EventArgs e)
         {
+            if (!Page.IsValid) return;
+
             using (PTCLEntities db = new PTCLEntities())
             {
-                tblComplaint s = new tblComplaint();
-                s.ComplaintTitle = txtComplaintTitle.Text;
-                s.ComplaintTypeID = Convert.ToInt32(ddlComplaint.SelectedValue);
-                s.ComplaintDescription = txtComplaintDescription.Text;
-                s.ComplaintStatus = false;
-                var UserID = Session["UserID"];
-                s.UserID = Convert.ToInt32(UserID);
+                int UserID = Convert.ToInt32(Session["UserID"]);
 
-                s.ComplaintCreationDate = DateTime.Now;
+                // checked here too, not only by hiding the form
+                if (OpenComplaintCount(db, UserID) >= MaxOpenComplaints)
+                {
+                    lblMsg.Text = "You already have " + MaxOpenComplaints + " open complaints";
+                    return;
+                }
 
-                if (FileUpload.HasFile)
-                {
-                    FileUpload.SaveAs(Server.MapPath("../../UploadFiles/ComplaintData/" + FileUpload.FileName));
-                    s.ComplaintImage = FileUpload.FileName;
-                }
-                else
-                {
-                    s.ComplaintImage = "";
-                }
+                int? parentID = null;
                 if (Request.QueryString["ComplaintID"] != null)
                 {
-                    s.RegeneratedID = Convert.ToInt32(Request.QueryString["ComplaintID"]);
+                    // only one of this customer's own closed complaints can be raised again
+                    int id = ParentComplaintID();
+                    if (!db.tblComplaints.Any(c => c.ComplaintID == id && c.UserID == UserID && c.ComplaintStatus == true))
+                    {
+                        lblMsg.Text = "Only your own closed complaints can be registered again";
+                        return;
+                    }
+                    parentID = id;
                 }
 
-                txtComplaintDescription.Text = "";
-                txtComplaintTitle.Text = "";
+                string uploadError;
+                string attachment = Uploads.Save(FileUpload, "ComplaintData", Uploads.ImagesAndPdf, out uploadError);
+                if (uploadError != null)
+                {
+                    lblMsg.Text = uploadError;
+                    return;
+                }
+
+                tblComplaint s = new tblComplaint();
+                s.ComplaintTitle = txtComplaintTitle.Text.Trim();
+                s.ComplaintTypeID = Convert.ToInt32(ddlComplaint.SelectedValue);
+                s.ComplaintDescription = txtComplaintDescription.Text.Trim();
+                s.ComplaintStatus = false;
+                s.UserID = UserID;
+                s.ComplaintCreationDate = DateTime.Now;
+                s.ComplaintImage = attachment ?? "";
+                s.RegeneratedID = parentID;
+
                 db.tblComplaints.Add(s);
                 db.SaveChanges();
 
-                lblMsg.Text = "Complaint Registered Successfully";
-                ddlComplaint.SelectedValue = "7";
-                if (Request.QueryString["ComplaintID"] != null)
+                txtComplaintDescription.Text = "";
+                txtComplaintTitle.Text = "";
+                SelectDefaultType();
+                if (parentID != null)
                 {
+                    // back to a normal form, so the same complaint isn't raised again twice
                     Response.Redirect("~/Complaints/User/UserComplaint.aspx?register=1");
                 }
+                lblMsg.Text = "Complaint Registered Successfully";
+                PendingGridView();
             }
         }
 
@@ -171,18 +194,20 @@ namespace PtclCustomerService
 
         protected void GV_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Regenerated")
-            {
-            }
             if (e.CommandName == "delete")
             {
                 int ComplaintID = Convert.ToInt32(e.CommandArgument);
-                //Response.Write(ComplaintID);
                 using (PTCLEntities db = new PTCLEntities())
                 {
-                    db.DeleteComplaint(ComplaintID);
+                    int UserID = Convert.ToInt32(Session["UserID"]);
+                    // customers can only delete their own complaints
+                    if (db.tblComplaints.Any(c => c.ComplaintID == ComplaintID && c.UserID == UserID))
+                    {
+                        db.DeleteComplaint(ComplaintID);
+                    }
                 }
                 PendingGridView();
+                ApprovedGridView();
             }
         }
     }

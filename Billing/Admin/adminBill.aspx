@@ -39,13 +39,13 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <asp:Label runat="server" ID="lblName">
-                                                        <asp:Label ID="lblFullName" runat="server" Text='<%# string.Concat(Eval("FirstName"), " ", Eval("LastName"))%>' Font-Bold="True" Font-Size="Large"></asp:Label>
+                                                        <asp:Label ID="lblFullName" runat="server" Text='<%# HttpUtility.HtmlEncode(Convert.ToString(string.Concat(Eval("FirstName"), " ", Eval("LastName")))) %>' Font-Bold="True" Font-Size="Large"></asp:Label>
                                                     </asp:Label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <asp:Label ID="lblEmail" runat="server" Text='<%# Eval("EmailAddress") %>'></asp:Label>
+                                                    <asp:Label ID="lblEmail" runat="server" Text='<%# HttpUtility.HtmlEncode(Convert.ToString(Eval("EmailAddress"))) %>'></asp:Label>
                                                 </div>
                                             </div>
                                         </div>
@@ -54,13 +54,13 @@
 
                         <asp:TemplateField HeaderText="LandLine Number">
                             <ItemTemplate>
-                                <asp:Label runat="server" ID="lblLandline" Text='<%# string.Concat("0", Eval("LocationCode"), Eval("landline"))%>'></asp:Label>
+                                <asp:Label runat="server" ID="lblLandline" Text='<%# HttpUtility.HtmlEncode(Convert.ToString(string.Concat("0", Eval("LocationCode"), Eval("landline")))) %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
 
                         <asp:TemplateField HeaderText="Location">
                             <ItemTemplate>
-                                <asp:Label runat="server" ID="lblLocation" Text='<%# Eval("LocationName") %>'></asp:Label>
+                                <asp:Label runat="server" ID="lblLocation" Text='<%# HttpUtility.HtmlEncode(Convert.ToString(Eval("LocationName"))) %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
 

@@ -34,30 +34,5 @@ namespace PtclCustomerService.Billing.Admin
                 }
             }
         }
-
-        protected void GV_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "edit")
-            {
-                Response.Redirect("CustomerSetup.aspx?UserID=" + e.CommandArgument);
-            }
-            else if (e.CommandName == "delete")
-            {
-                int UserID = Convert.ToInt32(e.CommandArgument);
-                using (PTCLEntities db = new PTCLEntities())
-                {
-                    db.DeletePtlcUser(UserID);
-                }
-                GridFill();
-            }
-        }
-
-        protected void GV_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-        }
-
-        protected void GV_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-        }
     }
 }

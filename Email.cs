@@ -64,7 +64,7 @@ public class Email
             client.Send(message);
             return true;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return false;
         }

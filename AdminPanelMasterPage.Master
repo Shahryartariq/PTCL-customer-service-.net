@@ -106,7 +106,7 @@
                             <div class="sb-sidenav-menu-heading">Pages</div>
                             <asp:HyperLink ID="HypManangeAdmin" runat="server" CssClass="nav-link" NavigateUrl="~/ManageAccounts/Admin/ManageAdmins.aspx">
                             <div class="sb-nav-link-icon"><i class="fas fa-user-cog"></i></div>
-                                Manange Admin
+                                Manage Admin
                             </asp:HyperLink>
                             <asp:HyperLink ID="HypAdminPanel" runat="server" CssClass="nav-link" NavigateUrl="~/ManageCustomers/Admin/AdminManageCustomers.aspx">
                             <div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>

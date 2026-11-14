@@ -37,7 +37,7 @@ namespace PtclCustomerService.Report.Admin
                 ddlLocation.DataTextField = "LocationName";
                 ddlLocation.DataValueField = "LocationID";
                 ddlLocation.DataBind();
-                ddlLocation.Items.Insert(0, new ListItem("--Select--", "1"));
+                ddlLocation.Items.Insert(0, new ListItem("--Select--", "0"));
             }
         }
 
@@ -45,58 +45,50 @@ namespace PtclCustomerService.Report.Admin
         {
             using (PTCLEntities db = new PTCLEntities())
             {
-                var reportData = db.spReportData().ToList();
-                GVAdmin.DataSource = reportData;
-                GVAdmin.UseAccessibleHeader = true;
-                if (GVAdmin.Rows.Count > 0)
-                {
-                    GVAdmin.HeaderRow.TableSection = TableRowSection.TableHeader;
-                    lblAdminmsg.Text = "";
-                }
-                else
-                {
-                    ;
-                }
-                GVAdmin.DataBind();
+                ShowReport(db.spReportData().ToList());
+            }
+        }
+
+        // binds first, then marks the header row (DataTables needs a <thead>)
+        private void ShowReport(object reportData)
+        {
+            GVAdmin.DataSource = reportData;
+            GVAdmin.DataBind();
+            GVAdmin.UseAccessibleHeader = true;
+            if (GVAdmin.Rows.Count > 0)
+            {
+                GVAdmin.HeaderRow.TableSection = TableRowSection.TableHeader;
+                lblAdminmsg.Text = "";
+            }
+            else
+            {
+                lblAdminmsg.Text = "No Record to Show";
             }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            if (ddlAdmins.SelectedValue == "0")
-            {
-                lblAdminmsg.Text = "Please Select Admins";
-            }
+            int adminValue = Convert.ToInt32(ddlAdmins.SelectedValue);
+            int LocationValue = Convert.ToInt32(ddlLocation.SelectedValue);
 
-            if (ddlLocation.SelectedValue == "1")
-            {
-                lblAdminmsg.Text = "Please Select Location";
-            }
             using (PTCLEntities db = new PTCLEntities())
             {
-                if (ddlAdmins.SelectedItem.Text == null && ddlLocation.SelectedItem.Text == null)
+                // 0 means "--Select--", so any of the two filters can be left empty
+                if (adminValue > 0 && LocationValue > 0)
                 {
-                    lblAdminmsg.Text = "Please Select both CheckBoxes";
+                    ShowReport(db.spFilterAdminWithLocation(adminValue, LocationValue).ToList());
+                }
+                else if (adminValue > 0)
+                {
+                    ShowReport(db.spFilterAdminOnly(adminValue).ToList());
+                }
+                else if (LocationValue > 0)
+                {
+                    ShowReport(db.spFilterLocationOnly(LocationValue).ToList());
                 }
                 else
                 {
-                    int adminValue = Convert.ToInt32(ddlAdmins.SelectedValue);
-                    int LocationValue = Convert.ToInt32(ddlLocation.SelectedValue);
-
-                    var reportData = db.spFilterAdminWithLocation(adminValue, LocationValue).ToList();
-                    GVAdmin.DataSource = reportData;
-                }
-
-                GVAdmin.DataBind();
-                GVAdmin.UseAccessibleHeader = true;
-                if (GVAdmin.Rows.Count > 0)
-                {
-                    GVAdmin.HeaderRow.TableSection = TableRowSection.TableHeader;
-                    lblAdminmsg.Text = "";
-                }
-                else
-                {
-                    lblAdminmsg.Text = "No Record to Show";
+                    ShowReport(db.spReportData().ToList());
                 }
             }
         }

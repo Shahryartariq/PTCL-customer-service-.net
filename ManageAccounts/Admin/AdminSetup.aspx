@@ -31,7 +31,7 @@
                 <div class="col-lg-6">
                     <div class="form-group mt-4">
                         <label>Password: </label>
-                        <asp:CompareValidator runat="server" ID="CMV4" ControlToValidate="txtPassword" ControlToCompare="txtConfirmPassword" SetFocusOnError="true" Text="*" ErrorMessage="Password Donot Match" ForeColor="Red" ValidationGroup="AdminSetup"></asp:CompareValidator>
+                        <asp:CompareValidator runat="server" ID="CMV4" ControlToValidate="txtPassword" ControlToCompare="txtConfirmPassword" SetFocusOnError="true" Text="*" ErrorMessage="Passwords Do Not Match" ForeColor="Red" ValidationGroup="AdminSetup"></asp:CompareValidator>
                         <asp:RequiredFieldValidator runat="server" ID="RFV5" ControlToValidate="txtPassword" SetFocusOnError="true" Text="*" ErrorMessage="Please Enter Your Password" ForeColor="Red" ValidationGroup="AdminSetup"></asp:RequiredFieldValidator>
                         <asp:TextBox runat="server" ID="txtPassword" CssClass="form-control"></asp:TextBox>
                     </div>

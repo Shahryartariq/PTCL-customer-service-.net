@@ -27,38 +27,38 @@ namespace PtclCustomerService.ManageAccounts.User
                     tblUserLocation l = db.tblUserLocations.FirstOrDefault(x => x.LocationID == s.LocationID);
 
                     Label lblFirstName = new Label();
-                    lblFirstName.Text = s.FirstName;
+                    lblFirstName.Text = HttpUtility.HtmlEncode(s.FirstName);
                     PanelFirstName.Controls.Add(lblFirstName);
 
                     Label lblLocation = new Label();
-                    if (l.LocationName.ToString() == "")
+                    if (l == null || string.IsNullOrEmpty(l.LocationName))
                     {
                         lblLocation.Text = "No location";
                     }
                     else
                     {
-                        lblLocation.Text = l.LocationName;
+                        lblLocation.Text = HttpUtility.HtmlEncode(l.LocationName);
                     }
                     PanelLocationName.Controls.Add(lblLocation);
 
                     Label lblLandline = new Label();
-                    lblLandline.Text = "Landline:  " + s.landline;
+                    lblLandline.Text = "Landline:  " + HttpUtility.HtmlEncode(s.landline);
                     PanelLandline.Controls.Add(lblLandline);
 
                     Label LblFullName = new Label();
-                    LblFullName.Text = s.FirstName + " " + s.LastName;
+                    LblFullName.Text = HttpUtility.HtmlEncode(s.FirstName + " " + s.LastName);
                     PanelFullName.Controls.Add(LblFullName);
 
                     Label lblEmail = new Label();
-                    lblEmail.Text = s.EmailAddress;
+                    lblEmail.Text = HttpUtility.HtmlEncode(s.EmailAddress);
                     PanelEmail.Controls.Add(lblEmail);
 
                     Label lblCnic = new Label();
-                    lblCnic.Text = s.Cnic;
+                    lblCnic.Text = HttpUtility.HtmlEncode(s.Cnic);
                     PanelCnic.Controls.Add(lblCnic);
 
                     Label lblPhone = new Label();
-                    lblPhone.Text = s.Phone;
+                    lblPhone.Text = HttpUtility.HtmlEncode(s.Phone);
                     PanelPhone.Controls.Add(lblPhone);
 
                     Label lblStatus = new Label();
